@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paiement Basketball</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 40px 32px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .emoji { font-size: 48px; margin-bottom: 16px; }
+    h1 { font-size: 22px; color: #1a1a2e; margin-bottom: 8px; }
+    .status {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    .status.normal { background: #d1fae5; color: #065f46; }
+    .status.late { background: #fee2e2; color: #991b1b; }
+    .price {
+      font-size: 48px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 4px;
+    }
+    .price-label {
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.1s, opacity 0.1s;
+    }
+    .btn:active { transform: scale(0.98); opacity: 0.9; }
+    .btn.normal { background: #10b981; color: white; }
+    .btn.late { background: #ef4444; color: white; }
+    .message {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
+    .message.late { color: #ef4444; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="emoji" id="emoji">🏀</div>
+    <h1>Basketball — Paiement</h1>
+    <div class="status" id="status">Chargement...</div>
+    <div class="price" id="price"></div>
+    <div class="price-label" id="price-label"></div>
+    <a class="btn" id="btn" href="#">Payer maintenant</a>
+    <p class="message" id="message"></p>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const normalLink = params.get('normal');
+    const retardLink = params.get('retard');
+    const deadline = params.get('deadline');
+    const prixNormal = params.get('prixNormal') || '';
+    const prixRetard = params.get('prixRetard') || '';
+
+    const now = new Date();
+    const deadlineDate = new Date(deadline);
+    const isLate = now > deadlineDate;
+
+    const emoji = document.getElementById('emoji');
+    const status = document.getElementById('status');
+    const price = document.getElementById('price');
+    const priceLabel = document.getElementById('price-label');
+    const btn = document.getElementById('btn');
+    const message = document.getElementById('message');
+
+    if (!normalLink || !retardLink || !deadline) {
+      emoji.textContent = '⚠️';
+      status.textContent = 'Lien invalide';
+      status.className = 'status late';
+      price.textContent = '';
+      btn.style.display = 'none';
+      message.textContent = 'Ce lien est incomplet. Contacte l\'organisateur.';
+      message.className = 'message late';
+    } else if (isLate) {
+      emoji.textContent = '⏰';
+      status.textContent = 'Paiement en retard';
+      status.className = 'status late';
+      price.textContent = prixRetard;
+      priceLabel.textContent = 'Frais de retard inclus';
+      btn.textContent = 'Payer (tarif retard)';
+      btn.className = 'btn late';
+      btn.href = retardLink;
+      message.textContent = 'La session est terminée. Le tarif retard s\'applique automatiquement.';
+      message.className = 'message late';
+    } else {
+      emoji.textContent = '🏀';
+      status.textContent = 'Paiement à temps ✓';
+      status.className = 'status normal';
+      price.textContent = prixNormal;
+      priceLabel.textContent = 'Tarif normal';
+      btn.textContent = 'Payer maintenant';
+      btn.className = 'btn normal';
+      btn.href = normalLink;
+      message.textContent = 'Merci de payer avant la session !';
+      message.className = 'message';
+    }
+  </script>
+</body>
+</html>
