@@ -69,6 +69,11 @@
       line-height: 1.5;
     }
     .message.late { color: #ef4444; }
+    .deadline-info {
+      margin-top: 16px;
+      font-size: 12px;
+      color: #d1d5db;
+    }
   </style>
 </head>
 <body>
@@ -80,19 +85,57 @@
     <div class="price-label" id="price-label"></div>
     <a class="btn" id="btn" href="#">Payer maintenant</a>
     <p class="message" id="message"></p>
+    <p class="deadline-info" id="deadline-info"></p>
   </div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
     const normalLink = params.get('normal');
     const retardLink = params.get('retard');
-    const deadline = params.get('deadline');
     const prixNormal = params.get('prixNormal') || '';
     const prixRetard = params.get('prixRetard') || '';
 
+    // Support deux modes : deadline fixe OU jour/heure récurrent
+    let deadlineDate;
+    const deadlineParam = params.get('deadline');
+    const jourSemaine = params.get('jourSemaine'); // 0=dim, 1=lun, ..., 6=sam
+    const heure = params.get('heure'); // ex: 23
+    const fuseau = params.get('fuseau') || 'America/Toronto'; // fuseau horaire
+
+    if (jourSemaine !== null && heure !== null) {
+      // Calcule la prochaine occurrence du jour/heure dans le bon fuseau
+      const now = new Date();
+      const jourCible = parseInt(jourSemaine);
+      const heureCible = parseInt(heure);
+
+      // On travaille en heure locale du fuseau spécifié
+      const nowLocal = new Date(now.toLocaleString('en-US', { timeZone: fuseau }));
+      const jourActuel = nowLocal.getDay();
+      const heureActuelle = nowLocal.getHours();
+      const minuteActuelle = nowLocal.getMinutes();
+
+      let joursRestants = (jourCible - jourActuel + 7) % 7;
+
+      // Si c'est aujourd'hui mais l'heure est déjà passée, on prend dans 7 jours
+      if (joursRestants === 0 && (heureActuelle > heureCible || (heureActuelle === heureCible && minuteActuelle >= 0))) {
+        joursRestants = 7;
+      }
+
+      // Construire la deadline dans le bon fuseau
+      const deadlineLocal = new Date(nowLocal);
+      deadlineLocal.setDate(deadlineLocal.getDate() + joursRestants);
+      deadlineLocal.setHours(heureCible, 0, 0, 0);
+
+      // Convertir en UTC pour comparer avec now
+      const diff = deadlineLocal - nowLocal;
+      deadlineDate = new Date(now.getTime() + diff);
+
+    } else if (deadlineParam) {
+      deadlineDate = new Date(deadlineParam);
+    }
+
     const now = new Date();
-    const deadlineDate = new Date(deadline);
-    const isLate = now > deadlineDate;
+    const isLate = deadlineDate ? now > deadlineDate : false;
 
     const emoji = document.getElementById('emoji');
     const status = document.getElementById('status');
@@ -100,14 +143,21 @@
     const priceLabel = document.getElementById('price-label');
     const btn = document.getElementById('btn');
     const message = document.getElementById('message');
+    const deadlineInfo = document.getElementById('deadline-info');
 
-    if (!normalLink || !retardLink || !deadline) {
+    // Affiche la date limite lisible
+    if (deadlineDate) {
+      const options = { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: fuseau };
+      deadlineInfo.textContent = 'Session : ' + deadlineDate.toLocaleString('fr-CA', options);
+    }
+
+    if (!normalLink || !retardLink) {
       emoji.textContent = '⚠️';
       status.textContent = 'Lien invalide';
       status.className = 'status late';
       price.textContent = '';
       btn.style.display = 'none';
-      message.textContent = 'Ce lien est incomplet. Contacte l\'organisateur.';
+      message.textContent = "Ce lien est incomplet. Contacte l'organisateur.";
       message.className = 'message late';
     } else if (isLate) {
       emoji.textContent = '⏰';
