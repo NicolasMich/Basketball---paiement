@@ -6,74 +6,22 @@
   <title>Paiement Basketball</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #f0f4f8;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
-    .card {
-      background: white;
-      border-radius: 16px;
-      padding: 40px 32px;
-      max-width: 420px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f4f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+    .card { background: white; border-radius: 16px; padding: 40px 32px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
     .emoji { font-size: 48px; margin-bottom: 16px; }
     h1 { font-size: 22px; color: #1a1a2e; margin-bottom: 8px; }
-    .status {
-      display: inline-block;
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 24px;
-    }
+    .status { display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 24px; }
     .status.normal { background: #d1fae5; color: #065f46; }
     .status.late { background: #fee2e2; color: #991b1b; }
-    .price {
-      font-size: 48px;
-      font-weight: 700;
-      color: #1a1a2e;
-      margin-bottom: 4px;
-    }
-    .price-label {
-      color: #6b7280;
-      font-size: 14px;
-      margin-bottom: 32px;
-    }
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 16px;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      transition: transform 0.1s, opacity 0.1s;
-    }
+    .price { font-size: 48px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+    .price-label { color: #6b7280; font-size: 14px; margin-bottom: 32px; }
+    .btn { display: block; width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 600; text-decoration: none; cursor: pointer; border: none; transition: transform 0.1s, opacity 0.1s; }
     .btn:active { transform: scale(0.98); opacity: 0.9; }
     .btn.normal { background: #10b981; color: white; }
     .btn.late { background: #ef4444; color: white; }
-    .message {
-      margin-top: 20px;
-      font-size: 13px;
-      color: #9ca3af;
-      line-height: 1.5;
-    }
+    .message { margin-top: 20px; font-size: 13px; color: #9ca3af; line-height: 1.5; }
     .message.late { color: #ef4444; }
-    .deadline-info {
-      margin-top: 16px;
-      font-size: 12px;
-      color: #d1d5db;
-    }
+    .deadline-info { margin-top: 16px; font-size: 12px; color: #d1d5db; }
   </style>
 </head>
 <body>
@@ -89,99 +37,93 @@
   </div>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const normalLink = params.get('normal');
-    const retardLink = params.get('retard');
-    const prixNormal = params.get('prixNormal') || '';
-    const prixRetard = params.get('prixRetard') || '';
+    var p = new URLSearchParams(window.location.search);
+    var normalLink = p.get('normal');
+    var retardLink = p.get('retard');
+    var prixNormal = p.get('prixNormal') || '';
+    var prixRetard = p.get('prixRetard') || '';
+    var fuseau = p.get('fuseau') || 'America/Toronto';
+    var ouvertureJour   = parseInt(p.get('ouvertureJour'));
+    var ouvertureHeure  = parseInt(p.get('ouvertureHeure'));
+    var ouvertureMinute = parseInt(p.get('ouvertureMinute') || '0');
+    var fermetureJour   = parseInt(p.get('fermetureJour'));
+    var fermetureHeure  = parseInt(p.get('fermetureHeure'));
 
-    // Support deux modes : deadline fixe OU jour/heure récurrent
-    let deadlineDate;
-    const deadlineParam = params.get('deadline');
-    const jourSemaine = params.get('jourSemaine'); // 0=dim, 1=lun, ..., 6=sam
-    const heure = params.get('heure'); // ex: 23
-    const fuseau = params.get('fuseau') || 'America/Toronto'; // fuseau horaire
+    var now = new Date();
+    var nowLocal = new Date(now.toLocaleString('en-US', { timeZone: fuseau }));
+    var jourActuel    = nowLocal.getDay();
+    var heureActuelle = nowLocal.getHours();
+    var minActuelle   = nowLocal.getMinutes();
 
-    if (jourSemaine !== null && heure !== null) {
-      // Calcule la prochaine occurrence du jour/heure dans le bon fuseau
-      const now = new Date();
-      const jourCible = parseInt(jourSemaine);
-      const heureCible = parseInt(heure);
+    function toMin(j, h, m) { return j * 1440 + h * 60 + m; }
 
-      // On travaille en heure locale du fuseau spécifié
-      const nowLocal = new Date(now.toLocaleString('en-US', { timeZone: fuseau }));
-      const jourActuel = nowLocal.getDay();
-      const heureActuelle = nowLocal.getHours();
-      const minuteActuelle = nowLocal.getMinutes();
+    var nowMin   = toMin(jourActuel, heureActuelle, minActuelle);
+    var openMin  = toMin(ouvertureJour, ouvertureHeure, ouvertureMinute);
+    var closeMin = toMin(fermetureJour, fermetureHeure, 0);
+    var isLate   = !(nowMin >= openMin && nowMin < closeMin);
 
-      let joursRestants = (jourCible - jourActuel + 7) % 7;
+    var jours = ['dim', 'lun', 'mar', 'mer', 'jeu', 'ven', 'sam'];
+    var oMin = ouvertureMinute > 0 ? String(ouvertureMinute).padStart(2,'0') : '';
+    var oTxt = jours[ouvertureJour] + '. ' + String(ouvertureHeure).padStart(2,'0') + 'h' + oMin;
+    var fTxt = jours[fermetureJour] + '. ' + String(fermetureHeure).padStart(2,'0') + 'h';
+    document.getElementById('deadline-info').textContent = 'Paiement à temps : ' + oTxt + ' → ' + fTxt;
 
-      // Si c'est aujourd'hui mais l'heure est déjà passée, on prend dans 7 jours
-      if (joursRestants === 0 && (heureActuelle > heureCible || (heureActuelle === heureCible && minuteActuelle >= 0))) {
-        joursRestants = 7;
-      }
-
-      // Construire la deadline dans le bon fuseau
-      const deadlineLocal = new Date(nowLocal);
-      deadlineLocal.setDate(deadlineLocal.getDate() + joursRestants);
-      deadlineLocal.setHours(heureCible, 0, 0, 0);
-
-      // Convertir en UTC pour comparer avec now
-      const diff = deadlineLocal - nowLocal;
-      deadlineDate = new Date(now.getTime() + diff);
-
-    } else if (deadlineParam) {
-      deadlineDate = new Date(deadlineParam);
-    }
-
-    const now = new Date();
-    const isLate = deadlineDate ? now > deadlineDate : false;
-
-    const emoji = document.getElementById('emoji');
-    const status = document.getElementById('status');
-    const price = document.getElementById('price');
-    const priceLabel = document.getElementById('price-label');
-    const btn = document.getElementById('btn');
-    const message = document.getElementById('message');
-    const deadlineInfo = document.getElementById('deadline-info');
-
-    // Affiche la date limite lisible
-    if (deadlineDate) {
-      const options = { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: fuseau };
-      deadlineInfo.textContent = 'Session : ' + deadlineDate.toLocaleString('fr-CA', options);
-    }
+    var emoji      = document.getElementById('emoji');
+    var status     = document.getElementById('status');
+    var price      = document.getElementById('price');
+    var priceLabel = document.getElementById('price-label');
+    var btn        = document.getElementById('btn');
+    var message    = document.getElementById('message');
 
     if (!normalLink || !retardLink) {
-      emoji.textContent = '⚠️';
-      status.textContent = 'Lien invalide';
-      status.className = 'status late';
-      price.textContent = '';
-      btn.style.display = 'none';
+      emoji.textContent   = '⚠️';
+      status.textContent  = 'Lien invalide';
+      status.className    = 'status late';
+      btn.style.display   = 'none';
       message.textContent = "Ce lien est incomplet. Contacte l'organisateur.";
-      message.className = 'message late';
+      message.className   = 'message late';
     } else if (isLate) {
-      emoji.textContent = '⏰';
-      status.textContent = 'Paiement en retard';
-      status.className = 'status late';
-      price.textContent = prixRetard;
-      priceLabel.textContent = 'Frais de retard inclus';
-      btn.textContent = 'Payer (tarif retard)';
-      btn.className = 'btn late';
-      btn.href = retardLink;
-      message.textContent = 'La session est terminée. Le tarif retard s\'applique automatiquement.';
-      message.className = 'message late';
+      emoji.textContent       = '⏰';
+      status.textContent      = 'Paiement en retard';
+      status.className        = 'status late';
+      price.textContent       = prixRetard;
+      priceLabel.textContent  = 'Frais de retard inclus';
+      btn.textContent         = 'Payer (tarif retard)';
+      btn.className           = 'btn late';
+      btn.href                = retardLink;
+      message.textContent     = "La session est terminée. Le tarif retard s'applique automatiquement.";
+      message.className       = 'message late';
     } else {
-      emoji.textContent = '🏀';
-      status.textContent = 'Paiement à temps ✓';
-      status.className = 'status normal';
-      price.textContent = prixNormal;
-      priceLabel.textContent = 'Tarif normal';
-      btn.textContent = 'Payer maintenant';
-      btn.className = 'btn normal';
-      btn.href = normalLink;
-      message.textContent = 'Merci de payer avant la session !';
-      message.className = 'message';
+      emoji.textContent       = '🏀';
+      status.textContent      = 'Paiement à temps ✓';
+      status.className        = 'status normal';
+      price.textContent       = prixNormal;
+      priceLabel.textContent  = 'Tarif normal';
+      btn.textContent         = 'Payer maintenant';
+      btn.className           = 'btn normal';
+      btn.href                = normalLink;
+      message.textContent     = 'Merci de payer avant la fin de la session !';
+      message.className       = 'message';
     }
   </script>
 </body>
 </html>
+```
+
+---
+
+**Les 3 liens à utiliser :**
+
+**Lundi 19h-21h** → fenêtre dim. 20h → lun. 21h
+```
+https://basketball-paiement.vercel.app/?ouvertureJour=0&ouvertureHeure=20&fermetureJour=1&fermetureHeure=21&normal=LIEN_NORMAL&retard=LIEN_RETARD&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto
+```
+
+**Lundi 21h-23h** → fenêtre dim. 19h55 → lun. 23h
+```
+https://basketball-paiement.vercel.app/?ouvertureJour=0&ouvertureHeure=19&ouvertureMinute=55&fermetureJour=1&fermetureHeure=23&normal=LIEN_NORMAL&retard=LIEN_RETARD&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto
+```
+
+**Samedi 11h-13h** → fenêtre ven. 11h → sam. 13h
+```
+https://basketball-paiement.vercel.app/?ouvertureJour=5&ouvertureHeure=11&fermetureJour=6&fermetureHeure=13&normal=LIEN_NORMAL&retard=LIEN_RETARD&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto
