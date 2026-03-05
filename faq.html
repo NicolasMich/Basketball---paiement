@@ -1107,7 +1107,7 @@
   </style>
 </head>
 <body>
-  <!-- NAV -->
+<!-- NAV -->
   <nav>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -1129,11 +1129,13 @@
     </div>
   </nav>
 
-  <div style="background:var(--card);border-bottom:1px solid var(--border);padding:12px 0;">
+    <!-- RETOUR -->
+  <section style="background:var(--card);border-top:1px solid var(--border);padding:48px 0;text-align:center;">
     <div class="container">
-      <a href="play.html" style="color:var(--orange);font-size:13px;font-weight:700;text-decoration:none;">← Retour au site</a>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase;margin-bottom:16px;" data-i18n="back_title">Tu as trouvé ce que tu cherchais ?</div>
+      <a href="play.html" class="btn-primary" data-i18n="back_btn">← Retour au site principal</a>
     </div>
-  </div>
+  </section>
   <!-- FAQ -->
   <section id="faq" class="faq-section">
     <div class="section-label" data-i18n="faq_label">Questions fréquentes</div>
@@ -1411,14 +1413,6 @@
 
   </section>
 
-  <!-- RETOUR -->
-  <section style="background:var(--card);border-top:1px solid var(--border);padding:48px 0;text-align:center;">
-    <div class="container">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase;margin-bottom:16px;" data-i18n="back_title">Tu as trouvé ce que tu cherchais ?</div>
-      <a href="play.html" class="btn-primary" data-i18n="back_btn">← Retour au site principal</a>
-    </div>
-  </section>
-
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">AREA<span>.</span>COURTS</div>
@@ -1427,154 +1421,110 @@
   </footer>
 
 
+
+
+
+
+
+
+
+
 <script>
 var translations = {
   fr: {
-    nav_how: 'Comment jouer',
-    nav_sessions: 'Sessions',
-    nav_rules: 'Règlement',
-    nav_location: 'Localisation',
-    hero_tag: 'Pickup Basketball — Montréal',
-    hero_sub: 'Rejoins la plus grande communauté pick up de Montréal. Basketball récréatif et compétitif en plein centre ville. Viens jouer !',
-    hero_cta1: '🏀 Comment jouer',
-    hero_cta2: 'Voir les sessions',
-    stat_players: 'Joueurs dans la communauté',
-    stat_sessions: 'Sessions / semaine',
-    stat_max: 'Joueurs max',
-    stat_per: 'Par session',
-    s1_label: 'Nouveau joueur ?',
-    s1_title: 'Comment rejoindre une session',
-    step1_title: 'Rejoins la communauté WhatsApp',
-    step2_title: 'Choisis ta session',
-    step3_title: 'Écris IN au Roll Call',
-    step4_title: 'Paie avant la fin de session',
-    wa_title: 'Prêt à jouer ?',
-    wa_btn: 'Rejoindre WhatsApp →',
-    s2_label: 'Calendrier',
-    s2_title: 'Sessions & Paiement',
-    s3_label: 'Règles du jeu',
-    s3_title: 'Règlement',
-    s4_label: 'Nous trouver',
-    s4_title: 'Localisation',
-    loc_gym: '📍 Le gymnase',
-    loc_park: '🚘 Stationnement',
-    loc_transit: '🚇 Transports en commun',
-    faq_banner_title: 'Une question ?',    faq_banner_sub: 'Consulte notre FAQ — on a probablement déjà la réponse.',    faq_banner_btn: 'Voir la FAQ →',    ob_label: "C'est ta première fois ?",    ob_title: 'Ce qu'il faut savoir avant de venir',    ob1_title: '⏰ Arrive 10 min en avance',    ob1_text: 'Prévois du temps pour te changer et déposer tes affaires aux vestiaires. Les sessions démarrent à l'heure.',    ob1_tip: '🔒 Apporte un cadenas pour les vestiaires',    ob2_title: '👟 Le bon équipement',    ob2_text: 'Souliers de basketball et tenue de sport. Le ballon est fourni. Aucun sac, veste ou bottes dans le gymnase.',    ob2_tip: '🚫 Pas de chaussures de ville sur le parquet',    ob3_title: '💳 Paie avant la fin',    ob3_text: 'Le lien est dans le chat WhatsApp. Paye avant la fin pour avoir 16,90\$. Après la session c'est 20\$.',    ob3_tip: '🏀 Abonnements à tarif réduit disponibles',    faq_cat_whatsapp: 'WhatsApp',    qwa1: "Est-ce normal que je ne voie aucun message quand je rejoins le chat d'une session ?",    awa1: "Oui, c'est normal. WhatsApp n'affiche pas les messages envoyés avant que tu rejoignes un groupe — tu ne vois que les messages à partir du moment où tu as rejoint.",    qwa2: 'Si je suis perdu, où puis-je demander de l'aide ?',    awa2: 'Tu peux poser ta question dans le chat Discussion générale de la communauté WhatsApp. Le staff viendra répondre.',    qamb: "À qui puis-je m'adresser si j'ai une question sur place ?",    aamb: "Il y a toujours un ambassadeur sur place responsable de la session. Si c'est ta première fois, n'hésite pas à te présenter !",    q_portal: 'Comment gérer mon abonnement ?',    a_portal: 'Tu peux gérer ton abonnement via ton portail client Stripe. Le lien t'est envoyé par email après inscription. En cas de problème, pose ta question dans le chat Discussion générale sur WhatsApp.',    back_title: 'Tu as trouvé ce que tu cherchais ?',    back_btn: '← Retour au site principal',    footer_sub: 'Pickup Basketball — Centre Sportif ÉTS, Montréal',
-    nav_faq: 'FAQ',
-    faq_label: 'Questions fréquentes',
-    faq_title: 'FAQ',
-    faq_all: 'Tout',
-    faq_cat_general: 'Général',
-    faq_cat_rollcall: 'Roll Call',
-    faq_cat_cancel: 'Annulation',
-    faq_cat_payment: 'Paiement',
-    faq_cat_sub: 'Abonnement',
-    faq_cat_location: 'Localisation',
-    q1: "C'est quoi Area Courts ?",
-    a1: "Area Courts est une communauté de pickup basketball organisé à Montréal. On propose 3 sessions par semaine au Centre Sportif ÉTS — lundi 19h-21h, lundi 21h-23h et samedi 11h-13h. Les matchs sont compétitifs, les sessions sont structurées et limitées à 15 joueurs.",
-    q2: 'Quel est le niveau requis pour jouer ?',
-    a2: "Le niveau est intermédiaire à avancé. Les sessions sont compétitives — on s'attend à ce que tu connaisses les règles du basketball et que tu aies déjà joué.",
-    q3: 'Est-ce que je dois apporter mon équipement ?',
-    a3: "Oui. Apporte tes souliers de basketball et ta tenue de jeu. Le ballon est fourni. Aucun sac, veste ou bottes n'est autorisé dans le gymnase. Apporte un cadenas pour les vestiaires.",
-    q4: 'Les sessions sont-elles mixtes ?',
-    a4: 'Oui, les sessions sont ouvertes à tous les genres. Tout le monde est le bienvenu tant que le niveau et l'attitude correspondent.',
-    q5: 'Comment fonctionne le roll call ?',
-    a5: "Le roll call s'ouvre à une heure précise dans le chat WhatsApp. Écris IN — les 15 premiers sont confirmés, le reste va en liste d'attente. Les abonnés ont leur place réservée avant l'ouverture.",
-    q7: "Que se passe-t-il si je suis sur la liste d'attente ?",
-    a7: "Si un joueur confirmé annule, le premier sur la liste d'attente est automatiquement invité. Reste actif sur le chat pour ne pas manquer ta chance.",
-    q9: 'Comment se déroule une session ?',
-    a9: 'Sessions de 2 heures, 15 joueurs max. Matchs à 7 points, durée approximative de 8 à 10 minutes. Équipes formées sur place. Bonne énergie et fairplay obligatoires.',
-    q10: 'Comment annuler ma place ?',
-    a10: "Écris dans le chat WhatsApp avant 15h le jour même. Dans ce délai, l'annulation est gratuite.",
-    q11: "Que se passe-t-il si j'annule trop tard ?",
-    a11: "Si tu annules après le délai et qu'on ne trouve pas de remplaçant, tu dois quand même payer 15,90$. Si un remplaçant est trouvé, tu ne dois rien.",
-    q12: 'Que se passe-t-il si je ne viens pas sans prévenir ?',
-    a12: 'Un no-show sans prévenir = paiement obligatoire de 15,90$. Les no-shows répétés peuvent entraîner une exclusion de la communauté.',
-    q13: 'Comment payer ?',
-    a13: 'Via un lien Stripe sécurisé dans le chat WhatsApp de ta session. Tu peux payer par carte de crédit ou débit.',
-    q14: 'Pourquoi le prix change après la session ?',
-    a14: 'Le lien passe automatiquement à 20$ une fois la session terminée. Paye avant la fin pour bénéficier du tarif normal de 16,90$.',
-    q15: 'Est-ce que je peux payer en cash ?',
-    a15: 'Non, le paiement en cash n'est pas accepté. Toutes les transactions se font en ligne via Stripe.',
-    q19: 'Comment annuler mon abonnement ?',
-    a19: 'Via ton portail client Stripe, dont le lien t'est envoyé par email après inscription. Area Courts ne peut pas annuler à ta place.',
-    q20: 'Est-ce que je peux changer de session avec mon abonnement ?',
-    a20: 'Ton abonnement est lié à une session fixe. Pour changer, contacte-nous via WhatsApp selon les places disponibles.',
-    q21: 'Que se passe-t-il si je ne peux pas venir une semaine ?',
-    a21: "L'abonnement ne se met pas en pause. Préviens dans le chat avant 15h le jour même pour libérer ta place. Aucun remboursement pour les sessions manquées.",
-    q22: 'Où se trouve le gymnase exactement ?',
-    a22: 'Centre Sportif ÉTS, 1100 Rue Notre-Dame Ouest, QC H3C 1K3. Pavillon B, 3e étage.',
-    q24: 'Comment accéder par transport en commun ?',
-    a24: "Stations Lucien-L'Allier et Bonaventure, toutes deux à ~10 min à pied.",
-    modal_title: 'Avant de continuer',
-    modal_step1_title: 'Choisis ta session sur Stripe',
-    modal_step1_text: 'Sur la page de paiement, un menu déroulant te permettra de choisir ta session (ou ta combinaison de sessions pour le forfait 2×).',
-    modal_step2_title: 'Renouvellement automatique',
-    modal_step2_text: 'Ton abonnement se renouvelle automatiquement chaque mois. Tu seras facturé le même jour chaque mois jusqu'à annulation.',
-    modal_step3_title: 'Pour annuler',
-    modal_step3_text: 'Tu peux annuler à tout moment via ton portail client Stripe. Le lien te sera envoyé par email après ton inscription. Area Courts ne peut pas annuler à ta place.',
-    modal_cta: 'Je m'abonne →',
-    f_choose: 'Je m'abonne',
-    f1_title: 'Forfait Solo',
-    f1_sub: 'Une session fixe par semaine au choix',
-    f1_vs: 'vs 67,60$ en drop-in',
-    f1_save: 'Tu économises 13%',
-    f1_p1: '~4 sessions garanties par mois',
-    f2_title: 'Forfait Double',
-    f2_sub: 'Deux sessions fixes par semaine au choix',
-    f2_vs: 'vs 135,20$ en drop-in',
-    f2_save: 'Tu économises 20%',
-    f2_p1: '~8 sessions garanties par mois',
-    f_choose: 'Choisir mes sessions',
-    modal_label: 'Forfait 1× / semaine',
-    modal1_title: 'Choisis ta session',
-    modal1_price: '59$/mois · 7 places disponibles par session',
-    modal_label2: 'Forfait 2× / semaine',
-    modal2_title: 'Choisis tes 2 sessions',
-    modal2_price: '109$/mois · 7 places disponibles par session',
-    modal_btn: "Choisir une session d'abord",
-    nav_sub: 'Abonnements',
-    sub_label: 'Abonnement mensuel',
-    sub_title: 'Joue chaque semaine',
-    sub_intro: 'Ta place est garantie chaque semaine. Plus jamais de stress au roll call. Les abonnés sont prioritaires et leur place est réservée automatiquement avant l'ouverture des inscriptions.',
-    perk1: 'Place garantie chaque semaine',
-    perk2: '13% de rabais vs drop-in',
-    perk3: 'Goodies exclusifs',
-    perk4: 'Réduction sur le merch',
-    perk5: 'Annulable à tout moment',
-    sub_vs: 'vs 67,60$ en drop-in',
-    sub_save: 'Tu économises 13%',
-    sub_btn: 'S'abonner →',
-    nav_sub: 'Abonnements',
+    nav_how: "Comment jouer",
+    nav_sessions: "Sessions",
+    nav_rules: "Règlement",
+    nav_sub: "Abonnements",
+    nav_location: "Localisation",
+    nav_faq: "FAQ",
+    faq_label: "Questions fréquentes",
+    faq_title: "FAQ",
+    faq_all: "Tout",
+    faq_cat_general: "Général",
+    faq_cat_rollcall: "Roll Call",
+    faq_cat_cancel: "Annulation",
+    faq_cat_payment: "Paiement",
+    faq_cat_sub: "Abonnement",
+    faq_cat_location: "Localisation",
+    faq_cat_whatsapp: "WhatsApp",
+    back_title: "Tu as trouvé ce que tu cherchais ?",
+    back_btn: "← Retour au site principal",
+    footer_sub: "Pickup Basketball — Centre Sportif ÉTS, Montréal"
   },
   en: {
-    nav_how: 'How to play',
-    nav_sessions: 'Sessions',
-    nav_rules: 'Rules',
-    nav_location: 'Location',
-    hero_tag: 'Pickup Basketball — Montreal',
-    hero_sub: 'Join the biggest pickup community in Montreal. Recreational and competitive basketball in the heart of the city. Come play!',
-    hero_cta1: '🏀 How to play',
-    hero_cta2: 'View sessions',
-    stat_players: 'Players in the community',
-    stat_sessions: 'Sessions / week',
-    stat_max: 'Players max',
-    stat_per: 'Per session',
-    s1_label: 'New player?',
-    s1_title: 'How to join a session',
-    step1_title: 'Join the WhatsApp community',
-    step2_title: 'Choose your session',
-    step3_title: 'Write IN at Roll Call',
-    step4_title: 'Pay before the end of the session',
-    wa_title: 'Ready to play?',
-    wa_btn: 'Join WhatsApp →',
-    s2_label: 'Schedule',
-    s2_title: 'Sessions & Payment',
-    s3_label: 'Game rules',
-    s3_title: 'Rules',
-    s4_label: 'Find us',
-    s4_title: 'Location',
-    loc_gym: '📍 The gym',
-    loc_park: '🚘 Parking',
-    loc_transit: '🚇 Public transit',
-    faq_banner_title: 'Got a question?',    faq_banner_sub: 'Check our FAQ — we probably already have the answer.',    faq_banner_btn: 'View FAQ →',    ob_label: 'First time here?',    ob_title: 'What you need to know before you come',    ob1_title: '⏰ Arrive 10 min early',    ob1_text: 'Give yourself time to change and drop your stuff in the locker room. Sessions start on time — no waiting.',    ob1_tip: '🔒 Bring a padlock for the lockers',    ob2_title: '👟 The right gear',    ob2_text: 'Basketball shoes and workout clothes required. Ball is provided. No bags, jackets or boots in the gym.',    ob2_tip: '🚫 No street shoes on the court',    ob3_title: '💳 Pay before the end',    ob3_text: 'The payment link is in the WhatsApp chat. Pay before the session ends to get the regular rate of .90. After, it is 
+    nav_how: "How to play",
+    nav_sessions: "Sessions",
+    nav_rules: "Rules",
+    nav_sub: "Memberships",
+    nav_location: "Location",
+    nav_faq: "FAQ",
+    faq_label: "Frequently asked questions",
+    faq_title: "FAQ",
+    faq_all: "All",
+    faq_cat_general: "General",
+    faq_cat_rollcall: "Roll Call",
+    faq_cat_cancel: "Cancellation",
+    faq_cat_payment: "Payment",
+    faq_cat_sub: "Membership",
+    faq_cat_location: "Location",
+    faq_cat_whatsapp: "WhatsApp",
+    back_title: "Did you find what you were looking for?",
+    back_btn: "← Back to main site",
+    footer_sub: "Pickup Basketball — Centre Sportif ETS, Montreal"
+  }
+};
+
+function setLang(lang) {
+  var t = translations[lang];
+  document.querySelectorAll("[data-i18n]").forEach(function(el) {
+    var key = el.getAttribute("data-i18n");
+    if (t[key] !== undefined) { el.textContent = t[key]; }
+  });
+  document.getElementById("btn-fr").classList.toggle("active", lang === "fr");
+  document.getElementById("btn-en").classList.toggle("active", lang === "en");
+  document.documentElement.lang = lang;
+}
+
+function toggleFaq(questionEl) {
+  var item = questionEl.parentElement;
+  var isOpen = item.classList.contains("open");
+  document.querySelectorAll(".faq-item.open").forEach(function(i) {
+    i.classList.remove("open");
+  });
+  if (!isOpen) item.classList.add("open");
+}
+
+function filterFaq(cat) {
+  document.querySelectorAll(".faq-cat-btn").forEach(function(btn) {
+    btn.classList.remove("active");
+  });
+  event.target.classList.add("active");
+  document.querySelectorAll(".faq-group").forEach(function(group) {
+    if (cat === "all" || group.dataset.category === cat) {
+      group.style.display = "";
+    } else {
+      group.style.display = "none";
+    }
+  });
+}
+
+function toggleMenu() {
+  var nav = document.getElementById("nav-links");
+  var burger = document.getElementById("hamburger");
+  var isOpen = nav.classList.contains("open");
+  nav.classList.toggle("open");
+  burger.classList.toggle("open");
+  document.body.style.overflow = isOpen ? "" : "hidden";
+}
+
+document.querySelectorAll("#nav-links a").forEach(function(link) {
+  link.addEventListener("click", function() {
+    document.getElementById("nav-links").classList.remove("open");
+    document.getElementById("hamburger").classList.remove("open");
+    document.body.style.overflow = "";
+  });
+});
+</script>
+</body>
+</html>
