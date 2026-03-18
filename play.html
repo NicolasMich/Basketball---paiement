@@ -167,6 +167,22 @@
       border: 1px solid var(--border);
       transition: border-color 0.2s, transform 0.1s;
     }
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #111;
+      color: #fff;
+      padding: 16px 32px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      border: 1px solid #111;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    .btn-dark:hover { opacity: 0.85; transform: translateY(-1px); }
     .btn-secondary:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-1px); }
 
     .hero-stats {
@@ -1123,6 +1139,7 @@
       <li><a href="#reglement" data-i18n="nav_rules">Règlement</a></li>
       <li><a href="#abonnements" data-i18n="nav_sub">Abonnements</a></li>
       <li><a href="#localisation" data-i18n="nav_location">Localisation</a></li>
+      <li><a href="reglement.html" data-i18n="nav_rules_full">Règlement</a></li>
       <li><a href="faq.html" data-i18n="nav_faq">FAQ</a></li>
     </ul>
     <div class="lang-toggle">
@@ -1144,7 +1161,7 @@
       <p class="hero-sub"><span data-i18n="hero_sub">Rejoins la plus grande communauté pick up de Montréal. Basketball récréatif et compétitif en plein centre ville. Viens jouer !</span></p>
       <div class="hero-cta">
         <a href="#comment-jouer" class="btn-primary"><span data-i18n="hero_cta1">🏀 Comment jouer</span></a>
-        <a href="#sessions" class="btn-secondary"><span data-i18n="hero_cta2">Voir les sessions</span></a>
+        <a href="#sessions" class="btn-secondary"><span data-i18n="hero_cta2">Sessions &amp; Paiements</span></a>
       </div>
     </div>
     <div class="hero-stats">
@@ -1296,7 +1313,7 @@
         <div class="onboarding-number">2</div>
         <div class="onboarding-content">
           <div class="onboarding-title" data-i18n="ob2_title">👟 Le bon équipement</div>
-          <div class="onboarding-text" data-i18n="ob2_text">Souliers de basketball et tenue de sport obligatoires. Le ballon est fourni. Aucun sac, veste ou bottes dans le gymnase — tout va aux vestiaires.</div>
+          <div class="onboarding-text" data-i18n="ob2_text">Souliers de basketball et tenue de sport obligatoires. Le ballon est fourni, mais tu peux amener le tien pour t'échauffer. Aucun sac, veste ou bottes dans le gymnase — tout va aux vestiaires.</div>
           <div class="onboarding-tip" data-i18n="ob2_tip">🚫 Pas de chaussures de ville sur le parquet</div>
         </div>
       </div>
@@ -1325,7 +1342,7 @@
         <div class="rule-icon">📝</div>
         <div class="rule-title">Roll Call</div>
         <div class="rule-text">
-          Écris <strong>IN</strong> dans le chat dès l'heure d'ouverture. Les <strong>15 premiers inscrits</strong> sont confirmés pour la session. Les horaires d'ouverture varient selon la session. <strong>Les détenteurs d'un abonnement mensuel sont prioritaires</strong> lors du roll call.
+          Écris <strong>IN</strong> à l'heure d'ouverture. Les <strong>15 premiers</strong> sont confirmés. En disant IN, tu t'engages à venir et à payer.
         </div>
       </div>
 
@@ -1333,7 +1350,7 @@
         <div class="rule-icon">❌</div>
         <div class="rule-title">Annulation</div>
         <div class="rule-text">
-          Annulation <strong>gratuite avant 15h</strong> les jours de semaine, <strong>avant 23h30 la veille</strong> pour le samedi. Après ces délais, <strong>15,90$</strong> sont dus si tu n'es pas remplacé.
+          Gratuite dans les délais. No-show ou annulation tardive : <strong>15,90$</strong> dus. Non-paiement répété : bannissement.
         </div>
       </div>
 
@@ -1341,35 +1358,41 @@
         <div class="rule-icon">💰</div>
         <div class="rule-title">Paiement</div>
         <div class="rule-text">
-          <strong>15,90$</strong> via le lien Stripe de ta session. Paiement effectué <strong>après la fin de la session</strong> = tarif retard automatique de <strong>20$</strong>. Le lien change de prix tout seul.
+          <strong>16,90$</strong> avant la fin. <strong>20$</strong> après. Lien Stripe dans le chat — aucun cash accepté.
         </div>
       </div>
 
       <div class="rule-card">
         <div class="rule-icon">⏱️</div>
-        <div class="rule-title">Format de jeu</div>
+        <div class="rule-title">Format</div>
         <div class="rule-text">
-          Sessions de <strong>2 heures</strong>, <strong>15 joueurs maximum</strong>. Matchs joués à <strong>7 points</strong> avec une durée approximative de <strong>8 à 10 minutes</strong>.
+          <strong>2h</strong>, 15 joueurs max. Matchs à <strong>7 points</strong>. Équipes formées sur place.
         </div>
       </div>
 
       <div class="rule-card">
-        <div class="rule-icon">🔒</div>
-        <div class="rule-title">Vestiaires</div>
+        <div class="rule-icon">👟</div>
+        <div class="rule-title">Équipement</div>
         <div class="rule-text">
-          Les vestiaires sont disponibles au Centre Sportif ÉTS. <strong>Apporte ton cadenas</strong> pour sécuriser tes affaires pendant la session. <strong>Aucun sac, veste ou bottes autorisé dans le gymnase.</strong>
+          Souliers de basketball obligatoires. <strong>Cadenas requis</strong>. Aucun sac ni bottes dans le gymnase.
         </div>
       </div>
 
       <div class="rule-card">
-        <div class="rule-icon">🏀</div>
-        <div class="rule-title">Esprit du jeu</div>
+        <div class="rule-icon">🤝</div>
+        <div class="rule-title">Conduite</div>
         <div class="rule-text">
-          Jeu récréatif mais aussi compétitif. Niveau intermédiaire à pro recommandé. <strong>Bonne énergie, fairplay et respect</strong> sur le terrain comme dehors.
+          Niveau <strong>intermédiaire à avancé nécessaire</strong>. Toute violence verbale ou physique : avertissement, éjection ou ban.
         </div>
       </div>
 
     </div>
+
+    <div style="text-align:center; margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border);">
+      <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;">Consulte le règlement complet pour tous les détails</p>
+      <a href="reglement.html" class="btn-secondary" style="display:inline-flex;">📋 Règlement complet →</a>
+    </div>
+
   </section>
 
   <!-- ABONNEMENTS -->
@@ -1557,11 +1580,13 @@ var translations = {
     nav_rules: "Règlement",
     nav_sub: "Abonnements",
     nav_location: "Localisation",
+    nav_rules_full: "Règlement",
+    nav_rules_full: "Rules",
     nav_faq: "FAQ",
     hero_tag: "Pickup Basketball — Montréal",
     hero_sub: "Rejoins la plus grande communauté pick up de Montréal. Basketball récréatif et compétitif en plein centre ville. Viens jouer !",
     hero_cta1: "🏀 Comment jouer",
-    hero_cta2: "Voir les sessions",
+    hero_cta2: "Sessions &amp; Paiements",
     stat_players: "Joueurs dans la communauté",
     stat_sessions: "Sessions / semaine",
     stat_max: "Joueurs max",
@@ -1630,11 +1655,13 @@ var translations = {
     nav_rules: "Rules",
     nav_sub: "Memberships",
     nav_location: "Location",
+    nav_rules_full: "Règlement",
+    nav_rules_full: "Rules",
     nav_faq: "FAQ",
     hero_tag: "Pickup Basketball — Montreal",
     hero_sub: "Join the biggest pickup basketball community in Montreal. Recreational and competitive basketball in the heart of the city. Come play!",
     hero_cta1: "🏀 How to play",
-    hero_cta2: "View sessions",
+    hero_cta2: "Sessions &amp; Payments",
     stat_players: "Players in the community",
     stat_sessions: "Sessions / week",
     stat_max: "Players max",
@@ -1686,7 +1713,7 @@ var translations = {
     ob1_text: "Give yourself time to change and drop your stuff in the locker room. Sessions start on time.",
     ob1_tip: "🔒 Bring a padlock for the lockers",
     ob2_title: "👟 The right gear",
-    ob2_text: "Basketball shoes and workout clothes required. Ball is provided. No bags, jackets or boots in the gym.",
+    ob2_text: "Basketball shoes and workout clothes required. Ball is provided, but feel free to bring your own to warm up. No bags, jackets or boots in the gym.",
     ob2_tip: "🚫 No street shoes on the court",
     ob3_title: "💳 Pay before the end",
     ob3_text: "The payment link is in the WhatsApp chat. Pay before the end to get $16.90. After the session it is $20.",
