@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Area Courts – Pickup Basketball Montréal</title>
+  <link rel="icon" type="image/png" href="logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -517,7 +518,15 @@
       .nav-links { display: none; }
       section { padding: 70px 20px; }
       .hero { padding: 100px 20px 60px; }
-      .hero-stats { position: static; margin-top: 48px; justify-content: flex-start; }
+      .hero-stats {
+        position: static;
+        margin-top: 48px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px 16px;
+        width: 100%;
+      }
+      .stat { text-align: left; }
       .location-wrapper { grid-template-columns: 1fr; }
       footer { padding: 32px 20px; flex-direction: column; text-align: center; }
     }
@@ -1435,7 +1444,7 @@
         <div class="location-block">
           <div class="location-block-title" data-i18n="loc_gym">📍 Le gymnase</div>
           <ul class="location-list">
-            <li><strong>Centre Sportif ÉTS</strong> – <a href="https://maps.google.com/?q=Centre+Sportif+ETS+1100+Rue+Notre-Dame+Ouest+Montreal" target="_blank" style="color:var(--orange);text-decoration:none;border-bottom:1px dashed var(--orange);">1100 Rue Notre-Dame Ouest, QC H3C 1K3 ↗</a></li>
+            <li><strong>Centre Sportif ÉTS</strong> – <a href="https://maps.google.com/?q=Centre+Sportif+ETS+1111+Rue+Notre-Dame+Ouest+Montreal" target="_blank" style="color:var(--orange);text-decoration:none;border-bottom:1px dashed var(--orange);">1111 Rue Notre-Dame Ouest, QC H3C 1K3 ↗</a></li>
             <li><strong>Pavillon B</strong>, 3e étage – suivre les indications pour le gymnase</li>
           </ul>
         </div>
@@ -1461,7 +1470,7 @@
 
       <div class="map-container">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.5!2d-73.5680!3d45.4942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc91a5b0f8e4d5f%3A0x1!2sCentre+Sportif+%C3%89TS%2C+1100+Rue+Notre-Dame+O%2C+Montr%C3%A9al!5e0!3m2!1sfr!2sca!4v1"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.5!2d-73.5680!3d45.4942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc91a5b0f8e4d5f%3A0x1!2sCentre+Sportif+%C3%89TS%2C+1111+Rue+Notre-Dame+O%2C+Montr%C3%A9al!5e0!3m2!1sfr!2sca!4v1"
           allowfullscreen loading="lazy">
         </iframe>
       </div>
