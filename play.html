@@ -98,7 +98,7 @@
       background-size: 60px 60px;
     }
 
-    .hero-content { position: relative; max-width: 900px; }
+    .hero-content { position: relative; max-width: 680px; flex: 1; }
 
     .hero-tag {
       display: inline-flex;
@@ -1048,16 +1048,24 @@
     }
 
     /* NEXT SESSION WIDGET */
+    .hero-main {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 40px;
+      position: relative;
+      width: 100%;
+    }
     .next-session-widget {
-      position: absolute;
-      top: 190px;
-      right: 40px;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 20px 24px;
       min-width: 200px;
       text-align: right;
+      flex-shrink: 0;
+      align-self: flex-start;
+      margin-top: 36px; /* aligne avec le h1 (tag height ~28px + margin-bottom 28px) */
     }
     .nsw-label {
       font-size: 10px;
@@ -1120,10 +1128,13 @@
     .nsw-btn:hover { background: var(--orange-dark); }
 
     @media (max-width: 768px) {
+      .hero-main {
+        flex-direction: column;
+        gap: 24px;
+      }
       .next-session-widget {
-        position: static;
         text-align: left;
-        margin-top: 32px;
+        margin-top: 0;
         width: 100%;
       }
       .nsw-status { display: inline-flex; }
@@ -1170,25 +1181,27 @@
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-court-lines"></div>
-    <div class="hero-content">
-      <div class="hero-tag">🏀 <span data-i18n="hero_tag">Pickup Basketball — Montréal</span></div>
-      <h1>
-        <div class="line1">AREA</div>
-        <div class="line2">COURTS</div>
-      </h1>
-      <p class="hero-sub"><span data-i18n="hero_sub">Rejoins la plus grande communauté pick up de Montréal. Basketball récréatif et compétitif en plein centre ville. Viens jouer !</span></p>
-      <div class="hero-cta">
-        <a href="#comment-jouer" class="btn-primary"><span data-i18n="hero_cta1">🏀 Comment jouer</span></a>
-        <a href="#sessions" class="btn-secondary"><span data-i18n="hero_cta2">Sessions &amp; Paiements</span></a>
+    <div class="hero-main">
+      <div class="hero-content">
+        <div class="hero-tag">🏀 <span data-i18n="hero_tag">Pickup Basketball — Montréal</span></div>
+        <h1>
+          <div class="line1">AREA</div>
+          <div class="line2">COURTS</div>
+        </h1>
+        <p class="hero-sub"><span data-i18n="hero_sub">Rejoins la plus grande communauté pick up de Montréal. Basketball récréatif et compétitif en plein centre ville. Viens jouer !</span></p>
+        <div class="hero-cta">
+          <a href="#comment-jouer" class="btn-primary"><span data-i18n="hero_cta1">🏀 Comment jouer</span></a>
+          <a href="#sessions" class="btn-secondary"><span data-i18n="hero_cta2">Sessions &amp; Paiements</span></a>
+        </div>
       </div>
-    </div>
-    <!-- NEXT SESSION WIDGET -->
-    <div class="next-session-widget" id="next-session-widget">
-      <div class="nsw-label" data-i18n="nsw_label">Prochaine session</div>
-      <div class="nsw-day" id="nsw-day">—</div>
-      <div class="nsw-time" id="nsw-time">—</div>
-      <div class="nsw-status" id="nsw-status"></div>
-      <a href="#sessions" class="nsw-btn" id="nsw-btn" data-i18n="nsw_btn">Payer →</a>
+      <!-- NEXT SESSION WIDGET -->
+      <div class="next-session-widget" id="next-session-widget">
+        <div class="nsw-label" data-i18n="nsw_label">Prochaine session</div>
+        <div class="nsw-day" id="nsw-day">—</div>
+        <div class="nsw-time" id="nsw-time">—</div>
+        <div class="nsw-status" id="nsw-status"></div>
+        <a href="#sessions" class="nsw-btn" id="nsw-btn" data-i18n="nsw_btn">Payer →</a>
+      </div>
     </div>
 
     <div class="hero-stats">
