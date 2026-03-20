@@ -1047,6 +1047,88 @@
       font-weight: 700;
     }
 
+    /* NEXT SESSION WIDGET */
+    .next-session-widget {
+      position: absolute;
+      top: 120px;
+      right: 40px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      min-width: 200px;
+      text-align: right;
+    }
+    .nsw-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .nsw-day {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 2px;
+    }
+    .nsw-time {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 32px;
+      font-weight: 900;
+      color: white;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .nsw-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .nsw-status.open {
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.3);
+      color: #10b981;
+    }
+    .nsw-status.closed {
+      background: rgba(204,68,34,0.10);
+      border: 1px solid rgba(204,68,34,0.25);
+      color: var(--orange);
+    }
+    .nsw-btn {
+      display: inline-block;
+      background: var(--orange);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nsw-btn:hover { background: var(--orange-dark); }
+
+    @media (max-width: 768px) {
+      .next-session-widget {
+        position: static;
+        text-align: left;
+        margin-top: 32px;
+        width: 100%;
+      }
+      .nsw-status { display: inline-flex; }
+    }
+
     /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
@@ -1100,6 +1182,15 @@
         <a href="#sessions" class="btn-secondary"><span data-i18n="hero_cta2">Sessions &amp; Paiements</span></a>
       </div>
     </div>
+    <!-- NEXT SESSION WIDGET -->
+    <div class="next-session-widget" id="next-session-widget">
+      <div class="nsw-label" data-i18n="nsw_label">Prochaine session</div>
+      <div class="nsw-day" id="nsw-day">—</div>
+      <div class="nsw-time" id="nsw-time">—</div>
+      <div class="nsw-status" id="nsw-status"></div>
+      <a href="#sessions" class="nsw-btn" id="nsw-btn" data-i18n="nsw_btn">Payer →</a>
+    </div>
+
     <div class="hero-stats">
       <div class="stat">
         <div class="stat-num"><span>+</span>350</div>
@@ -1570,7 +1661,9 @@
       faq_banner_title: "Une question ?",
       faq_banner_sub: "Consulte notre FAQ — on a probablement déjà la réponse.",
       faq_banner_btn: "Voir la FAQ →",
-      footer_sub: "Pickup Basketball — Centre Sportif ÉTS, Montréal"
+      footer_sub: "Pickup Basketball — Centre Sportif ÉTS, Montréal",
+      nsw_label: "Prochaine session",
+      nsw_btn: "Payer →"
     },
     en: {
       nav_how: "How to play",
@@ -1642,7 +1735,9 @@
       faq_banner_title: "Got a question?",
       faq_banner_sub: "Check our FAQ — we probably already have the answer.",
       faq_banner_btn: "View FAQ →",
-      footer_sub: "Pickup Basketball — Centre Sportif ETS, Montreal"
+      footer_sub: "Pickup Basketball — Centre Sportif ETS, Montreal",
+      nsw_label: "Next session",
+      nsw_btn: "Pay →"
     }
   };
 
@@ -1663,6 +1758,7 @@
     if (btnFr) btnFr.classList.toggle("active", lang === "fr");
     if (btnEn) btnEn.classList.toggle("active", lang === "en");
     document.documentElement.lang = lang;
+    updateNextSession();
     try {
       var url = new URL(window.location.href);
       url.searchParams.set("lang", lang);
@@ -1705,8 +1801,103 @@
   window.addEventListener("scroll", updateActiveNav, { passive: true });
 
   // =====================
-  // INIT AU CHARGEMENT
+  // NEXT SESSION WIDGET
   // =====================
+  function updateNextSession() {
+    var TZ = "America/Toronto";
+
+    // Sessions définies : { day: 0=dim..6=sam, hour, minute, label_fr, label_en, time_str,
+    //   rollOpenDay, rollOpenHour, rollOpenMinute, closeDay, closeHour }
+    var sessions = [
+      {
+        day: 1, hour: 19, minute: 0,
+        label_fr: "Lundi", label_en: "Monday", time_str: "19h – 21h",
+        rollOpenDay: 0, rollOpenHour: 20, rollOpenMinute: 0,
+        closeDay: 1, closeHour: 21, closeMinute: 0,
+        payUrl: "https://basketball-paiement.vercel.app/?ouvertureJour=0&ouvertureHeure=20&fermetureJour=1&fermetureHeure=21&normal=https://buy.stripe.com/dRm9AU5yx8xre7k1rF3wQ0e&retard=https://buy.stripe.com/5kQ4gA2ml8xr6ESeer3wQ0g&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto"
+      },
+      {
+        day: 1, hour: 21, minute: 0,
+        label_fr: "Lundi", label_en: "Monday", time_str: "21h – 23h",
+        rollOpenDay: 0, rollOpenHour: 19, rollOpenMinute: 55,
+        closeDay: 1, closeHour: 23, closeMinute: 0,
+        payUrl: "https://basketball-paiement.vercel.app/?ouvertureJour=0&ouvertureHeure=19&ouvertureMinute=55&fermetureJour=1&fermetureHeure=23&normal=https://buy.stripe.com/5kA17a4HxfZ56DSbIQ&retard=https://buy.stripe.com/eVq6oIf97eVPbZc6LZ3wQ0f&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto"
+      },
+      {
+        day: 6, hour: 11, minute: 0,
+        label_fr: "Samedi", label_en: "Saturday", time_str: "11h – 13h",
+        rollOpenDay: 5, rollOpenHour: 11, rollOpenMinute: 0,
+        closeDay: 6, closeHour: 13, closeMinute: 0,
+        payUrl: "https://basketball-paiement.vercel.app/?ouvertureJour=5&ouvertureHeure=11&fermetureJour=6&fermetureHeure=13&normal=https://buy.stripe.com/6oU9AUf97bJD8N0eer3wQ0d&retard=https://buy.stripe.com/3cI8wQ5yx293aV89Yb3wQ0h&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto"
+      }
+    ];
+
+    // Heure locale Toronto
+    var nowStr = new Date().toLocaleString("en-US", { timeZone: TZ });
+    var now = new Date(nowStr);
+    var nowDay = now.getDay();    // 0=dim
+    var nowH = now.getHours();
+    var nowM = now.getMinutes();
+    var nowMins = nowDay * 1440 + nowH * 60 + nowM;
+
+    function sessionMins(s) { return s.day * 1440 + s.hour * 60 + s.minute; }
+    function rollMins(s)    { return s.rollOpenDay * 1440 + s.rollOpenHour * 60 + s.rollOpenMinute; }
+    function closeMins(s)   { return s.closeDay * 1440 + s.closeHour * 60 + s.closeMinute; }
+
+    // Trouver la prochaine session (pas encore terminée)
+    var next = null;
+    var minDiff = Infinity;
+    for (var i = 0; i < sessions.length; i++) {
+      var sm = sessionMins(sessions[i]);
+      var cm = closeMins(sessions[i]);
+      var diff = sm - nowMins;
+      if (diff < 0) diff += 7 * 1440; // semaine prochaine
+      // Si la session est en cours (pas terminée), diff = 0 prioritaire
+      if (nowMins >= sm && nowMins < cm) { diff = 0; }
+      if (diff < minDiff) { minDiff = diff; next = sessions[i]; }
+    }
+
+    if (!next) return;
+
+    // Langue courante
+    var lang = document.documentElement.lang || "fr";
+    var dayLabel = lang === "en" ? next.label_en : next.label_fr;
+
+    // Statut roll call
+    var rm = rollMins(next);
+    var cm = closeMins(next);
+    var isOpen = (nowMins >= rm && nowMins < cm);
+    // Si session de la semaine prochaine, roll call pas encore ouvert
+    if (minDiff > 0 && nowMins < rm + (next.rollOpenDay < next.day ? 0 : -7*1440)) {
+      isOpen = false;
+    }
+    // Recalcul propre : roll call ouvert si on est entre rollOpen et close dans la même semaine
+    var rmAbs = next.rollOpenDay * 1440 + next.rollOpenHour * 60 + next.rollOpenMinute;
+    var cmAbs = closeMins(next);
+    isOpen = (nowMins >= rmAbs && nowMins < cmAbs);
+
+    var statusEl = document.getElementById("nsw-status");
+    var dayEl    = document.getElementById("nsw-day");
+    var timeEl   = document.getElementById("nsw-time");
+    var btnEl    = document.getElementById("nsw-btn");
+
+    dayEl.textContent  = dayLabel;
+    timeEl.textContent = next.time_str;
+    btnEl.href = next.payUrl;
+
+    if (isOpen) {
+      statusEl.textContent = lang === "en" ? "🟢 Roll call open" : "🟢 Roll call ouvert";
+      statusEl.className = "nsw-status open";
+      btnEl.textContent  = lang === "en" ? "Pay →" : "Payer →";
+    } else {
+      statusEl.textContent = lang === "en" ? "🔴 Roll call closed" : "🔴 Roll call fermé";
+      statusEl.className = "nsw-status closed";
+      btnEl.textContent  = lang === "en" ? "Sessions →" : "Sessions →";
+    }
+  }
+
+  updateNextSession();
+  setInterval(updateNextSession, 60000); // rafraîchit chaque minute
   document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll("#nav-links a").forEach(function(link) {
       link.addEventListener("click", function() {
