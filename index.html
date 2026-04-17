@@ -28,7 +28,7 @@
   <div class="card">
     <div class="emoji" id="emoji">🏀</div>
     <h1>Basketball — Paiement</h1>
-    <div class="status" id="status">Chargement...</div>
+    <div class="status" id="status"></div>
     <div class="price" id="price"></div>
     <div class="price-label" id="price-label"></div>
     <a class="btn" id="btn" href="#">Payer maintenant</a>
@@ -40,8 +40,8 @@
     var p = new URLSearchParams(window.location.search);
     var normalLink = p.get('normal');
     var retardLink = p.get('retard');
-    var prixNormal = p.get('prixNormal') || '';
-    var prixRetard = p.get('prixRetard') || '';
+    var prixNormal = p.get('prixNormal') || '15,90$';
+    var prixRetard = p.get('prixRetard') || '20$';
     var fuseau = p.get('fuseau') || 'America/Toronto';
     var ouvertureJour   = parseInt(p.get('ouvertureJour'));
     var ouvertureHeure  = parseInt(p.get('ouvertureHeure'));
