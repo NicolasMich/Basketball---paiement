@@ -7,1161 +7,154 @@
   <link rel="icon" type="image/png" href="logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --orange: #CC4422;
-      --orange-dark: #B03518;
-      --black: #0A0A0A;
-      --dark: #111111;
-      --card: #1A1A1A;
-      --border: #2A2A2A;
-      --text: #E8E8E8;
-      --muted: #888;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Barlow', sans-serif;
-      background: var(--black);
-      color: var(--text);
-      overflow-x: hidden;
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      background: rgba(10,10,10,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-logo {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 22px;
-      letter-spacing: 2px;
-      color: var(--text);
-      text-decoration: none;
-    }
-    .nav-logo span { color: var(--orange); }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--orange); }
-
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 120px 40px 80px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 80% 50%, rgba(255,107,26,0.12) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(255,107,26,0.06) 0%, transparent 60%);
-    }
-
-    .hero-court-lines {
-      position: absolute;
-      inset: 0;
-      opacity: 0.04;
-      background-image:
-        linear-gradient(var(--orange) 1px, transparent 1px),
-        linear-gradient(90deg, var(--orange) 1px, transparent 1px);
-      background-size: 60px 60px;
-    }
-
-    .hero-content { position: relative; max-width: 680px; flex: 1; }
-
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,107,26,0.12);
-      border: 1px solid rgba(255,107,26,0.3);
-      color: var(--orange);
-      padding: 6px 16px;
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-    }
-
-    .hero h1 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: clamp(64px, 10vw, 120px);
-      line-height: 0.92;
-      text-transform: uppercase;
-      letter-spacing: -1px;
-      margin-bottom: 28px;
-    }
-
-    .hero h1 .line2 { color: var(--orange); }
-
-    .hero-sub {
-      font-size: 18px;
-      color: var(--muted);
-      max-width: 480px;
-      line-height: 1.6;
-      margin-bottom: 48px;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--orange);
-      color: white;
-      padding: 16px 32px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 15px;
-      letter-spacing: 0.5px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.1s;
-    }
-    .btn-primary:hover { background: var(--orange-dark); transform: translateY(-1px); }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: transparent;
-      color: var(--text);
-      padding: 16px 32px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 15px;
-      letter-spacing: 0.5px;
-      text-decoration: none;
-      border: 1px solid var(--border);
-      transition: border-color 0.2s, transform 0.1s;
-    }
-    .btn-dark {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #111;
-      color: #fff;
-      padding: 16px 32px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 15px;
-      letter-spacing: 0.5px;
-      text-decoration: none;
-      border: 1px solid #111;
-      transition: opacity 0.2s, transform 0.1s;
-    }
-    .btn-dark:hover { opacity: 0.85; transform: translateY(-1px); }
-    .btn-secondary:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-1px); }
-
-    .hero-stats {
-      position: absolute;
-      bottom: 60px;
-      right: 40px;
-      display: flex;
-      gap: 48px;
-    }
-    .stat { text-align: right; }
-    .stat-num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 42px;
-      font-weight: 900;
-      color: white;
-      line-height: 1;
-    }
-    .stat-num span { color: var(--orange); }
-    .stat-label { font-size: 11px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; }
-
-    /* SECTIONS */
-    section { padding: 100px 40px; }
-
-    .section-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 16px;
-    }
-
-    .section-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: clamp(36px, 5vw, 56px);
-      text-transform: uppercase;
-      line-height: 1;
-      margin-bottom: 48px;
-    }
-
-    /* STEPS */
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-      margin-bottom: 48px;
-    }
-
-    .step-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px 28px;
-      position: relative;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .step-card:hover { border-color: var(--orange); transform: translateY(-3px); }
-
-    .step-num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 64px;
-      font-weight: 900;
-      color: var(--border);
-      line-height: 1;
-      margin-bottom: 12px;
-    }
-    .step-icon { font-size: 28px; margin-bottom: 14px; }
-    .step-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 22px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 12px;
-    }
-    .step-text { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
-    .step-text strong { color: var(--text); }
-    .step-btn {
-      display: inline-flex;
-      align-items: center;
-      background: var(--orange);
-      color: white;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 13px;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .step-btn:hover { background: var(--orange-dark); }
-
-    .whatsapp-banner {
-      background: linear-gradient(135deg, rgba(204,68,34,0.15), rgba(204,68,34,0.05));
-      border: 1px solid rgba(204,68,34,0.3);
-      border-radius: 16px;
-      padding: 40px 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-    .whatsapp-left { display: flex; align-items: center; gap: 24px; }
-    .whatsapp-icon { font-size: 48px; }
-    .whatsapp-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 28px;
-      font-weight: 900;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .whatsapp-sub { font-size: 14px; color: var(--muted); max-width: 400px; line-height: 1.5; }
-
-    .sessions-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-bottom: 48px;
-    }
-
-    .session-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .session-card:hover { border-color: var(--orange); transform: translateY(-3px); }
-    .session-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--orange);
-    }
-
-    .session-day {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 8px;
-    }
-    .session-time {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 44px;
-      font-weight: 900;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .session-duration {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 24px;
-    }
-    .session-info {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 28px;
-    }
-    .session-info-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      color: var(--muted);
-    }
-    .session-info-item .icon { font-size: 16px; }
-    .session-price {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 28px;
-      font-weight: 800;
-      color: white;
-      margin-bottom: 20px;
-    }
-    .session-price .per { font-size: 14px; font-weight: 400; color: var(--muted); }
-
-    .btn-pay {
-      display: block;
-      width: 100%;
-      text-align: center;
-      background: var(--orange);
-      color: white;
-      padding: 14px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: 0.5px;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .btn-pay:hover { background: var(--orange-dark); }
-
-    .roll-call-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,107,26,0.1);
-      border: 1px solid rgba(255,107,26,0.2);
-      color: var(--orange);
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    /* RÈGLEMENT */
-    .rules-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-
-    .rule-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px;
-    }
-
-    .rule-icon { font-size: 28px; margin-bottom: 14px; }
-    .rule-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 12px;
-    }
-    .rule-text { font-size: 14px; color: var(--muted); line-height: 1.7; }
-    .rule-text strong { color: var(--text); font-weight: 600; }
-
-    /* LOCALISATION */
-    .location-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: start;
-    }
-
-    .location-info { display: flex; flex-direction: column; gap: 24px; }
-
-    .location-block {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px;
-    }
-    .location-block-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 16px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--orange);
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .location-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .location-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-    .location-list li::before {
-      content: '→';
-      color: var(--orange);
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-    .location-list li strong { color: var(--text); }
-
-    .map-container {
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      height: 400px;
-    }
-    .map-container iframe { width: 100%; height: 100%; border: none; filter: invert(90%) hue-rotate(180deg); }
-
-    /* FOOTER */
-    footer {
-      background: var(--dark);
-      border-top: 1px solid var(--border);
-      padding: 48px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 24px;
-    }
-    .footer-logo {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 28px;
-      letter-spacing: 2px;
-    }
-    .footer-logo span { color: var(--orange); }
-    .footer-text { font-size: 13px; color: var(--muted); }
-
-    /* DIVIDER */
-    .divider {
-      width: 60px;
-      height: 4px;
-      background: var(--orange);
-      margin-bottom: 48px;
-      border-radius: 2px;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      nav { padding: 16px 20px; }
-      .nav-links { display: none; }
-      section { padding: 70px 20px; }
-      .hero { padding: 100px 20px 60px; }
-      .hero-stats {
-        position: static;
-        margin-top: 48px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 24px 16px;
-        width: 100%;
-      }
-      .stat { text-align: left; }
-      .location-wrapper { grid-template-columns: 1fr; }
-      footer { padding: 32px 20px; flex-direction: column; text-align: center; }
-    }
-
-    .lang-toggle {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-left: 32px;
-    }
-    .lang-btn {
-      background: none;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .lang-btn.active {
-      background: var(--orange);
-      border-color: var(--orange);
-      color: white;
-    }
-    .lang-btn:hover:not(.active) {
-      border-color: var(--orange);
-      color: var(--orange);
-    }
-
-    /* ABONNEMENTS */
-    .sub-section {
-      background: var(--dark);
-    }
-
-    .sub-intro {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      background: linear-gradient(135deg, rgba(204,68,34,0.15), rgba(204,68,34,0.05));
-      border: 1px solid rgba(204,68,34,0.3);
-      border-radius: 12px;
-      padding: 28px 32px;
-      margin-bottom: 48px;
-      flex-wrap: wrap;
-    }
-    .sub-intro-icon { font-size: 36px; flex-shrink: 0; }
-    .sub-intro-text { font-size: 15px; color: var(--muted); line-height: 1.7; }
-    .sub-intro-text strong { color: var(--text); }
-
-    .sub-perks {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 48px;
-    }
-    .sub-perk {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 16px;
-      font-size: 13px;
-      font-weight: 600;
-    }
-    .sub-perk-icon { font-size: 16px; }
-
-    .sub-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
-
-    .sub-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .sub-card:hover { border-color: var(--orange); transform: translateY(-3px); }
-    .sub-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--orange);
-    }
-
-    /* FORFAITS */
-    .forfait-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-bottom: 0;
-    }
-    @media (max-width: 600px) { .forfait-grid { grid-template-columns: 1fr; } }
-
-    .forfait-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 36px 32px;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .forfait-card:hover { border-color: var(--orange); transform: translateY(-3px); }
-    .forfait-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--orange);
-    }
-    .forfait-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(204,68,34,0.1);
-      border: 1px solid rgba(204,68,34,0.2);
-      color: var(--orange);
-      padding: 4px 12px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-    .forfait-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 36px;
-      font-weight: 900;
-      text-transform: uppercase;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-    .forfait-sub {
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 28px;
-      line-height: 1.5;
-    }
-    .forfait-price {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 52px;
-      font-weight: 900;
-      color: white;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .forfait-price sup { font-size: 22px; vertical-align: super; }
-    .forfait-price-per { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
-    .forfait-saving {
-      display: inline-block;
-      background: rgba(16,185,129,0.15);
-      border: 1px solid rgba(16,185,129,0.3);
-      color: #10b981;
-      padding: 3px 10px;
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: 700;
-      margin-bottom: 28px;
-    }
-    .forfait-perks {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 28px;
-    }
-    .forfait-perk {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-    .forfait-perk::before { content: '✓'; color: var(--orange); font-weight: 900; flex-shrink: 0; }
-    .btn-forfait {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      background: var(--orange);
-      color: white;
-      padding: 14px 20px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: 0.5px;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .btn-forfait:hover { background: var(--orange-dark); }
-
-    /* MODAL SESSION PICKER */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.75);
-      z-index: 200;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-    .modal-overlay.open { display: flex; }
-    .modal {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 40px;
-      max-width: 480px;
-      width: 100%;
-      position: relative;
-    }
-    .modal-close {
-      position: absolute;
-      top: 16px; right: 20px;
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 24px;
-      cursor: pointer;
-      line-height: 1;
-    }
-    .modal-close:hover { color: var(--text); }
-    .modal-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 8px;
-    }
-    .modal-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 28px;
-      font-weight: 900;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .modal-price {
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 28px;
-    }
-    .session-options {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 28px;
-    }
-    .session-option {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: var(--dark);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px 20px;
-      cursor: pointer;
-      transition: border-color 0.2s;
-    }
-    .session-option:hover { border-color: var(--orange); }
-    .session-option input[type=radio] { display: none; }
-    .session-option.selected { border-color: var(--orange); background: rgba(204,68,34,0.08); }
-    .session-option-dot {
-      width: 18px; height: 18px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      transition: border-color 0.2s;
-    }
-    .session-option.selected .session-option-dot {
-      border-color: var(--orange);
-      background: var(--orange);
-    }
-    .session-option.selected .session-option-dot::after {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: white;
-    }
-    .session-option-day {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 2px;
-    }
-    .session-option-time {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 22px;
-      font-weight: 800;
-      line-height: 1;
-    }
-    .btn-subscribe {
-      display: block;
-      width: 100%;
-      text-align: center;
-      background: var(--orange);
-      color: white;
-      padding: 15px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 15px;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s;
-      text-decoration: none;
-    }
-    .btn-subscribe:hover { background: var(--orange-dark); }
-    .btn-subscribe:disabled, .btn-subscribe.disabled {
-      background: var(--border);
-      color: var(--muted);
-      cursor: not-allowed;
-    }
-
-    /* FAQ */
-    .faq-section { background: var(--black); }
-
-    .faq-categories {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 48px;
-    }
-    .faq-cat-btn {
-      background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 8px 18px;
-      border-radius: 6px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      letter-spacing: 0.5px;
-    }
-    .faq-cat-btn:hover { border-color: var(--orange); color: var(--orange); }
-    .faq-cat-btn.active { background: var(--orange); border-color: var(--orange); color: white; }
-
-    .faq-group { margin-bottom: 48px; }
-    .faq-group-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 18px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--orange);
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .faq-item {
-      border-bottom: 1px solid var(--border);
-    }
-    .faq-question {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-      cursor: pointer;
-      gap: 16px;
-      transition: color 0.2s;
-    }
-    .faq-question:hover { color: var(--orange); }
-    .faq-question-text {
-      font-size: 15px;
-      font-weight: 600;
-      line-height: 1.4;
-    }
-    .faq-chevron {
-      font-size: 18px;
-      color: var(--orange);
-      flex-shrink: 0;
-      transition: transform 0.25s;
-      line-height: 1;
-    }
-    .faq-item.open .faq-chevron { transform: rotate(180deg); }
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.35s ease, padding 0.25s;
-    }
-    .faq-item.open .faq-answer { max-height: 400px; }
-    .faq-answer-inner {
-      padding-bottom: 20px;
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-    .faq-answer-inner strong { color: var(--text); }
-    .faq-answer-inner a { color: var(--orange); text-decoration: none; }
-    .faq-answer-inner a:hover { text-decoration: underline; }
-
-    /* HAMBURGER MOBILE */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-      background: none;
-      border: none;
-    }
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
-    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-    @media (max-width: 768px) {
-      .hamburger { display: flex; }
-      .nav-links {
-        display: none;
-        position: fixed;
-        top: 60px; left: 0; right: 0;
-        background: var(--card);
-        border-bottom: 1px solid var(--border);
-        flex-direction: column;
-        padding: 16px 0;
-        z-index: 99;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-      }
-      .nav-links.open { display: flex; }
-      .nav-links li { width: 100%; }
-      .nav-links li a {
-        display: block;
-        padding: 14px 32px;
-        font-size: 15px;
-        border-bottom: 1px solid var(--border);
-      }
-      .nav-links li:last-child a { border-bottom: none; }
-      .lang-toggle { margin-left: auto; }
-    }
-
-    /* NAV ACTIVE */
-    nav a.nav-active { color: var(--orange) !important; }
-
-    /* ONBOARDING */
-    .onboarding-section {
-      background: linear-gradient(180deg, var(--dark) 0%, var(--black) 100%);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .onboarding-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    @media (max-width: 768px) { .onboarding-grid { grid-template-columns: 1fr; } }
-
-    .onboarding-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px 24px;
-      display: flex;
-      gap: 18px;
-      align-items: flex-start;
-      position: relative;
-    }
-    .onboarding-number {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 48px;
-      font-weight: 900;
-      color: var(--orange);
-      opacity: 0.25;
-      line-height: 1;
-      flex-shrink: 0;
-      margin-top: -4px;
-    }
-    .onboarding-content {}
-    .onboarding-title {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-    .onboarding-text {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-    .onboarding-tip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 10px;
-      background: rgba(204,68,34,0.08);
-      border: 1px solid rgba(204,68,34,0.2);
-      color: var(--orange);
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    /* NEXT SESSION WIDGET */
-    .hero-main {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 40px;
-      position: relative;
-      width: 100%;
-    }
-    .next-session-widget {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px 24px;
-      min-width: 200px;
-      text-align: right;
-      flex-shrink: 0;
-      align-self: flex-start;
-      margin-top: 36px; /* aligne avec le h1 (tag height ~28px + margin-bottom 28px) */
-    }
-    .nsw-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-    .nsw-day {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 2px;
-    }
-    .nsw-time {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 32px;
-      font-weight: 900;
-      color: white;
-      line-height: 1;
-      margin-bottom: 10px;
-    }
-    .nsw-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-    .nsw-status.open {
-      background: rgba(16,185,129,0.12);
-      border: 1px solid rgba(16,185,129,0.3);
-      color: #10b981;
-    }
-    .nsw-status.closed {
-      background: rgba(204,68,34,0.10);
-      border: 1px solid rgba(204,68,34,0.25);
-      color: var(--orange);
-    }
-    .nsw-btn {
-      display: inline-block;
-      background: var(--orange);
-      color: white;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .nsw-btn:hover { background: var(--orange-dark); }
-
-    @media (max-width: 768px) {
-      .hero-main {
-        flex-direction: column;
-        gap: 24px;
-      }
-      .next-session-widget {
-        text-align: left;
-        margin-top: 0;
-        width: 100%;
-      }
-      .nsw-status { display: inline-flex; }
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .hero-tag { animation: fadeUp 0.5s ease both; }
-    .hero h1 { animation: fadeUp 0.5s 0.1s ease both; }
-    .hero-sub { animation: fadeUp 0.5s 0.2s ease both; }
-    .hero-cta { animation: fadeUp 0.5s 0.3s ease both; }
+    :root { --orange:#CC4422; --orange-dark:#B03518; --black:#0A0A0A; --dark:#111111; --card:#1A1A1A; --border:#2A2A2A; --text:#E8E8E8; --muted:#888; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:"Barlow",sans-serif; background:var(--black); color:var(--text); overflow-x:hidden; }
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:20px 40px; background:rgba(10,10,10,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+    .nav-logo { font-family:"Barlow Condensed",sans-serif; font-weight:900; font-size:22px; letter-spacing:2px; color:var(--text); text-decoration:none; }
+    .nav-logo span { color:var(--orange); }
+    .nav-links { display:flex; gap:32px; list-style:none; }
+    .nav-links a { text-decoration:none; color:var(--muted); font-size:13px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; transition:color 0.2s; }
+    .nav-links a:hover { color:var(--orange); }
+    .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:120px 40px 80px; position:relative; overflow:hidden; }
+    .hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse 60% 50% at 80% 50%,rgba(255,107,26,0.12) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 10% 80%,rgba(255,107,26,0.06) 0%,transparent 60%); }
+    .hero-court-lines { position:absolute; inset:0; opacity:0.04; background-image:linear-gradient(var(--orange) 1px,transparent 1px),linear-gradient(90deg,var(--orange) 1px,transparent 1px); background-size:60px 60px; }
+    .hero-content { position:relative; max-width:680px; flex:1; }
+    .hero-tag { display:inline-flex; align-items:center; gap:8px; background:rgba(255,107,26,0.12); border:1px solid rgba(255,107,26,0.3); color:var(--orange); padding:6px 16px; border-radius:4px; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:28px; }
+    .hero h1 { font-family:"Barlow Condensed",sans-serif; font-weight:900; font-size:clamp(64px,10vw,120px); line-height:0.92; text-transform:uppercase; letter-spacing:-1px; margin-bottom:28px; }
+    .hero h1 .line2 { color:var(--orange); }
+    .hero-sub { font-size:18px; color:var(--muted); max-width:480px; line-height:1.6; margin-bottom:48px; }
+    .hero-cta { display:flex; gap:16px; flex-wrap:wrap; }
+    .btn-primary { display:inline-flex; align-items:center; gap:10px; background:var(--orange); color:white; padding:16px 32px; border-radius:6px; font-weight:700; font-size:15px; letter-spacing:0.5px; text-decoration:none; transition:background 0.2s,transform 0.1s; }
+    .btn-primary:hover { background:var(--orange-dark); transform:translateY(-1px); }
+    .btn-secondary { display:inline-flex; align-items:center; gap:10px; background:transparent; color:var(--text); padding:16px 32px; border-radius:6px; font-weight:700; font-size:15px; letter-spacing:0.5px; text-decoration:none; border:1px solid var(--border); transition:border-color 0.2s,transform 0.1s; }
+    .btn-secondary:hover { border-color:var(--orange); color:var(--orange); transform:translateY(-1px); }
+    .hero-stats { position:absolute; bottom:60px; right:40px; display:flex; gap:48px; }
+    .stat { text-align:right; }
+    .stat-num { font-family:"Barlow Condensed",sans-serif; font-size:42px; font-weight:900; color:white; line-height:1; }
+    .stat-num span { color:var(--orange); }
+    .stat-label { font-size:11px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-top:4px; }
+    section { padding:100px 40px; }
+    .section-label { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--orange); margin-bottom:16px; }
+    .section-title { font-family:"Barlow Condensed",sans-serif; font-weight:900; font-size:clamp(36px,5vw,56px); text-transform:uppercase; line-height:1; margin-bottom:48px; }
+    .divider { width:60px; height:4px; background:var(--orange); margin-bottom:48px; border-radius:2px; }
+    .steps-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px; margin-bottom:48px; }
+    .step-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:32px 28px; position:relative; transition:border-color 0.2s,transform 0.2s; }
+    .step-card:hover { border-color:var(--orange); transform:translateY(-3px); }
+    .step-num { font-family:"Barlow Condensed",sans-serif; font-size:64px; font-weight:900; color:var(--border); line-height:1; margin-bottom:12px; }
+    .step-icon { font-size:28px; margin-bottom:14px; }
+    .step-title { font-family:"Barlow Condensed",sans-serif; font-size:22px; font-weight:800; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px; }
+    .step-text { font-size:14px; color:var(--muted); line-height:1.7; margin-bottom:20px; }
+    .step-text strong { color:var(--text); }
+    .step-btn { display:inline-flex; align-items:center; background:var(--orange); color:white; padding:10px 20px; border-radius:6px; font-weight:700; font-size:13px; text-decoration:none; transition:background 0.2s; }
+    .step-btn:hover { background:var(--orange-dark); }
+    .whatsapp-banner { background:linear-gradient(135deg,rgba(204,68,34,0.15),rgba(204,68,34,0.05)); border:1px solid rgba(204,68,34,0.3); border-radius:16px; padding:40px 48px; display:flex; justify-content:space-between; align-items:center; gap:32px; flex-wrap:wrap; }
+    .whatsapp-left { display:flex; align-items:center; gap:24px; }
+    .whatsapp-icon { font-size:48px; }
+    .whatsapp-title { font-family:"Barlow Condensed",sans-serif; font-size:28px; font-weight:900; text-transform:uppercase; margin-bottom:6px; }
+    .whatsapp-sub { font-size:14px; color:var(--muted); max-width:400px; line-height:1.5; }
+    .sessions-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-bottom:48px; }
+    .session-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:32px; position:relative; overflow:hidden; transition:border-color 0.2s,transform 0.2s; }
+    .session-card:hover { border-color:var(--orange); transform:translateY(-3px); }
+    .session-card::before { content:""; position:absolute; top:0; left:0; right:0; height:3px; background:var(--orange); }
+    .session-day { font-family:"Barlow Condensed",sans-serif; font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--orange); margin-bottom:8px; }
+    .session-time { font-family:"Barlow Condensed",sans-serif; font-size:44px; font-weight:900; line-height:1; margin-bottom:4px; }
+    .session-duration { font-size:13px; color:var(--muted); margin-bottom:24px; }
+    .session-info { display:flex; flex-direction:column; gap:8px; margin-bottom:28px; }
+    .session-info-item { display:flex; align-items:center; gap:10px; font-size:14px; color:var(--muted); }
+    .session-info-item .icon { font-size:16px; }
+    .session-price { font-family:"Barlow Condensed",sans-serif; font-size:28px; font-weight:800; color:white; margin-bottom:20px; }
+    .session-price .per { font-size:14px; font-weight:400; color:var(--muted); }
+    .btn-pay { display:block; width:100%; text-align:center; background:var(--orange); color:white; padding:14px; border-radius:8px; font-weight:700; font-size:14px; letter-spacing:0.5px; text-decoration:none; transition:background 0.2s; }
+    .btn-pay:hover { background:var(--orange-dark); }
+    .roll-call-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(255,107,26,0.1); border:1px solid rgba(255,107,26,0.2); color:var(--orange); padding:4px 10px; border-radius:4px; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:20px; }
+    .rules-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+    .rule-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:28px; }
+    .rule-icon { font-size:28px; margin-bottom:14px; }
+    .rule-title { font-family:"Barlow Condensed",sans-serif; font-size:20px; font-weight:800; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px; }
+    .rule-text { font-size:14px; color:var(--muted); line-height:1.7; }
+    .rule-text strong { color:var(--text); font-weight:600; }
+    .location-wrapper { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
+    .location-info { display:flex; flex-direction:column; gap:24px; }
+    .location-block { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:28px; }
+    .location-block-title { font-family:"Barlow Condensed",sans-serif; font-size:16px; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:var(--orange); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+    .location-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .location-list li { display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--muted); line-height:1.5; }
+    .location-list li::before { content:"→"; color:var(--orange); flex-shrink:0; margin-top:1px; }
+    .location-list li strong { color:var(--text); }
+    .map-container { border-radius:12px; overflow:hidden; border:1px solid var(--border); height:400px; }
+    .map-container iframe { width:100%; height:100%; border:none; filter:invert(90%) hue-rotate(180deg); }
+    footer { background:var(--dark); border-top:1px solid var(--border); padding:48px 40px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px; }
+    .footer-logo { font-family:"Barlow Condensed",sans-serif; font-weight:900; font-size:28px; letter-spacing:2px; }
+    .footer-logo span { color:var(--orange); }
+    .footer-text { font-size:13px; color:var(--muted); }
+    @media (max-width:768px) { nav { padding:16px 20px; } .nav-links { display:none; } section { padding:70px 20px; } .hero { padding:100px 20px 60px; } .hero-stats { position:static; margin-top:48px; display:grid; grid-template-columns:1fr 1fr; gap:24px 16px; width:100%; } .stat { text-align:left; } .location-wrapper { grid-template-columns:1fr; } footer { padding:32px 20px; flex-direction:column; text-align:center; } }
+    .lang-toggle { display:flex; align-items:center; gap:4px; margin-left:32px; }
+    .lang-btn { background:none; border:1px solid var(--border); color:var(--muted); padding:4px 10px; border-radius:4px; font-size:12px; font-weight:700; letter-spacing:1px; cursor:pointer; transition:all 0.2s; }
+    .lang-btn.active { background:var(--orange); border-color:var(--orange); color:white; }
+    .lang-btn:hover:not(.active) { border-color:var(--orange); color:var(--orange); }
+    .sub-section { background:var(--dark); }
+    .sub-intro { display:flex; align-items:center; gap:16px; background:linear-gradient(135deg,rgba(204,68,34,0.15),rgba(204,68,34,0.05)); border:1px solid rgba(204,68,34,0.3); border-radius:12px; padding:28px 32px; margin-bottom:48px; flex-wrap:wrap; }
+    .sub-intro-icon { font-size:36px; flex-shrink:0; }
+    .sub-intro-text { font-size:15px; color:var(--muted); line-height:1.7; }
+    .sub-intro-text strong { color:var(--text); }
+    .sub-perks { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:48px; }
+    .sub-perk { display:flex; align-items:center; gap:8px; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:10px 16px; font-size:13px; font-weight:600; }
+    .sub-perk-icon { font-size:16px; }
+    .forfait-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    @media (max-width:600px) { .forfait-grid { grid-template-columns:1fr; } }
+    .forfait-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:36px 32px; position:relative; overflow:hidden; cursor:pointer; transition:border-color 0.2s,transform 0.2s; }
+    .forfait-card:hover { border-color:var(--orange); transform:translateY(-3px); }
+    .forfait-card::before { content:""; position:absolute; top:0; left:0; right:0; height:3px; background:var(--orange); }
+    .forfait-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(204,68,34,0.1); border:1px solid rgba(204,68,34,0.2); color:var(--orange); padding:4px 12px; border-radius:4px; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:20px; }
+    .forfait-title { font-family:"Barlow Condensed",sans-serif; font-size:36px; font-weight:900; text-transform:uppercase; line-height:1; margin-bottom:8px; }
+    .forfait-sub { font-size:14px; color:var(--muted); margin-bottom:28px; line-height:1.5; }
+    .forfait-price { font-family:"Barlow Condensed",sans-serif; font-size:52px; font-weight:900; color:white; line-height:1; margin-bottom:4px; }
+    .forfait-price sup { font-size:22px; vertical-align:super; }
+    .forfait-price-per { font-size:13px; color:var(--muted); margin-bottom:8px; }
+    .forfait-saving { display:inline-block; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.3); color:#10b981; padding:3px 10px; border-radius:4px; font-size:12px; font-weight:700; margin-bottom:28px; }
+    .forfait-perks { display:flex; flex-direction:column; gap:8px; margin-bottom:28px; }
+    .forfait-perk { display:flex; align-items:center; gap:10px; font-size:13px; color:var(--muted); }
+    .forfait-perk::before { content:"✓"; color:var(--orange); font-weight:900; flex-shrink:0; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
+    .hamburger span { display:block; width:24px; height:2px; background:var(--text); border-radius:2px; transition:all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+    .hamburger.open span:nth-child(2) { opacity:0; }
+    .hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+    @media (max-width:768px) { .hamburger { display:flex; } .nav-links { display:none; position:fixed; top:60px; left:0; right:0; background:var(--card); border-bottom:1px solid var(--border); flex-direction:column; padding:16px 0; z-index:99; box-shadow:0 8px 32px rgba(0,0,0,0.3); } .nav-links.open { display:flex; } .nav-links li { width:100%; } .nav-links li a { display:block; padding:14px 32px; font-size:15px; border-bottom:1px solid var(--border); } .nav-links li:last-child a { border-bottom:none; } .lang-toggle { margin-left:auto; } }
+    nav a.nav-active { color:var(--orange) !important; }
+    .onboarding-section { background:linear-gradient(180deg,var(--dark) 0%,var(--black) 100%); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+    .onboarding-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    @media (max-width:768px) { .onboarding-grid { grid-template-columns:1fr; } }
+    .onboarding-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:28px 24px; display:flex; gap:18px; align-items:flex-start; }
+    .onboarding-number { font-family:"Barlow Condensed",sans-serif; font-size:48px; font-weight:900; color:var(--orange); opacity:0.25; line-height:1; flex-shrink:0; margin-top:-4px; }
+    .onboarding-title { font-size:15px; font-weight:700; margin-bottom:6px; }
+    .onboarding-text { font-size:13px; color:var(--muted); line-height:1.7; }
+    .onboarding-tip { display:inline-flex; align-items:center; gap:6px; margin-top:10px; background:rgba(204,68,34,0.08); border:1px solid rgba(204,68,34,0.2); color:var(--orange); padding:4px 10px; border-radius:4px; font-size:11px; font-weight:700; }
+    .hero-main { display:flex; align-items:flex-start; justify-content:space-between; gap:40px; position:relative; width:100%; }
+    .next-session-widget { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px 24px; min-width:200px; text-align:right; flex-shrink:0; align-self:flex-start; margin-top:36px; }
+    .nsw-label { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+    .nsw-day { font-family:"Barlow Condensed",sans-serif; font-size:13px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--orange); margin-bottom:2px; }
+    .nsw-time { font-family:"Barlow Condensed",sans-serif; font-size:32px; font-weight:900; color:white; line-height:1; margin-bottom:10px; }
+    .nsw-status { display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:4px; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px; }
+    .nsw-status.open { background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); color:#10b981; }
+    .nsw-status.closed { background:rgba(204,68,34,0.10); border:1px solid rgba(204,68,34,0.25); color:var(--orange); }
+    .nsw-btn { display:inline-block; background:var(--orange); color:white; padding:8px 16px; border-radius:6px; font-size:12px; font-weight:700; text-decoration:none; transition:background 0.2s; }
+    .nsw-btn:hover { background:var(--orange-dark); }
+    @media (max-width:768px) { .hero-main { flex-direction:column; gap:24px; } .next-session-widget { text-align:left; margin-top:0; width:100%; } .nsw-status { display:inline-flex; } }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+    .hero-tag { animation:fadeUp 0.5s ease both; }
+    .hero h1 { animation:fadeUp 0.5s 0.1s ease both; }
+    .hero-sub { animation:fadeUp 0.5s 0.2s ease both; }
+    .hero-cta { animation:fadeUp 0.5s 0.3s ease both; }
   </style>
   <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 </head>
 <body>
-
-  <!-- NAV -->
   <nav>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-    <a href="#" class="nav-logo">
-      <img src="logo.png" alt="Area Courts" style="height:44px;width:auto;">
-    </a>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="#" class="nav-logo"><img src="logo.png" alt="Area Courts" style="height:44px;width:auto;"></a>
     <ul class="nav-links" id="nav-links">
       <li><a href="#comment-jouer" data-i18n="nav_how">Comment jouer</a></li>
       <li><a href="#sessions" data-i18n="nav_sessions">Sessions</a></li>
@@ -1177,24 +170,19 @@
     </div>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-court-lines"></div>
     <div class="hero-main">
       <div class="hero-content">
         <div class="hero-tag">🏀 <span data-i18n="hero_tag">Pickup Basketball — Montréal</span></div>
-        <h1>
-          <div class="line1">AREA</div>
-          <div class="line2">COURTS</div>
-        </h1>
-        <p class="hero-sub"><span data-i18n="hero_sub">Rejoins la plus grande communauté pick up de Montréal. Basketball récréatif et compétitif en plein centre ville. Viens jouer !</span></p>
+        <h1><div class="line1">AREA</div><div class="line2">COURTS</div></h1>
+        <p class="hero-sub"><span data-i18n="hero_sub">Rejoins la plus grande communauté pick up de Montréal. Basketball récréatif et compétitif en plein centre ville. Viens jouer !</span></p>
         <div class="hero-cta">
           <a href="#comment-jouer" class="btn-primary"><span data-i18n="hero_cta1">🏀 Comment jouer</span></a>
           <a href="#sessions" class="btn-secondary"><span data-i18n="hero_cta2">Sessions &amp; Paiements</span></a>
         </div>
       </div>
-      <!-- NEXT SESSION WIDGET -->
       <div class="next-session-widget" id="next-session-widget">
         <div class="nsw-label" data-i18n="nsw_label">Prochaine session</div>
         <div class="nsw-day" id="nsw-day">—</div>
@@ -1203,260 +191,135 @@
         <a href="#sessions" class="nsw-btn" id="nsw-btn" data-i18n="nsw_btn">Payer →</a>
       </div>
     </div>
-
     <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-num"><span>+</span>350</div>
-        <div class="stat-label" data-i18n="stat_players">Joueurs dans la communauté</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">3<span>×</span></div>
-        <div class="stat-label" data-i18n="stat_sessions">Sessions / semaine</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">15</div>
-        <div class="stat-label" data-i18n="stat_max">Joueurs max</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">2<span>h</span></div>
-        <div class="stat-label" data-i18n="stat_per">Par session</div>
-      </div>
+      <div class="stat"><div class="stat-num"><span>+</span>350</div><div class="stat-label" data-i18n="stat_players">Joueurs dans la communauté</div></div>
+      <div class="stat"><div class="stat-num">4<span>×</span></div><div class="stat-label" data-i18n="stat_sessions">Sessions / semaine</div></div>
+      <div class="stat"><div class="stat-num">15</div><div class="stat-label" data-i18n="stat_max">Joueurs max</div></div>
+      <div class="stat"><div class="stat-num">2<span>h</span></div><div class="stat-label" data-i18n="stat_per">Par session</div></div>
     </div>
   </section>
 
-  <!-- COMMENT JOUER -->
-  <section id="comment-jouer" style="background: var(--black);">
-    <div class="section-label" data-i18n="s1_label">Nouveau joueur ?</div>
+  <section id="comment-jouer" style="background:var(--black);">
+    <div class="section-label" data-i18n="s1_label">Nouveau joueur ?</div>
     <h2 class="section-title" data-i18n="s1_title">Comment rejoindre une session</h2>
     <div class="divider"></div>
-
     <div class="steps-grid">
-
-      <div class="step-card">
-        <div class="step-num">01</div>
-        <div class="step-icon">💬</div>
-        <div class="step-title" data-i18n="step1_title">Rejoins la communauté WhatsApp</div>
-        <div class="step-text" data-i18n="step1_text">Tout se passe sur WhatsApp. Rejoins notre groupe communautaire pour rester informé des sessions, annulations et nouveautés.</div>
-        <a href="https://chat.whatsapp.com/DPwa8jNiDJE3XDgvsm94eI" target="_blank" class="step-btn"><span data-i18n="step1_btn">Rejoindre le groupe →</span></a>
-      </div>
-
-      <div class="step-card">
-        <div class="step-num">02</div>
-        <div class="step-icon">🏀</div>
-        <div class="step-title" data-i18n="step2_title">Choisis ta session</div>
-        <div class="step-text" data-i18n="step2_text">On a 3 sessions par semaine : lundi 19h-21h, lundi 21h-23h, et samedi 11h-13h. Rejoins le chat de la session qui t'intéresse.</div>
-      </div>
-
-      <div class="step-card">
-        <div class="step-num">03</div>
-        <div class="step-icon">✍️</div>
-        <div class="step-title" data-i18n="step3_title">Écris IN au Roll Call</div>
-        <div class="step-text" data-i18n="step3_text">À l'heure d'ouverture du roll call, écris <strong>IN</strong> dans le chat de ta session. Les <strong>15 premiers</strong> sont confirmés. Simple comme ça.</div>
-      </div>
-
-      <div class="step-card">
-        <div class="step-num">04</div>
-        <div class="step-icon">💳</div>
-        <div class="step-title" data-i18n="step4_title">Paie avant la fin de session</div>
-        <div class="step-text" data-i18n="step4_text">Utilise le lien Stripe de ta session pour payer <strong>15,90$</strong>. Le lien passe automatiquement à <strong>20$</strong> une fois la session terminée.</div>
-      </div>
-
+      <div class="step-card"><div class="step-num">01</div><div class="step-icon">💬</div><div class="step-title" data-i18n="step1_title">Rejoins la communauté WhatsApp</div><div class="step-text" data-i18n="step1_text">Tout se passe sur WhatsApp. Rejoins notre groupe communautaire pour rester informé des sessions, annulations et nouveautés.</div><a href="https://chat.whatsapp.com/DPwa8jNiDJE3XDgvsm94eI" target="_blank" class="step-btn"><span data-i18n="step1_btn">Rejoindre le groupe →</span></a></div>
+      <div class="step-card"><div class="step-num">02</div><div class="step-icon">🏀</div><div class="step-title" data-i18n="step2_title">Choisis ta session</div><div class="step-text" data-i18n="step2_text">On a 4 sessions par semaine : lundi 19h-21h, lundi 21h-23h, mercredi 19h-21h et samedi 11h-13h. Rejoins le chat de la session qui t'intéresse.</div></div>
+      <div class="step-card"><div class="step-num">03</div><div class="step-icon">✍️</div><div class="step-title" data-i18n="step3_title">Écris IN au Roll Call</div><div class="step-text" data-i18n="step3_text">À l'heure d'ouverture du roll call, écris <strong>IN</strong> dans le chat de ta session. Les <strong>15 premiers</strong> sont confirmés. Simple comme ça.</div></div>
+      <div class="step-card"><div class="step-num">04</div><div class="step-icon">💳</div><div class="step-title" data-i18n="step4_title">Paie avant la fin de session</div><div class="step-text" data-i18n="step4_text">Utilise le lien Stripe de ta session pour payer <strong>16,90$</strong>. Le lien passe automatiquement à <strong>20$</strong> une fois la session terminée.</div></div>
     </div>
-
     <div class="whatsapp-banner">
-      <div class="whatsapp-left">
-        <div class="whatsapp-icon">📲</div>
-        <div>
-          <div class="whatsapp-title" data-i18n="wa_title">Prêt à jouer ?</div>
-          <div class="whatsapp-sub" data-i18n="wa_sub">Rejoins la communauté Area Courts sur WhatsApp et réserve ta place dès le prochain roll call.</div>
-        </div>
-      </div>
+      <div class="whatsapp-left"><div class="whatsapp-icon">📲</div><div><div class="whatsapp-title" data-i18n="wa_title">Prêt à jouer ?</div><div class="whatsapp-sub" data-i18n="wa_sub">Rejoins la communauté Area Courts sur WhatsApp et réserve ta place dès le prochain roll call.</div></div></div>
       <a href="https://chat.whatsapp.com/DPwa8jNiDJE3XDgvsm94eI" target="_blank" class="btn-primary"><span data-i18n="wa_btn">Rejoindre WhatsApp →</span></a>
     </div>
   </section>
 
-  <!-- SESSIONS -->
-  <section id="sessions" style="background: var(--dark);">
+  <section id="sessions" style="background:var(--dark);">
     <div class="section-label" data-i18n="s2_label">Calendrier</div>
-    <h2 class="section-title" data-i18n="s2_title">Sessions & Paiement</h2>
+    <h2 class="section-title" data-i18n="s2_title">Sessions &amp; Paiement</h2>
     <div class="divider"></div>
-
     <div class="sessions-grid">
 
-      <!-- Lundi 19h-21h -->
       <div class="session-card">
-        <div class="session-day">Lundi</div>
-        <div class="session-time">19h – 21h</div>
+        <div class="session-day">Lundi</div><div class="session-time">19h – 21h</div>
         <div class="session-duration">2 heures · 15 joueurs max</div>
-        <div class="roll-call-badge">📅 Roll call : dim. 20h00</div>
+        <div class="roll-call-badge">📅 Roll call : dim. 20h00</div>
         <div class="session-info">
           <div class="session-info-item"><span class="icon">📍</span> Centre Sportif ÉTS, 3e étage</div>
           <div class="session-info-item"><span class="icon">❌</span> Annulation gratuite avant 15h (lun.)</div>
           <div class="session-info-item"><span class="icon">⏰</span> Paiement tardif après 21h → 20$</div>
         </div>
-        <div class="session-price">15,90$ <span class="per">/ session</span></div>
-        <a href="https://basketball-paiement.vercel.app/?ouvertureJour=0&ouvertureHeure=20&fermetureJour=1&fermetureHeure=21&normal=https://buy.stripe.com/dRm9AU5yx8xre7k1rF3wQ0e&retard=https://buy.stripe.com/5kQ4gA2ml8xr6ESeer3wQ0g&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto" class="btn-pay" target="_blank">Payer cette session →</a>
+        <div class="session-price">16,90$ <span class="per">/ session</span></div>
+        <a href="https://basketball-paiement.vercel.app/?ouvertureJour=0&ouvertureHeure=20&fermetureJour=1&fermetureHeure=21&normal=https://buy.stripe.com/dRm9AU5yx8xre7k1rF3wQ0e&retard=https://buy.stripe.com/5kQ4gA2ml8xr6ESeer3wQ0g&prixNormal=16,90$&prixRetard=20$&fuseau=America/Toronto" class="btn-pay" target="_blank">Payer cette session →</a>
       </div>
 
-      <!-- Lundi 21h-23h -->
       <div class="session-card">
-        <div class="session-day">Lundi</div>
-        <div class="session-time">21h – 23h</div>
+        <div class="session-day">Lundi</div><div class="session-time">21h – 23h</div>
         <div class="session-duration">2 heures · 15 joueurs max</div>
-        <div class="roll-call-badge">📅 Roll call : dim. 19h55</div>
+        <div class="roll-call-badge">📅 Roll call : dim. 19h55</div>
         <div class="session-info">
           <div class="session-info-item"><span class="icon">📍</span> Centre Sportif ÉTS, 3e étage</div>
           <div class="session-info-item"><span class="icon">❌</span> Annulation gratuite avant 15h (lun.)</div>
           <div class="session-info-item"><span class="icon">⏰</span> Paiement tardif après 23h → 20$</div>
         </div>
-        <div class="session-price">15,90$ <span class="per">/ session</span></div>
-        <a href="https://basketball-paiement.vercel.app/?ouvertureJour=0&ouvertureHeure=19&ouvertureMinute=55&fermetureJour=1&fermetureHeure=23&normal=https://buy.stripe.com/5kA17a4HxfZ56DSbIQ&retard=https://buy.stripe.com/eVq6oIf97eVPbZc6LZ3wQ0f&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto" class="btn-pay" target="_blank">Payer cette session →</a>
+        <div class="session-price">16,90$ <span class="per">/ session</span></div>
+        <a href="https://basketball-paiement.vercel.app/?ouvertureJour=0&ouvertureHeure=19&ouvertureMinute=55&fermetureJour=1&fermetureHeure=23&normal=https://buy.stripe.com/5kA17a4HxfZ56DSbIQ&retard=https://buy.stripe.com/eVq6oIf97eVPbZc6LZ3wQ0f&prixNormal=16,90$&prixRetard=20$&fuseau=America/Toronto" class="btn-pay" target="_blank">Payer cette session →</a>
       </div>
 
-      <!-- Samedi 11h-13h -->
       <div class="session-card">
-        <div class="session-day">Samedi</div>
-        <div class="session-time">11h – 13h</div>
+        <div class="session-day">Mercredi</div><div class="session-time">19h – 21h</div>
         <div class="session-duration">2 heures · 15 joueurs max</div>
-        <div class="roll-call-badge">📅 Roll call : ven. 11h00</div>
+        <div class="roll-call-badge">📅 Roll call : mar. 20h00</div>
+        <div class="session-info">
+          <div class="session-info-item"><span class="icon">📍</span> Centre Sportif ÉTS, 3e étage</div>
+          <div class="session-info-item"><span class="icon">❌</span> Annulation gratuite avant 15h (mer.)</div>
+          <div class="session-info-item"><span class="icon">⏰</span> Paiement tardif après 21h → 20$</div>
+        </div>
+        <div class="session-price">16,90$ <span class="per">/ session</span></div>
+        <a href="https://basketball-paiement.vercel.app/?ouvertureJour=2&ouvertureHeure=20&fermetureJour=3&fermetureHeure=21&normal=https://buy.stripe.com/8wMcPSc9ZeV10fu6ox&retard=https://buy.stripe.com/dRm00k9ON8xr5AO4DR3wQ0l&prixNormal=16,90$&prixRetard=20$&fuseau=America/Toronto" class="btn-pay" target="_blank">Payer cette session →</a>
+      </div>
+
+      <div class="session-card">
+        <div class="session-day">Samedi</div><div class="session-time">11h – 13h</div>
+        <div class="session-duration">2 heures · 15 joueurs max</div>
+        <div class="roll-call-badge">📅 Roll call : ven. 11h00</div>
         <div class="session-info">
           <div class="session-info-item"><span class="icon">📍</span> Centre Sportif ÉTS, 3e étage</div>
           <div class="session-info-item"><span class="icon">❌</span> Annulation gratuite avant 23h30 (ven.)</div>
           <div class="session-info-item"><span class="icon">⏰</span> Paiement tardif après 13h → 20$</div>
         </div>
-        <div class="session-price">15,90$ <span class="per">/ session</span></div>
-        <a href="https://basketball-paiement.vercel.app/?ouvertureJour=5&ouvertureHeure=11&fermetureJour=6&fermetureHeure=13&normal=https://buy.stripe.com/6oU9AUf97bJD8N0eer3wQ0d&retard=https://buy.stripe.com/3cI8wQ5yx293aV89Yb3wQ0h&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto" class="btn-pay" target="_blank">Payer cette session →</a>
+        <div class="session-price">16,90$ <span class="per">/ session</span></div>
+        <a href="https://basketball-paiement.vercel.app/?ouvertureJour=5&ouvertureHeure=11&fermetureJour=6&fermetureHeure=13&normal=https://buy.stripe.com/6oU9AUf97bJD8N0eer3wQ0d&retard=https://buy.stripe.com/3cI8wQ5yx293aV89Yb3wQ0h&prixNormal=16,90$&prixRetard=20$&fuseau=America/Toronto" class="btn-pay" target="_blank">Payer cette session →</a>
       </div>
 
     </div>
   </section>
 
-  <!-- ONBOARDING -->
   <section class="onboarding-section">
-    <div class="section-label" data-i18n="ob_label">C'est ta première fois ?</div>
+    <div class="section-label" data-i18n="ob_label">C'est ta première fois ?</div>
     <h2 class="section-title" data-i18n="ob_title">Ce qu'il faut savoir avant de venir</h2>
     <div class="divider"></div>
-
     <div class="onboarding-grid">
-
-      <div class="onboarding-card">
-        <div class="onboarding-number">1</div>
-        <div class="onboarding-content">
-          <div class="onboarding-title" data-i18n="ob1_title">⏰ Arrive 10 min en avance</div>
-          <div class="onboarding-text" data-i18n="ob1_text">Prévois du temps pour te changer, déposer tes affaires aux vestiaires et te préparer. Les sessions démarrent à l'heure — pas d'attente.</div>
-          <div class="onboarding-tip" data-i18n="ob1_tip">🔒 Apporte un cadenas pour les vestiaires</div>
-        </div>
-      </div>
-
-      <div class="onboarding-card">
-        <div class="onboarding-number">2</div>
-        <div class="onboarding-content">
-          <div class="onboarding-title" data-i18n="ob2_title">👟 Le bon équipement</div>
-          <div class="onboarding-text" data-i18n="ob2_text">Souliers de basketball et tenue de sport obligatoires. Le ballon est fourni, mais tu peux amener le tien pour t'échauffer. Aucun sac, veste ou bottes dans le gymnase — tout va aux vestiaires.</div>
-          <div class="onboarding-tip" data-i18n="ob2_tip">🚫 Pas de chaussures de ville sur le parquet</div>
-        </div>
-      </div>
-
-      <div class="onboarding-card">
-        <div class="onboarding-number">3</div>
-        <div class="onboarding-content">
-          <div class="onboarding-title" data-i18n="ob3_title">💳 Paie avant la fin</div>
-          <div class="onboarding-text" data-i18n="ob3_text">Le lien de paiement est dans le chat WhatsApp de ta session. Paye avant la fin de la session pour avoir le tarif normal de 15,90$. Après, c'est 20$.</div>
-          <div class="onboarding-tip" data-i18n="ob3_tip">🏀 Abonnements à tarif réduit disponibles</div>
-        </div>
-      </div>
-
+      <div class="onboarding-card"><div class="onboarding-number">1</div><div class="onboarding-content"><div class="onboarding-title" data-i18n="ob1_title">⏰ Arrive 10 min en avance</div><div class="onboarding-text" data-i18n="ob1_text">Prévois du temps pour te changer et déposer tes affaires aux vestiaires. Les sessions démarrent à l'heure.</div><div class="onboarding-tip" data-i18n="ob1_tip">🔒 Apporte un cadenas pour les vestiaires</div></div></div>
+      <div class="onboarding-card"><div class="onboarding-number">2</div><div class="onboarding-content"><div class="onboarding-title" data-i18n="ob2_title">👟 Le bon équipement</div><div class="onboarding-text" data-i18n="ob2_text">Souliers de basketball et tenue de sport. Le ballon est fourni. Aucun sac, veste ou bottes dans le gymnase.</div><div class="onboarding-tip" data-i18n="ob2_tip">🚫 Pas de chaussures de ville sur le parquet</div></div></div>
+      <div class="onboarding-card"><div class="onboarding-number">3</div><div class="onboarding-content"><div class="onboarding-title" data-i18n="ob3_title">💳 Paie avant la fin</div><div class="onboarding-text" data-i18n="ob3_text">Le lien est dans le chat WhatsApp. Paye avant la fin pour avoir 16,90$. Après la session c'est 20$.</div><div class="onboarding-tip" data-i18n="ob3_tip">🏀 Abonnements à tarif réduit disponibles</div></div></div>
     </div>
   </section>
 
-  <!-- RÈGLEMENT -->
   <section id="reglement">
     <div class="section-label" data-i18n="s3_label">Règles du jeu</div>
     <h2 class="section-title" data-i18n="s3_title">Règlement</h2>
     <div class="divider"></div>
-
     <div class="rules-grid">
-
-      <div class="rule-card">
-        <div class="rule-icon">📝</div>
-        <div class="rule-title">Roll Call</div>
-        <div class="rule-text">
-          Écris <strong>IN</strong> à l'heure d'ouverture. Les <strong>15 premiers</strong> sont confirmés. En disant IN, tu t'engages à venir et à payer.
-        </div>
-      </div>
-
-      <div class="rule-card">
-        <div class="rule-icon">❌</div>
-        <div class="rule-title">Annulation</div>
-        <div class="rule-text">
-          Gratuite dans les délais. No-show ou annulation tardive : <strong>15,90$</strong> dus. Non-paiement répété : bannissement.
-        </div>
-      </div>
-
-      <div class="rule-card">
-        <div class="rule-icon">💰</div>
-        <div class="rule-title">Paiement</div>
-        <div class="rule-text">
-          <strong>15,90$</strong> avant la fin. <strong>20$</strong> après. Lien Stripe dans le chat — aucun cash accepté.
-        </div>
-      </div>
-
-      <div class="rule-card">
-        <div class="rule-icon">⏱️</div>
-        <div class="rule-title">Format</div>
-        <div class="rule-text">
-          <strong>2h</strong>, 15 joueurs max. Matchs à <strong>7 points</strong>. Équipes formées sur place.
-        </div>
-      </div>
-
-      <div class="rule-card">
-        <div class="rule-icon">👟</div>
-        <div class="rule-title">Équipement</div>
-        <div class="rule-text">
-          Souliers de basketball obligatoires. <strong>Cadenas requis</strong>. Aucun sac ni bottes dans le gymnase.
-        </div>
-      </div>
-
-      <div class="rule-card">
-        <div class="rule-icon">🤝</div>
-        <div class="rule-title">Conduite</div>
-        <div class="rule-text">
-          Niveau <strong>intermédiaire à avancé nécessaire</strong>. Toute violence verbale ou physique : avertissement, éjection ou ban.
-        </div>
-      </div>
-
+      <div class="rule-card"><div class="rule-icon">📝</div><div class="rule-title">Roll Call</div><div class="rule-text">Écris <strong>IN</strong> à l'heure d'ouverture. Les <strong>15 premiers</strong> sont confirmés. En disant IN, tu t'engages à venir et à payer.</div></div>
+      <div class="rule-card"><div class="rule-icon">❌</div><div class="rule-title">Annulation</div><div class="rule-text">Gratuite dans les délais. No-show ou annulation tardive : <strong>16,90$</strong> dus. Non-paiement répété : bannissement.</div></div>
+      <div class="rule-card"><div class="rule-icon">💰</div><div class="rule-title">Paiement</div><div class="rule-text"><strong>16,90$</strong> avant la fin. <strong>20$</strong> après. Lien Stripe dans le chat — aucun cash accepté.</div></div>
+      <div class="rule-card"><div class="rule-icon">⏱️</div><div class="rule-title">Format</div><div class="rule-text"><strong>2h</strong>, 15 joueurs max. Matchs à <strong>7 points</strong>. Équipes formées sur place.</div></div>
+      <div class="rule-card"><div class="rule-icon">👟</div><div class="rule-title">Équipement</div><div class="rule-text">Souliers de basketball obligatoires. <strong>Cadenas requis</strong>. Aucun sac ni bottes dans le gymnase.</div></div>
+      <div class="rule-card"><div class="rule-icon">🤝</div><div class="rule-title">Conduite</div><div class="rule-text">Niveau <strong>intermédiaire à avancé nécessaire</strong>. Toute violence verbale ou physique : avertissement, éjection ou ban.</div></div>
     </div>
-
-    <div style="text-align:center; margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border);">
-      <p style="color: var(--muted); font-size: 14px; margin-bottom: 16px;">Consulte le règlement complet pour tous les détails</p>
+    <div style="text-align:center;margin-top:40px;padding-top:32px;border-top:1px solid var(--border);">
+      <p style="color:var(--muted);font-size:14px;margin-bottom:16px;">Consulte le règlement complet pour tous les détails</p>
       <a href="reglement.html" class="btn-secondary" style="display:inline-flex;">📋 Règlement complet →</a>
     </div>
-
   </section>
 
-  <!-- ABONNEMENTS -->
   <section id="abonnements" class="sub-section">
     <div class="section-label" data-i18n="sub_label">Abonnement mensuel</div>
     <h2 class="section-title" data-i18n="sub_title">Joue chaque semaine</h2>
     <div class="divider"></div>
-
     <div class="sub-intro">
       <div class="sub-intro-icon">🔒</div>
-      <div class="sub-intro-text" data-i18n="sub_intro">
-        <strong>Ta place est garantie chaque semaine.</strong> Plus jamais de stress au roll call. Les abonnés sont prioritaires et leur place est réservée automatiquement avant l'ouverture des inscriptions.
-      </div>
+      <div class="sub-intro-text" data-i18n="sub_intro"><strong>Ta place est garantie chaque semaine.</strong> Plus jamais de stress au roll call. Les abonnés sont prioritaires et leur place est réservée automatiquement avant l'ouverture des inscriptions.</div>
     </div>
-
     <div class="sub-perks">
       <div class="sub-perk"><span class="sub-perk-icon">✅</span> <span data-i18n="perk1">Place garantie chaque semaine</span></div>
       <div class="sub-perk"><span class="sub-perk-icon">🎁</span> <span data-i18n="perk3">Goodies exclusifs</span></div>
       <div class="sub-perk"><span class="sub-perk-icon">👕</span> <span data-i18n="perk4">Réduction sur le merch</span></div>
       <div class="sub-perk"><span class="sub-perk-icon">🔄</span> <span data-i18n="perk5">Annulable à tout moment</span></div>
     </div>
-
     <div class="forfait-grid">
-
-      <!-- FORFAIT 1x -->
       <div class="forfait-card">
         <div class="forfait-badge">1× / semaine</div>
         <div class="forfait-title" data-i18n="f1_title">Forfait Solo</div>
@@ -1469,13 +332,8 @@
           <div class="forfait-perk" data-i18n="perk3">Goodies exclusifs</div>
           <div class="forfait-perk" data-i18n="perk4">Réduction sur le merch</div>
         </div>
-        <stripe-buy-button
-          buy-button-id="buy_btn_1T7hRhJBtwWGjbUN3TItHbJg"
-          publishable-key="pk_live_51Qcwg3JBtwWGjbUNMi7TYLF567I3K0TO1iilUMg3WyX2knuMxdr2ui0emnWGyZT9BfdpT4f4LwmVbvEyB0j7QOWw00FNaqmIfv"
-        ></stripe-buy-button>
+        <stripe-buy-button buy-button-id="buy_btn_1T7hRhJBtwWGjbUN3TItHbJg" publishable-key="pk_live_51Qcwg3JBtwWGjbUNMi7TYLF567I3K0TO1iilUMg3WyX2knuMxdr2ui0emnWGyZT9BfdpT4f4LwmVbvEyB0j7QOWw00FNaqmIfv"></stripe-buy-button>
       </div>
-
-      <!-- FORFAIT 2x -->
       <div class="forfait-card">
         <div class="forfait-badge">2× / semaine</div>
         <div class="forfait-title" data-i18n="f2_title">Forfait Double</div>
@@ -1488,63 +346,17 @@
           <div class="forfait-perk" data-i18n="perk3">Goodies exclusifs</div>
           <div class="forfait-perk" data-i18n="perk4">Réduction sur le merch</div>
         </div>
-        <stripe-buy-button
-          buy-button-id="buy_btn_1T7hdBJBtwWGjbUNYexSFWB5"
-          publishable-key="pk_live_51Qcwg3JBtwWGjbUNMi7TYLF567I3K0TO1iilUMg3WyX2knuMxdr2ui0emnWGyZT9BfdpT4f4LwmVbvEyB0j7QOWw00FNaqmIfv"
-        ></stripe-buy-button>
+        <stripe-buy-button buy-button-id="buy_btn_1T7hdBJBtwWGjbUNYexSFWB5" publishable-key="pk_live_51Qcwg3JBtwWGjbUNMi7TYLF567I3K0TO1iilUMg3WyX2knuMxdr2ui0emnWGyZT9BfdpT4f4LwmVbvEyB0j7QOWw00FNaqmIfv"></stripe-buy-button>
       </div>
-
     </div>
   </section>
 
-  <!-- MODAL CONFIRMATION -->
-  <div class="modal-overlay" id="modal-confirm">
-    <div class="modal">
-      <button class="modal-close" onclick="closeModal()">×</button>
-      <div class="modal-label" id="modal-confirm-label">Forfait 1× / semaine</div>
-      <div class="modal-title" data-i18n="modal_title">Avant de continuer</div>
-
-      <div style="display:flex;flex-direction:column;gap:16px;margin:24px 0;">
-
-        <div style="display:flex;gap:14px;align-items:flex-start;background:var(--dark);border:1px solid var(--border);border-radius:10px;padding:16px 18px;">
-          <span style="font-size:22px;flex-shrink:0;">📋</span>
-          <div>
-            <div style="font-weight:700;font-size:14px;margin-bottom:4px;" data-i18n="modal_step1_title">Choisis ta session sur Stripe</div>
-            <div style="font-size:13px;color:var(--muted);line-height:1.6;" data-i18n="modal_step1_text">Sur la page de paiement, un menu déroulant te permettra de choisir ta session (ou ta combinaison de sessions pour le forfait 2×).</div>
-          </div>
-        </div>
-
-        <div style="display:flex;gap:14px;align-items:flex-start;background:var(--dark);border:1px solid var(--border);border-radius:10px;padding:16px 18px;">
-          <span style="font-size:22px;flex-shrink:0;">🔄</span>
-          <div>
-            <div style="font-weight:700;font-size:14px;margin-bottom:4px;" data-i18n="modal_step2_title">Renouvellement automatique</div>
-            <div style="font-size:13px;color:var(--muted);line-height:1.6;" data-i18n="modal_step2_text">Ton abonnement se renouvelle automatiquement chaque mois. Tu seras facturé le même jour chaque mois jusqu'à annulation.</div>
-          </div>
-        </div>
-
-        <div style="display:flex;gap:14px;align-items:flex-start;background:rgba(204,68,34,0.06);border:1px solid rgba(204,68,34,0.25);border-radius:10px;padding:16px 18px;">
-          <span style="font-size:22px;flex-shrink:0;">⚠️</span>
-          <div>
-            <div style="font-weight:700;font-size:14px;margin-bottom:4px;color:var(--orange);" data-i18n="modal_step3_title">Pour annuler</div>
-            <div style="font-size:13px;color:var(--muted);line-height:1.6;" data-i18n="modal_step3_text">Tu peux annuler à tout moment via ton portail client Stripe. Le lien te sera envoyé par email après ton inscription. Area Courts ne peut pas annuler à ta place.</div>
-          </div>
-        </div>
-
-      </div>
-
-      <a class="btn-subscribe" id="btn-confirm" href="#" target="_blank">Je m'abonne →</a>
-    </div>
-  </div>
-
-  <!-- LOCALISATION -->
-  <section id="localisation" style="background: var(--dark);">
+  <section id="localisation" style="background:var(--dark);">
     <div class="section-label" data-i18n="s4_label">Nous trouver</div>
     <h2 class="section-title" data-i18n="s4_title">Localisation</h2>
     <div class="divider"></div>
-
     <div class="location-wrapper">
       <div class="location-info">
-
         <div class="location-block">
           <div class="location-block-title" data-i18n="loc_gym">📍 Le gymnase</div>
           <ul class="location-list">
@@ -1552,7 +364,6 @@
             <li><strong>Pavillon B</strong>, 3e étage – suivre les indications pour le gymnase</li>
           </ul>
         </div>
-
         <div class="location-block">
           <div class="location-block-title" data-i18n="loc_park">🚘 Stationnement</div>
           <ul class="location-list">
@@ -1561,7 +372,6 @@
             <li><strong>Rue Notre-Dame</strong> — stationnement sur rue disponible</li>
           </ul>
         </div>
-
         <div class="location-block">
           <div class="location-block-title" data-i18n="loc_transit">🚇 Transports en commun</div>
           <ul class="location-list">
@@ -1569,365 +379,164 @@
             <li>Métro <strong>Bonaventure</strong> — 10 min à pied</li>
           </ul>
         </div>
-
       </div>
-
       <div class="map-container">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.5!2d-73.5680!3d45.4942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc91a5b0f8e4d5f%3A0x1!2sCentre+Sportif+%C3%89TS%2C+1111+Rue+Notre-Dame+O%2C+Montr%C3%A9al!5e0!3m2!1sfr!2sca!4v1"
-          allowfullscreen loading="lazy">
-        </iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.5!2d-73.5680!3d45.4942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc91a5b0f8e4d5f%3A0x1!2sCentre+Sportif+%C3%89TS%2C+1111+Rue+Notre-Dame+O%2C+Montr%C3%A9al!5e0!3m2!1sfr!2sca!4v1" allowfullscreen loading="lazy"></iframe>
       </div>
     </div>
   </section>
 
-  <!-- FAQ BANNER -->
   <section style="background:var(--card);border-top:1px solid var(--border);padding:40px;">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
       <div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;text-transform:uppercase;margin-bottom:4px;" data-i18n="faq_banner_title">Une question ?</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;text-transform:uppercase;margin-bottom:4px;" data-i18n="faq_banner_title">Une question ?</div>
         <div style="font-size:14px;color:var(--muted);" data-i18n="faq_banner_sub">Consulte notre FAQ — on a probablement déjà la réponse.</div>
       </div>
       <a href="faq.html" class="btn-primary" style="flex-shrink:0;" data-i18n="faq_banner_btn">Voir la FAQ →</a>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-logo">AREA<span>.</span>COURTS</div>
     <div class="footer-text"><span data-i18n="footer_sub">Pickup Basketball — Centre Sportif ÉTS, Montréal</span></div>
-    <div class="footer-text"><a href="https://www.instagram.com/areacourts/" target="_blank" style="color: var(--orange); text-decoration: none;">📸 @areacourts</a> &nbsp;·&nbsp; © 2026 Area Courts</div>
+    <div class="footer-text"><a href="https://www.instagram.com/areacourts/" target="_blank" style="color:var(--orange);text-decoration:none;">📸 @areacourts</a> &nbsp;·&nbsp; © 2026 Area Courts</div>
+    <div class="footer-text" style="font-size:11px;color:var(--muted);margin-top:4px;">Site créé et détenu par Nicolas Michaud. Tous droits réservés.</div>
   </footer>
 
   <script>
-  // =====================
-  // TRADUCTIONS FR / EN
-  // =====================
   var translations = {
     fr: {
-      nav_how: "Comment jouer",
-      nav_sessions: "Sessions",
-      nav_rules: "Règlement",
-      nav_sub: "Abonnements",
-      nav_location: "Localisation",
-      nav_rules_full: "Règlement complet",
-      nav_faq: "FAQ",
-      hero_tag: "Pickup Basketball — Montréal",
-      hero_sub: "Rejoins la plus grande communauté pick up de Montréal. Basketball récréatif et compétitif en plein centre ville. Viens jouer !",
-      hero_cta1: "🏀 Comment jouer",
-      hero_cta2: "Sessions & Paiements",
-      stat_players: "Joueurs dans la communauté",
-      stat_sessions: "Sessions / semaine",
-      stat_max: "Joueurs max",
-      stat_per: "Par session",
-      s1_label: "Nouveau joueur ?",
-      s1_title: "Comment rejoindre une session",
-      step1_title: "Rejoins la communauté WhatsApp",
-      step1_text: "Rejoins le groupe WhatsApp de ta session pour recevoir les informations et participer au roll call.",
-      step1_btn: "Rejoindre le groupe →",
-      step2_title: "Choisis ta session",
-      step2_text: "Lundi 19h-21h, lundi 21h-23h ou samedi 11h-13h. Chaque session est limitée à 15 joueurs.",
-      step3_title: "Écris IN au Roll Call",
-      step3_text: "Quand le roll call s'ouvre, écris IN dans le chat. Les 15 premiers sont confirmés.",
-      step4_title: "Paie avant la fin de session",
-      step4_text: "Utilise le lien Stripe de ta session pour payer avant la fin. Passé ce délai, le tarif retard de 20$ s'applique.",
-      wa_title: "Prêt à jouer ?",
-      wa_sub: "Rejoins la communauté Area Courts sur WhatsApp et réserve ta place dès le prochain roll call.",
-      wa_btn: "Rejoindre WhatsApp →",
-      s2_label: "Calendrier",
-      s2_title: "Sessions & Paiement",
-      s3_label: "Règles du jeu",
-      s3_title: "Règlement",
-      s4_label: "Nous trouver",
-      s4_title: "Localisation",
-      loc_gym: "📍 Le gymnase",
-      loc_park: "🚘 Stationnement",
-      loc_transit: "🚇 Transports en commun",
-      sub_label: "Abonnement mensuel",
-      sub_title: "Joue chaque semaine",
-      sub_intro: "Ta place est garantie chaque semaine. Plus jamais de stress au roll call.",
-      perk1: "Place garantie chaque semaine",
-      perk3: "Goodies exclusifs",
-      perk4: "Réduction sur le merch",
-      perk5: "Annulable à tout moment",
-      f1_title: "Forfait Solo",
-      f1_sub: "Une session fixe par semaine au choix",
-      f1_vs: "vs 67,60$ en drop-in",
-      f1_save: "Tu économises 13%",
-      f1_p1: "~4 sessions garanties par mois",
-      f2_title: "Forfait Double",
-      f2_sub: "Deux sessions fixes par semaine au choix",
-      f2_vs: "vs 135,20$ en drop-in",
-      f2_save: "Tu économises 20%",
-      f2_p1: "~8 sessions garanties par mois",
-      ob_label: "C'est ta première fois ?",
-      ob_title: "Ce qu'il faut savoir avant de venir",
-      ob1_title: "⏰ Arrive 10 min en avance",
-      ob1_text: "Prévois du temps pour te changer et déposer tes affaires aux vestiaires. Les sessions démarrent à l'heure.",
-      ob1_tip: "🔒 Apporte un cadenas pour les vestiaires",
-      ob2_title: "👟 Le bon équipement",
-      ob2_text: "Souliers de basketball et tenue de sport. Le ballon est fourni. Aucun sac, veste ou bottes dans le gymnase.",
-      ob2_tip: "🚫 Pas de chaussures de ville sur le parquet",
-      ob3_title: "💳 Paie avant la fin",
-      ob3_text: "Le lien est dans le chat WhatsApp. Paye avant la fin pour avoir 15,90$. Après la session c'est 20$.",
-      ob3_tip: "🏀 Abonnements à tarif réduit disponibles",
-      faq_banner_title: "Une question ?",
-      faq_banner_sub: "Consulte notre FAQ — on a probablement déjà la réponse.",
-      faq_banner_btn: "Voir la FAQ →",
-      footer_sub: "Pickup Basketball — Centre Sportif ÉTS, Montréal",
-      nsw_label: "Prochaine session",
-      nsw_btn: "Payer →"
+      nav_how:"Comment jouer",nav_sessions:"Sessions",nav_rules:"R\u00e8glement",nav_sub:"Abonnements",
+      nav_location:"Localisation",nav_rules_full:"R\u00e8glement complet",nav_faq:"FAQ",
+      hero_tag:"Pickup Basketball \u2014 Montr\u00e9al",
+      hero_sub:"Rejoins la plus grande communaut\u00e9 pick up de Montr\u00e9al. Basketball r\u00e9cr\u00e9atif et comp\u00e9titif en plein centre ville. Viens jouer\u00a0!",
+      hero_cta1:"\U0001f3c0 Comment jouer",hero_cta2:"Sessions & Paiements",
+      stat_players:"Joueurs dans la communaut\u00e9",stat_sessions:"Sessions / semaine",stat_max:"Joueurs max",stat_per:"Par session",
+      s1_label:"Nouveau joueur\u00a0?",s1_title:"Comment rejoindre une session",
+      step1_title:"Rejoins la communaut\u00e9 WhatsApp",step1_text:"Rejoins le groupe WhatsApp de ta session pour recevoir les informations et participer au roll call.",step1_btn:"Rejoindre le groupe \u2192",
+      step2_title:"Choisis ta session",step2_text:"Lundi 19h-21h, lundi 21h-23h, mercredi 19h-21h ou samedi 11h-13h. Chaque session est limit\u00e9e \u00e0 15 joueurs.",
+      step3_title:"\u00c9cris IN au Roll Call",step3_text:"Quand le roll call s'ouvre, \u00e9cris IN dans le chat. Les 15 premiers sont confirm\u00e9s.",
+      step4_title:"Paie avant la fin de session",step4_text:"Utilise le lien Stripe de ta session pour payer avant la fin. Pass\u00e9 ce d\u00e9lai, le tarif retard de 20$ s'applique.",
+      wa_title:"Pr\u00eat \u00e0 jouer\u00a0?",wa_sub:"Rejoins la communaut\u00e9 Area Courts sur WhatsApp et r\u00e9serve ta place d\u00e8s le prochain roll call.",wa_btn:"Rejoindre WhatsApp \u2192",
+      s2_label:"Calendrier",s2_title:"Sessions & Paiement",s3_label:"R\u00e8gles du jeu",s3_title:"R\u00e8glement",s4_label:"Nous trouver",s4_title:"Localisation",
+      loc_gym:"\U0001f4cd Le gymnase",loc_park:"\U0001f698 Stationnement",loc_transit:"\U0001f687 Transports en commun",
+      sub_label:"Abonnement mensuel",sub_title:"Joue chaque semaine",sub_intro:"Ta place est garantie chaque semaine. Plus jamais de stress au roll call.",
+      perk1:"Place garantie chaque semaine",perk3:"Goodies exclusifs",perk4:"R\u00e9duction sur le merch",perk5:"Annulable \u00e0 tout moment",
+      f1_title:"Forfait Solo",f1_sub:"Une session fixe par semaine au choix",f1_vs:"vs 67,60$ en drop-in",f1_save:"Tu \u00e9conomises 13%",f1_p1:"~4 sessions garanties par mois",
+      f2_title:"Forfait Double",f2_sub:"Deux sessions fixes par semaine au choix",f2_vs:"vs 135,20$ en drop-in",f2_save:"Tu \u00e9conomises 20%",f2_p1:"~8 sessions garanties par mois",
+      ob_label:"C'est ta premi\u00e8re fois\u00a0?",ob_title:"Ce qu'il faut savoir avant de venir",
+      ob1_title:"\u23f0 Arrive 10 min en avance",ob1_text:"Pr\u00e9vois du temps pour te changer et d\u00e9poser tes affaires aux vestiaires. Les sessions d\u00e9marrent \u00e0 l'heure.",ob1_tip:"\U0001f512 Apporte un cadenas pour les vestiaires",
+      ob2_title:"\U0001f45f Le bon \u00e9quipement",ob2_text:"Souliers de basketball et tenue de sport. Le ballon est fourni. Aucun sac, veste ou bottes dans le gymnase.",ob2_tip:"\U0001f6ab Pas de chaussures de ville sur le parquet",
+      ob3_title:"\U0001f4b3 Paie avant la fin",ob3_text:"Le lien est dans le chat WhatsApp. Paye avant la fin pour avoir 16,90$. Apr\u00e8s la session c'est 20$.",ob3_tip:"\U0001f3c0 Abonnements \u00e0 tarif r\u00e9duit disponibles",
+      faq_banner_title:"Une question\u00a0?",faq_banner_sub:"Consulte notre FAQ \u2014 on a probablement d\u00e9j\u00e0 la r\u00e9ponse.",faq_banner_btn:"Voir la FAQ \u2192",
+      footer_sub:"Pickup Basketball \u2014 Centre Sportif \u00c9TS, Montr\u00e9al",
+      nsw_label:"Prochaine session",nsw_btn:"Payer \u2192"
     },
     en: {
-      nav_how: "How to play",
-      nav_sessions: "Sessions",
-      nav_rules: "Rules",
-      nav_sub: "Memberships",
-      nav_location: "Location",
-      nav_rules_full: "Full Rules",
-      nav_faq: "FAQ",
-      hero_tag: "Pickup Basketball — Montreal",
-      hero_sub: "Join the biggest pickup basketball community in Montreal. Recreational and competitive basketball in the heart of the city. Come play!",
-      hero_cta1: "🏀 How to play",
-      hero_cta2: "Sessions & Payments",
-      stat_players: "Players in the community",
-      stat_sessions: "Sessions / week",
-      stat_max: "Players max",
-      stat_per: "Per session",
-      s1_label: "New player?",
-      s1_title: "How to join a session",
-      step1_title: "Join the WhatsApp community",
-      step1_text: "Join your session's WhatsApp group to get updates and take part in roll call.",
-      step1_btn: "Join the group →",
-      step2_title: "Choose your session",
-      step2_text: "Monday 7-9pm, Monday 9-11pm or Saturday 11am-1pm. Each session is capped at 15 players.",
-      step3_title: "Write IN at Roll Call",
-      step3_text: "When roll call opens, write IN in the chat. The first 15 are confirmed.",
-      step4_title: "Pay before the session ends",
-      step4_text: "Use the Stripe link in your session chat to pay before the end. After that, the $20 late fee applies.",
-      wa_title: "Ready to play?",
-      wa_sub: "Join the Area Courts WhatsApp community and reserve your spot at the next roll call.",
-      wa_btn: "Join WhatsApp →",
-      s2_label: "Schedule",
-      s2_title: "Sessions & Payment",
-      s3_label: "Game rules",
-      s3_title: "Rules",
-      s4_label: "Find us",
-      s4_title: "Location",
-      loc_gym: "📍 The gym",
-      loc_park: "🚘 Parking",
-      loc_transit: "🚇 Public transit",
-      sub_label: "Monthly membership",
-      sub_title: "Play every week",
-      sub_intro: "Your spot is guaranteed every week. No more roll call stress.",
-      perk1: "Guaranteed spot every week",
-      perk3: "Exclusive goodies",
-      perk4: "Merch discount",
-      perk5: "Cancel anytime",
-      f1_title: "Solo Plan",
-      f1_sub: "One fixed session per week of your choice",
-      f1_vs: "vs $67.60 drop-in",
-      f1_save: "You save 13%",
-      f1_p1: "~4 guaranteed sessions per month",
-      f2_title: "Double Plan",
-      f2_sub: "Two fixed sessions per week of your choice",
-      f2_vs: "vs $135.20 drop-in",
-      f2_save: "You save 20%",
-      f2_p1: "~8 guaranteed sessions per month",
-      ob_label: "First time here?",
-      ob_title: "What you need to know before you come",
-      ob1_title: "⏰ Arrive 10 min early",
-      ob1_text: "Give yourself time to change and drop your stuff in the locker room. Sessions start on time.",
-      ob1_tip: "🔒 Bring a padlock for the lockers",
-      ob2_title: "👟 The right gear",
-      ob2_text: "Basketball shoes and workout clothes required. Ball is provided. No bags, jackets or boots in the gym.",
-      ob2_tip: "🚫 No street shoes on the court",
-      ob3_title: "💳 Pay before the end",
-      ob3_text: "The payment link is in the WhatsApp chat. Pay before the end to get $15.90. After the session it's $20.",
-      ob3_tip: "🏀 Discounted memberships available",
-      faq_banner_title: "Got a question?",
-      faq_banner_sub: "Check our FAQ — we probably already have the answer.",
-      faq_banner_btn: "View FAQ →",
-      footer_sub: "Pickup Basketball — Centre Sportif ETS, Montreal",
-      nsw_label: "Next session",
-      nsw_btn: "Pay →"
+      nav_how:"How to play",nav_sessions:"Sessions",nav_rules:"Rules",nav_sub:"Memberships",
+      nav_location:"Location",nav_rules_full:"Full Rules",nav_faq:"FAQ",
+      hero_tag:"Pickup Basketball \u2014 Montreal",
+      hero_sub:"Join the biggest pickup basketball community in Montreal. Recreational and competitive basketball in the heart of the city. Come play!",
+      hero_cta1:"\U0001f3c0 How to play",hero_cta2:"Sessions & Payments",
+      stat_players:"Players in the community",stat_sessions:"Sessions / week",stat_max:"Players max",stat_per:"Per session",
+      s1_label:"New player?",s1_title:"How to join a session",
+      step1_title:"Join the WhatsApp community",step1_text:"Join your session's WhatsApp group to get updates and take part in roll call.",step1_btn:"Join the group \u2192",
+      step2_title:"Choose your session",step2_text:"Monday 7-9pm, Monday 9-11pm, Wednesday 7-9pm or Saturday 11am-1pm. Each session is capped at 15 players.",
+      step3_title:"Write IN at Roll Call",step3_text:"When roll call opens, write IN in the chat. The first 15 are confirmed.",
+      step4_title:"Pay before the session ends",step4_text:"Use the Stripe link in your session chat to pay before the end. After that, the $20 late fee applies.",
+      wa_title:"Ready to play?",wa_sub:"Join the Area Courts WhatsApp community and reserve your spot at the next roll call.",wa_btn:"Join WhatsApp \u2192",
+      s2_label:"Schedule",s2_title:"Sessions & Payment",s3_label:"Game rules",s3_title:"Rules",s4_label:"Find us",s4_title:"Location",
+      loc_gym:"\U0001f4cd The gym",loc_park:"\U0001f698 Parking",loc_transit:"\U0001f687 Public transit",
+      sub_label:"Monthly membership",sub_title:"Play every week",sub_intro:"Your spot is guaranteed every week. No more roll call stress.",
+      perk1:"Guaranteed spot every week",perk3:"Exclusive goodies",perk4:"Merch discount",perk5:"Cancel anytime",
+      f1_title:"Solo Plan",f1_sub:"One fixed session per week of your choice",f1_vs:"vs $67.60 drop-in",f1_save:"You save 13%",f1_p1:"~4 guaranteed sessions per month",
+      f2_title:"Double Plan",f2_sub:"Two fixed sessions per week of your choice",f2_vs:"vs $135.20 drop-in",f2_save:"You save 20%",f2_p1:"~8 guaranteed sessions per month",
+      ob_label:"First time here?",ob_title:"What you need to know before you come",
+      ob1_title:"\u23f0 Arrive 10 min early",ob1_text:"Give yourself time to change and drop your stuff in the locker room. Sessions start on time.",ob1_tip:"\U0001f512 Bring a padlock for the lockers",
+      ob2_title:"\U0001f45f The right gear",ob2_text:"Basketball shoes and workout clothes required. Ball is provided. No bags, jackets or boots in the gym.",ob2_tip:"\U0001f6ab No street shoes on the court",
+      ob3_title:"\U0001f4b3 Pay before the end",ob3_text:"The payment link is in the WhatsApp chat. Pay before the end to get $16.90. After the session it's $20.",ob3_tip:"\U0001f3c0 Discounted memberships available",
+      faq_banner_title:"Got a question?",faq_banner_sub:"Check our FAQ \u2014 we probably already have the answer.",faq_banner_btn:"View FAQ \u2192",
+      footer_sub:"Pickup Basketball \u2014 Centre Sportif ETS, Montreal",
+      nsw_label:"Next session",nsw_btn:"Pay \u2192"
     }
   };
 
-  // =====================
-  // LANGUE
-  // =====================
   function setLang(lang) {
-    var t = translations[lang];
-    if (!t) return;
-    document.querySelectorAll("[data-i18n]").forEach(function(el) {
-      var key = el.getAttribute("data-i18n");
-      if (t[key] !== undefined) {
-        el.textContent = t[key];
-      }
-    });
-    var btnFr = document.getElementById("btn-fr");
-    var btnEn = document.getElementById("btn-en");
-    if (btnFr) btnFr.classList.toggle("active", lang === "fr");
-    if (btnEn) btnEn.classList.toggle("active", lang === "en");
+    var t = translations[lang]; if (!t) return;
+    document.querySelectorAll("[data-i18n]").forEach(function(el) { var k = el.getAttribute("data-i18n"); if (t[k] !== undefined) el.textContent = t[k]; });
+    var bf = document.getElementById("btn-fr"); var be = document.getElementById("btn-en");
+    if (bf) bf.classList.toggle("active", lang === "fr");
+    if (be) be.classList.toggle("active", lang === "en");
     document.documentElement.lang = lang;
     updateNextSession();
-    try {
-      var url = new URL(window.location.href);
-      url.searchParams.set("lang", lang);
-      window.history.replaceState({}, "", url);
-    } catch(e) {}
+    try { var u = new URL(window.location.href); u.searchParams.set("lang", lang); window.history.replaceState({}, "", u); } catch(e) {}
   }
 
-  // =====================
-  // HAMBURGER MENU
-  // =====================
   function toggleMenu() {
-    var nav = document.getElementById("nav-links");
-    var burger = document.getElementById("hamburger");
-    if (!nav || !burger) return;
+    var nav = document.getElementById("nav-links"); var burger = document.getElementById("hamburger"); if (!nav || !burger) return;
     var isOpen = nav.classList.contains("open");
-    nav.classList.toggle("open");
-    burger.classList.toggle("open");
+    nav.classList.toggle("open"); burger.classList.toggle("open");
     document.body.style.overflow = isOpen ? "" : "hidden";
   }
 
-  // =====================
-  // NAV ACTIVE AU SCROLL
-  // =====================
   function updateActiveNav() {
-    var scrollY = window.scrollY + 100;
-    var current = "";
-    document.querySelectorAll("section[id]").forEach(function(section) {
-      if (section.offsetTop <= scrollY) {
-        current = section.getAttribute("id");
-      }
-    });
-    document.querySelectorAll("nav a[href^='#']").forEach(function(link) {
-      link.classList.remove("nav-active");
-      if (link.getAttribute("href") === "#" + current) {
-        link.classList.add("nav-active");
-      }
-    });
+    var scrollY = window.scrollY + 100; var current = "";
+    document.querySelectorAll("section[id]").forEach(function(s) { if (s.offsetTop <= scrollY) current = s.getAttribute("id"); });
+    document.querySelectorAll("nav a[href^='#']").forEach(function(l) { l.classList.remove("nav-active"); if (l.getAttribute("href") === "#" + current) l.classList.add("nav-active"); });
   }
-
   window.addEventListener("scroll", updateActiveNav, { passive: true });
 
-  // =====================
-  // NEXT SESSION WIDGET
-  // =====================
   function updateNextSession() {
     var TZ = "America/Toronto";
-
-    // Sessions définies : { day: 0=dim..6=sam, hour, minute, label_fr, label_en, time_str,
-    //   rollOpenDay, rollOpenHour, rollOpenMinute, closeDay, closeHour }
     var sessions = [
-      {
-        day: 1, hour: 19, minute: 0,
-        label_fr: "Lundi", label_en: "Monday", time_str: "19h – 21h",
-        rollOpenDay: 0, rollOpenHour: 20, rollOpenMinute: 0,
-        closeDay: 1, closeHour: 21, closeMinute: 0,
-        payUrl: "https://basketball-paiement.vercel.app/?ouvertureJour=0&ouvertureHeure=20&fermetureJour=1&fermetureHeure=21&normal=https://buy.stripe.com/dRm9AU5yx8xre7k1rF3wQ0e&retard=https://buy.stripe.com/5kQ4gA2ml8xr6ESeer3wQ0g&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto"
-      },
-      {
-        day: 1, hour: 21, minute: 0,
-        label_fr: "Lundi", label_en: "Monday", time_str: "21h – 23h",
-        rollOpenDay: 0, rollOpenHour: 19, rollOpenMinute: 55,
-        closeDay: 1, closeHour: 23, closeMinute: 0,
-        payUrl: "https://basketball-paiement.vercel.app/?ouvertureJour=0&ouvertureHeure=19&ouvertureMinute=55&fermetureJour=1&fermetureHeure=23&normal=https://buy.stripe.com/5kA17a4HxfZ56DSbIQ&retard=https://buy.stripe.com/eVq6oIf97eVPbZc6LZ3wQ0f&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto"
-      },
-      {
-        day: 6, hour: 11, minute: 0,
-        label_fr: "Samedi", label_en: "Saturday", time_str: "11h – 13h",
-        rollOpenDay: 5, rollOpenHour: 11, rollOpenMinute: 0,
-        closeDay: 6, closeHour: 13, closeMinute: 0,
-        payUrl: "https://basketball-paiement.vercel.app/?ouvertureJour=5&ouvertureHeure=11&fermetureJour=6&fermetureHeure=13&normal=https://buy.stripe.com/6oU9AUf97bJD8N0eer3wQ0d&retard=https://buy.stripe.com/3cI8wQ5yx293aV89Yb3wQ0h&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto"
-      }
+      { day:1, hour:19, minute:0, label_fr:"Lundi", label_en:"Monday", time_str:"19h \u2013 21h", rollOpenDay:0, rollOpenHour:20, rollOpenMinute:0, closeDay:1, closeHour:21, closeMinute:0, payUrl:"https://basketball-paiement.vercel.app/?ouvertureJour=0&ouvertureHeure=20&fermetureJour=1&fermetureHeure=21&normal=https://buy.stripe.com/dRm9AU5yx8xre7k1rF3wQ0e&retard=https://buy.stripe.com/5kQ4gA2ml8xr6ESeer3wQ0g&prixNormal=16,90$&prixRetard=20$&fuseau=America/Toronto" },
+      { day:1, hour:21, minute:0, label_fr:"Lundi", label_en:"Monday", time_str:"21h \u2013 23h", rollOpenDay:0, rollOpenHour:19, rollOpenMinute:55, closeDay:1, closeHour:23, closeMinute:0, payUrl:"https://basketball-paiement.vercel.app/?ouvertureJour=0&ouvertureHeure=19&ouvertureMinute=55&fermetureJour=1&fermetureHeure=23&normal=https://buy.stripe.com/5kA17a4HxfZ56DSbIQ&retard=https://buy.stripe.com/eVq6oIf97eVPbZc6LZ3wQ0f&prixNormal=16,90$&prixRetard=20$&fuseau=America/Toronto" },
+      { day:3, hour:19, minute:0, label_fr:"Mercredi", label_en:"Wednesday", time_str:"19h \u2013 21h", rollOpenDay:2, rollOpenHour:20, rollOpenMinute:0, closeDay:3, closeHour:21, closeMinute:0, payUrl:"https://basketball-paiement.vercel.app/?ouvertureJour=2&ouvertureHeure=20&fermetureJour=3&fermetureHeure=21&normal=https://buy.stripe.com/8wMcPSc9ZeV10fu6ox&retard=https://buy.stripe.com/dRm00k9ON8xr5AO4DR3wQ0l&prixNormal=16,90$&prixRetard=20$&fuseau=America/Toronto" },
+      { day:6, hour:11, minute:0, label_fr:"Samedi", label_en:"Saturday", time_str:"11h \u2013 13h", rollOpenDay:5, rollOpenHour:11, rollOpenMinute:0, closeDay:6, closeHour:13, closeMinute:0, payUrl:"https://basketball-paiement.vercel.app/?ouvertureJour=5&ouvertureHeure=11&fermetureJour=6&fermetureHeure=13&normal=https://buy.stripe.com/6oU9AUf97bJD8N0eer3wQ0d&retard=https://buy.stripe.com/3cI8wQ5yx293aV89Yb3wQ0h&prixNormal=16,90$&prixRetard=20$&fuseau=America/Toronto" }
     ];
-
-    // Heure locale Toronto
     var nowStr = new Date().toLocaleString("en-US", { timeZone: TZ });
     var now = new Date(nowStr);
-    var nowDay = now.getDay();    // 0=dim
-    var nowH = now.getHours();
-    var nowM = now.getMinutes();
-    var nowMins = nowDay * 1440 + nowH * 60 + nowM;
-
-    function sessionMins(s) { return s.day * 1440 + s.hour * 60 + s.minute; }
-    function rollMins(s)    { return s.rollOpenDay * 1440 + s.rollOpenHour * 60 + s.rollOpenMinute; }
-    function closeMins(s)   { return s.closeDay * 1440 + s.closeHour * 60 + s.closeMinute; }
-
-    // Trouver la prochaine session (pas encore terminée)
-    var next = null;
-    var minDiff = Infinity;
-    for (var i = 0; i < sessions.length; i++) {
-      var sm = sessionMins(sessions[i]);
-      var cm = closeMins(sessions[i]);
-      var diff = sm - nowMins;
-      if (diff < 0) diff += 7 * 1440; // semaine prochaine
-      // Si la session est en cours (pas terminée), diff = 0 prioritaire
-      if (nowMins >= sm && nowMins < cm) { diff = 0; }
+    var nowMins = now.getDay() * 1440 + now.getHours() * 60 + now.getMinutes();
+    function sm(s) { return s.day*1440+s.hour*60+s.minute; }
+    function cm(s) { return s.closeDay*1440+s.closeHour*60+s.closeMinute; }
+    var next = null; var minDiff = Infinity;
+    for (var i=0; i<sessions.length; i++) {
+      var diff = sm(sessions[i]) - nowMins;
+      if (diff < 0) diff += 7*1440;
+      if (nowMins >= sm(sessions[i]) && nowMins < cm(sessions[i])) diff = 0;
       if (diff < minDiff) { minDiff = diff; next = sessions[i]; }
     }
-
     if (!next) return;
-
-    // Langue courante
     var lang = document.documentElement.lang || "fr";
-    var dayLabel = lang === "en" ? next.label_en : next.label_fr;
-
-    // Statut roll call
-    var rm = rollMins(next);
-    var cm = closeMins(next);
-    var isOpen = (nowMins >= rm && nowMins < cm);
-    // Si session de la semaine prochaine, roll call pas encore ouvert
-    if (minDiff > 0 && nowMins < rm + (next.rollOpenDay < next.day ? 0 : -7*1440)) {
-      isOpen = false;
-    }
-    // Recalcul propre : roll call ouvert si on est entre rollOpen et close dans la même semaine
-    var rmAbs = next.rollOpenDay * 1440 + next.rollOpenHour * 60 + next.rollOpenMinute;
-    var cmAbs = closeMins(next);
-    isOpen = (nowMins >= rmAbs && nowMins < cmAbs);
-
+    var rmAbs = next.rollOpenDay*1440 + next.rollOpenHour*60 + next.rollOpenMinute;
+    var isOpen = (nowMins >= rmAbs && nowMins < cm(next));
+    document.getElementById("nsw-day").textContent = lang === "en" ? next.label_en : next.label_fr;
+    document.getElementById("nsw-time").textContent = next.time_str;
+    document.getElementById("nsw-day").textContent = lang === "en" ? next.label_en : next.label_fr;
+    document.getElementById("nsw-time").textContent = next.time_str;
     var statusEl = document.getElementById("nsw-status");
-    var dayEl    = document.getElementById("nsw-day");
-    var timeEl   = document.getElementById("nsw-time");
-    var btnEl    = document.getElementById("nsw-btn");
-
-    dayEl.textContent  = dayLabel;
-    timeEl.textContent = next.time_str;
-    btnEl.href = next.payUrl;
-
+    var btnEl = document.getElementById("nsw-btn");
     if (isOpen) {
-      statusEl.textContent = lang === "en" ? "🟢 Roll call open" : "🟢 Roll call ouvert";
+      statusEl.textContent = lang==="en" ? "🟢 Roll call open" : "🟢 Roll call ouvert";
       statusEl.className = "nsw-status open";
-      btnEl.textContent  = lang === "en" ? "Pay →" : "Payer →";
+      btnEl.textContent = lang==="en" ? "Pay →" : "Payer →";
+      btnEl.href = next.payUrl;
+      btnEl.target = "_blank";
     } else {
-      statusEl.textContent = lang === "en" ? "🔴 Roll call closed" : "🔴 Roll call fermé";
+      statusEl.textContent = lang==="en" ? "🔴 Roll call closed" : "🔴 Roll call fermé";
       statusEl.className = "nsw-status closed";
-      btnEl.textContent  = lang === "en" ? "Sessions →" : "Sessions →";
+      btnEl.textContent = "Sessions →";
+      btnEl.href = "#sessions";
+      btnEl.target = "";
     }
   }
 
   updateNextSession();
-  setInterval(updateNextSession, 60000); // rafraîchit chaque minute
+  setInterval(updateNextSession, 60000);
   document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll("#nav-links a").forEach(function(link) {
-      link.addEventListener("click", function() {
-        var nav = document.getElementById("nav-links");
-        var burger = document.getElementById("hamburger");
-        if (nav) nav.classList.remove("open");
-        if (burger) burger.classList.remove("open");
-        document.body.style.overflow = "";
-      });
-    });
-
+    document.querySelectorAll("#nav-links a").forEach(function(l) { l.addEventListener("click", function() { var n=document.getElementById("nav-links"); var b=document.getElementById("hamburger"); if(n) n.classList.remove("open"); if(b) b.classList.remove("open"); document.body.style.overflow=""; }); });
     updateActiveNav();
-
-    try {
-      var urlLang = new URLSearchParams(window.location.search).get("lang");
-      if (urlLang === "en") setLang("en");
-    } catch(e) {}
+    try { var ul = new URLSearchParams(window.location.search).get("lang"); if (ul === "en") setLang("en"); } catch(e) {}
   });
   </script>
 </body>
