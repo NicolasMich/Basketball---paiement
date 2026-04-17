@@ -7,310 +7,73 @@
   <link rel="icon" type="image/png" href="logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --orange: #CC4422;
-      --orange-dark: #B03518;
-      --black: #0A0A0A;
-      --dark: #111111;
-      --card: #1A1A1A;
-      --border: #2A2A2A;
-      --text: #E8E8E8;
-      --muted: #888;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Barlow', sans-serif;
-      background: var(--black);
-      color: var(--text);
-      overflow-x: hidden;
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      background: rgba(10,10,10,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo img { height: 44px; width: auto; }
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--orange); }
-    .nav-active { color: var(--orange) !important; }
-    .lang-btn {
-      background: none;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .lang-btn.active { background: var(--orange); border-color: var(--orange); color: white; }
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-      background: none;
-      border: none;
-    }
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
-    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-    /* HERO */
-    .page-hero {
-      padding: 160px 40px 80px;
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .page-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 16px;
-    }
-    .page-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(56px, 10vw, 96px);
-      font-weight: 900;
-      letter-spacing: -1px;
-      line-height: 0.95;
-      text-transform: uppercase;
-      color: var(--text);
-      margin-bottom: 24px;
-    }
-    .page-subtitle {
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.6;
-      max-width: 560px;
-      margin: 0 auto;
-    }
-
-    /* SECTIONS */
-    .reg-section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 40px 80px;
-    }
-    .reg-section-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 32px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    /* RÈGLES */
-    .rule-block { margin-bottom: 40px; }
-    .rule-block-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      color: var(--text);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .rule-block-title .icon { font-size: 20px; }
-    .rule-block p { color: #aaa; font-size: 15px; line-height: 1.75; margin-bottom: 10px; }
-    .rule-block ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .rule-block ul li {
-      color: #aaa;
-      font-size: 15px;
-      line-height: 1.6;
-      padding-left: 20px;
-      position: relative;
-    }
-    .rule-block ul li::before {
-      content: '—';
-      position: absolute;
-      left: 0;
-      color: var(--orange);
-      font-weight: 700;
-    }
-    .rule-block strong { color: var(--text); font-weight: 600; }
-
-    /* ALERTE */
-    .rule-alert {
-      background: rgba(204,68,34,0.08);
-      border: 1px solid rgba(204,68,34,0.25);
-      border-left: 3px solid var(--orange);
-      border-radius: 6px;
-      padding: 16px 20px;
-      margin-bottom: 10px;
-      color: #bbb;
-      font-size: 14px;
-      line-height: 1.65;
-    }
-    .rule-alert strong { color: var(--text); }
-
-    /* BADGE SANCTION */
-    .sanction-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .sanction-row:last-child { border-bottom: none; }
-    .sanction-badge {
-      min-width: 90px;
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      text-align: center;
-    }
-    .badge-warning { background: rgba(251,191,36,0.12); border: 1px solid rgba(251,191,36,0.3); color: #fbbf24; }
-    .badge-ejection { background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3); color: #ef4444; }
-    .badge-ban { background: rgba(139,0,0,0.15); border: 1px solid rgba(139,0,0,0.4); color: #f87171; }
-    .badge-paid { background: rgba(204,68,34,0.12); border: 1px solid rgba(204,68,34,0.3); color: var(--orange); }
-    .sanction-text { color: #aaa; font-size: 14px; line-height: 1.6; padding-top: 2px; }
-
-    /* DIVIDER */
-    .section-divider { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
-
-    /* CTA */
-    .reg-cta {
-      text-align: center;
-      padding: 60px 40px;
-      border-top: 1px solid var(--border);
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .reg-cta p { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: transparent;
-      color: var(--text);
-      padding: 14px 28px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: 0.5px;
-      text-decoration: none;
-      border: 1px solid var(--border);
-      transition: border-color 0.2s;
-      margin: 6px;
-    }
-    .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--orange);
-      color: white;
-      padding: 14px 28px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 14px;
-      text-decoration: none;
-      margin: 6px;
-      transition: background 0.2s;
-    }
-    .btn-primary:hover { background: var(--orange-dark); }
-
-    /* FOOTER */
-    footer {
-      background: var(--dark);
-      border-top: 1px solid var(--border);
-      padding: 48px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 24px;
-    }
-    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 28px; letter-spacing: 2px; }
-    .footer-logo span { color: var(--orange); }
-    .footer-text { color: var(--muted); font-size: 13px; }
-
-    /* MOBILE */
-    @media (max-width: 768px) {
-      nav { padding: 16px 20px; }
-      .hamburger { display: flex; }
-      .nav-links {
-        display: none;
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: var(--black);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 40px;
-        z-index: 99;
-      }
-      .nav-links.open { display: flex; }
-      .nav-links a { font-size: 24px; letter-spacing: 2px; }
-      .page-hero { padding: 120px 24px 60px; }
-      .reg-section { padding: 0 24px 60px; }
-      .reg-cta { padding: 40px 24px; }
-      footer { padding: 40px 24px; flex-direction: column; text-align: center; }
+    :root { --orange:#CC4422; --orange-dark:#B03518; --black:#0A0A0A; --dark:#111111; --card:#1A1A1A; --border:#2A2A2A; --text:#E8E8E8; --muted:#888; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Barlow',sans-serif; background:var(--black); color:var(--text); overflow-x:hidden; }
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:20px 40px; background:rgba(10,10,10,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+    .nav-logo img { height:44px; width:auto; }
+    .nav-links { display:flex; gap:32px; list-style:none; }
+    .nav-links a { text-decoration:none; color:var(--muted); font-size:13px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; transition:color 0.2s; }
+    .nav-links a:hover { color:var(--orange); }
+    .nav-active { color:var(--orange) !important; }
+    .lang-btn { background:none; border:1px solid var(--border); color:var(--muted); padding:4px 10px; border-radius:4px; font-size:12px; font-weight:700; letter-spacing:1px; cursor:pointer; transition:all 0.2s; }
+    .lang-btn.active { background:var(--orange); border-color:var(--orange); color:white; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
+    .hamburger span { display:block; width:24px; height:2px; background:var(--text); border-radius:2px; transition:all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+    .hamburger.open span:nth-child(2) { opacity:0; }
+    .hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+    .page-hero { padding:160px 40px 80px; max-width:900px; margin:0 auto; text-align:center; }
+    .page-label { font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--orange); margin-bottom:16px; }
+    .page-title { font-family:'Barlow Condensed',sans-serif; font-size:clamp(56px,10vw,96px); font-weight:900; letter-spacing:-1px; line-height:0.95; text-transform:uppercase; color:var(--text); margin-bottom:24px; }
+    .page-subtitle { color:var(--muted); font-size:16px; line-height:1.6; max-width:560px; margin:0 auto; }
+    .reg-section { max-width:900px; margin:0 auto; padding:0 40px 80px; }
+    .reg-section-title { font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--orange); margin-bottom:32px; padding-bottom:12px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+    .rule-block { margin-bottom:40px; }
+    .rule-block-title { font-family:'Barlow Condensed',sans-serif; font-size:22px; font-weight:800; letter-spacing:0.5px; text-transform:uppercase; color:var(--text); margin-bottom:12px; display:flex; align-items:center; gap:12px; }
+    .rule-block-title .icon { font-size:20px; }
+    .rule-block p { color:#aaa; font-size:15px; line-height:1.75; margin-bottom:10px; }
+    .rule-block ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
+    .rule-block ul li { color:#aaa; font-size:15px; line-height:1.6; padding-left:20px; position:relative; }
+    .rule-block ul li::before { content:'—'; position:absolute; left:0; color:var(--orange); font-weight:700; }
+    .rule-block strong { color:var(--text); font-weight:600; }
+    .rule-alert { background:rgba(204,68,34,0.08); border:1px solid rgba(204,68,34,0.25); border-left:3px solid var(--orange); border-radius:6px; padding:16px 20px; margin-bottom:10px; color:#bbb; font-size:14px; line-height:1.65; }
+    .rule-alert strong { color:var(--text); }
+    .rule-info { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-left:3px solid #444; border-radius:6px; padding:16px 20px; margin-top:16px; margin-bottom:10px; color:#bbb; font-size:14px; line-height:1.65; }
+    .rule-info strong { color:var(--text); }
+    .sanction-row { display:flex; align-items:flex-start; gap:16px; padding:14px 0; border-bottom:1px solid var(--border); }
+    .sanction-row:last-child { border-bottom:none; }
+    .sanction-badge { min-width:90px; padding:4px 10px; border-radius:4px; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; text-align:center; }
+    .badge-warning { background:rgba(251,191,36,0.12); border:1px solid rgba(251,191,36,0.3); color:#fbbf24; }
+    .badge-ejection { background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.3); color:#ef4444; }
+    .badge-ban { background:rgba(139,0,0,0.15); border:1px solid rgba(139,0,0,0.4); color:#f87171; }
+    .badge-paid { background:rgba(204,68,34,0.12); border:1px solid rgba(204,68,34,0.3); color:var(--orange); }
+    .sanction-text { color:#aaa; font-size:14px; line-height:1.6; padding-top:2px; }
+    .section-divider { border:none; border-top:1px solid var(--border); margin:40px 0; }
+    .reg-cta { text-align:center; padding:60px 40px; border-top:1px solid var(--border); max-width:900px; margin:0 auto; }
+    .reg-cta p { color:var(--muted); font-size:14px; margin-bottom:20px; }
+    .btn-secondary { display:inline-flex; align-items:center; gap:10px; background:transparent; color:var(--text); padding:14px 28px; border-radius:6px; font-weight:700; font-size:14px; letter-spacing:0.5px; text-decoration:none; border:1px solid var(--border); transition:border-color 0.2s; margin:6px; }
+    .btn-secondary:hover { border-color:var(--orange); color:var(--orange); }
+    .btn-primary { display:inline-flex; align-items:center; gap:10px; background:var(--orange); color:white; padding:14px 28px; border-radius:6px; font-weight:700; font-size:14px; text-decoration:none; margin:6px; transition:background 0.2s; }
+    .btn-primary:hover { background:var(--orange-dark); }
+    footer { background:var(--dark); border-top:1px solid var(--border); padding:48px 40px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px; }
+    .footer-logo { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:28px; letter-spacing:2px; }
+    .footer-logo span { color:var(--orange); }
+    .footer-text { color:var(--muted); font-size:13px; }
+    @media (max-width:768px) {
+      nav { padding:16px 20px; } .hamburger { display:flex; }
+      .nav-links { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:var(--black); flex-direction:column; justify-content:center; align-items:center; gap:40px; z-index:99; }
+      .nav-links.open { display:flex; } .nav-links a { font-size:24px; letter-spacing:2px; }
+      .page-hero { padding:120px 24px 60px; } .reg-section { padding:0 24px 60px; }
+      .reg-cta { padding:40px 24px; } footer { padding:40px 24px; flex-direction:column; text-align:center; }
     }
   </style>
 </head>
 <body>
-
 <nav>
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-  <a href="play.html" class="nav-logo">
-    <img src="logo.png" alt="Area Courts" style="height:44px;width:auto;">
-  </a>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  <a href="play.html" class="nav-logo"><img src="logo.png" alt="Area Courts" style="height:44px;width:auto;"></a>
   <ul class="nav-links" id="nav-links">
     <li><a href="play.html#comment-jouer" data-i18n="nav_how">Comment jouer</a></li>
     <li><a href="play.html#sessions" data-i18n="nav_sessions">Sessions</a></li>
@@ -319,187 +82,169 @@
     <li><a href="play.html#localisation" data-i18n="nav_location">Localisation</a></li>
     <li><a href="faq.html" data-i18n="nav_faq">FAQ</a></li>
   </ul>
-  <div style="display:flex; gap:8px; align-items:center;">
+  <div style="display:flex;gap:8px;align-items:center;">
     <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button>
     <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="page-hero">
   <div class="page-label" data-i18n="reg_label">Règles du jeu</div>
   <h1 class="page-title" data-i18n="reg_title">Règlement</h1>
-  <p class="page-subtitle" data-i18n="reg_subtitle">En participant à une session Area Courts, tu acceptes l'ensemble de ces règles. Elles sont là pour garantir une expérience de qualité pour tout le monde.</p>
+  <p class="page-subtitle" data-i18n="reg_subtitle">En participant à une session Area Courts, tu acceptes l’ensemble de ces règles. Elles sont là pour garantir une expérience de qualité pour tout le monde.</p>
 </div>
 
-<!-- SECTION 1 : ROLL CALL & ENGAGEMENT -->
+<!-- S1: ROLL CALL -->
 <section class="reg-section">
-  <div class="reg-section-title">📝 <span data-i18n="reg_s1_title">Roll Call & Engagement</span></div>
-
+  <div class="reg-section-title">📝 <span data-i18n="reg_s1_title">Roll Call &amp; Engagement</span></div>
   <div class="rule-block">
     <div class="rule-block-title"><span class="icon">📋</span> <span data-i18n="reg_rc_title">Inscription par roll call</span></div>
-    <p data-i18n="reg_rc_text">Le roll call s'ouvre à une heure précise dans le chat WhatsApp de ta session. Les <strong>15 premiers joueurs à écrire IN</strong> sont confirmés. Les abonnés ont leur place réservée avant l'ouverture du roll call.</p>
+    <p data-i18n="reg_rc_text">Le roll call s’ouvre à une heure précise dans le chat WhatsApp de ta session. Les <strong>15 premiers joueurs à écrire IN</strong> sont confirmés. Les abonnés ont leur place réservée avant l’ouverture du roll call.</p>
     <ul>
       <li data-i18n="reg_rc_li1">Lundi 19h → ouverture dimanche à 20h00</li>
       <li data-i18n="reg_rc_li2">Lundi 21h → ouverture dimanche à 19h55</li>
-      <li data-i18n="reg_rc_li3">Samedi 11h → ouverture vendredi à 11h00</li>
+      <li data-i18n="reg_rc_li3">Mercredi 19h → ouverture mardi à 20h00</li>
+      <li data-i18n="reg_rc_li4">Samedi 11h → ouverture vendredi à 11h00</li>
     </ul>
   </div>
-
-  <div class="rule-alert" data-i18n="reg_commit_alert">
-    <strong>En écrivant IN, tu t'engages à venir et à payer.</strong> Rejoindre la liste de participation confirme ta présence — ce n'est pas une simple pré-inscription. Si tu ne peux finalement pas venir, tu dois annuler dans les délais pour éviter des frais.
-  </div>
-
+  <div class="rule-alert" data-i18n="reg_commit_alert"><strong>En écrivant IN, tu t’engages à venir et à payer.</strong> Rejoindre la liste de participation confirme ta présence — ce n’est pas une simple pré-inscription. Si tu ne peux finalement pas venir, tu dois annuler dans les délais pour éviter des frais.</div>
   <hr class="section-divider">
-
   <div class="rule-block">
-    <div class="rule-block-title"><span class="icon">⏳</span> <span data-i18n="reg_wait_title">Liste d'attente</span></div>
-    <p data-i18n="reg_wait_text">Si tu es sur la liste d'attente, reste actif sur le chat. Dès qu'une place se libère, le premier sur la liste est automatiquement invité. Un refus ou une non-réponse dans un délai raisonnable passe la place au suivant.</p>
+    <div class="rule-block-title"><span class="icon">⏳</span> <span data-i18n="reg_wait_title">Liste d’attente</span></div>
+    <p data-i18n="reg_wait_text">Si tu es sur la liste d’attente, reste actif sur le chat. Dès qu’une place se libère, le premier sur la liste est automatiquement invité. Un refus ou une non-réponse dans un délai raisonnable passe la place au suivant.</p>
   </div>
 </section>
 
-<!-- SECTION 2 : ANNULATION & NO-SHOW -->
+<!-- S2: ANNULATION -->
 <section class="reg-section">
-  <div class="reg-section-title">❌ <span data-i18n="reg_s2_title">Annulation & No-Show</span></div>
-
+  <div class="reg-section-title">❌ <span data-i18n="reg_s2_title">Annulation &amp; No-Show</span></div>
   <div class="rule-block">
-    <div class="rule-block-title"><span class="icon">🗓️</span> <span data-i18n="reg_cancel_title">Délais d'annulation</span></div>
+    <div class="rule-block-title"><span class="icon">🗓️</span> <span data-i18n="reg_cancel_title">Délais d’annulation</span></div>
     <ul>
       <li data-i18n="reg_cancel_li1"><strong>Lundi (semaine) :</strong> annulation gratuite avant 15h le jour même</li>
-      <li data-i18n="reg_cancel_li2"><strong>Samedi :</strong> annulation gratuite avant 23h30 la veille</li>
-      <li data-i18n="reg_cancel_li3">Après ces délais, <strong>15,90$</strong> sont dus si aucun remplaçant n'est trouvé</li>
-      <li data-i18n="reg_cancel_li4">Si un remplaçant est trouvé, aucun frais n'est appliqué</li>
+      <li data-i18n="reg_cancel_li2"><strong>Mercredi :</strong> annulation gratuite avant 15h le jour même</li>
+      <li data-i18n="reg_cancel_li3"><strong>Samedi :</strong> annulation gratuite avant 23h30 la veille</li>
+      <li data-i18n="reg_cancel_li4">Après ces délais, <strong>16,90$</strong> sont dus si aucun remplaçant n’est trouvé</li>
+      <li data-i18n="reg_cancel_li5">Si un remplaçant est trouvé, aucun frais n’est appliqué</li>
     </ul>
   </div>
-
   <hr class="section-divider">
-
   <div class="rule-block">
     <div class="rule-block-title"><span class="icon">🚫</span> <span data-i18n="reg_noshow_title">No-Show</span></div>
-    <div class="rule-alert" data-i18n="reg_noshow_alert">
-      <strong>Ne pas se présenter sans prévenir = paiement obligatoire de 15,90$</strong>, même si un remplaçant a été trouvé. Un no-show prive un joueur sur la liste d'attente de sa chance de jouer.
-    </div>
-    <div class="sanction-row">
-      <span class="sanction-badge badge-paid">15,90 $</span>
-      <span class="sanction-text" data-i18n="reg_noshow_s1">Frais automatiques pour tout no-show, sans exception</span>
-    </div>
-    <div class="sanction-row">
-      <span class="sanction-badge badge-warning">Avertissement</span>
-      <span class="sanction-text" data-i18n="reg_noshow_s2">No-shows répétés : avertissement formel</span>
-    </div>
-    <div class="sanction-row">
-      <span class="sanction-badge badge-ban">Bannissement</span>
-      <span class="sanction-text" data-i18n="reg_noshow_s3">No-shows répétés après avertissement : exclusion de la communauté</span>
-    </div>
+    <div class="rule-alert" data-i18n="reg_noshow_alert"><strong>Ne pas se présenter sans prévenir = paiement obligatoire de 16,90$</strong>, même si un remplaçant a été trouvé. Un no-show prive un joueur sur la liste d’attente de sa chance de jouer.</div>
+    <div class="sanction-row"><span class="sanction-badge badge-paid">16,90 $</span><span class="sanction-text" data-i18n="reg_noshow_s1">Frais automatiques pour tout no-show, sans exception</span></div>
+    <div class="sanction-row"><span class="sanction-badge badge-warning">Avertissement</span><span class="sanction-text" data-i18n="reg_noshow_s2">No-shows répétés : avertissement formel</span></div>
+    <div class="sanction-row"><span class="sanction-badge badge-ban">Bannissement</span><span class="sanction-text" data-i18n="reg_noshow_s3">No-shows répétés après avertissement : exclusion de la communauté</span></div>
   </div>
 </section>
 
-<!-- SECTION 3 : PAIEMENT -->
+<!-- S3: PAIEMENT -->
 <section class="reg-section">
   <div class="reg-section-title">💳 <span data-i18n="reg_s3_title">Paiement</span></div>
-
   <div class="rule-block">
-    <div class="rule-block-title"><span class="icon">💰</span> <span data-i18n="reg_pay_title">Tarifs & délais</span></div>
+    <div class="rule-block-title"><span class="icon">💰</span> <span data-i18n="reg_pay_title">Tarifs &amp; délais</span></div>
     <ul>
-      <li data-i18n="reg_pay_li1"><strong>15,90$</strong> — tarif normal, payé avant la fin de la session</li>
+      <li data-i18n="reg_pay_li1"><strong>16,90$</strong> — tarif normal, payé avant la fin de la session</li>
       <li data-i18n="reg_pay_li2"><strong>20$</strong> — tarif retard, appliqué automatiquement après la fin de session</li>
       <li data-i18n="reg_pay_li3">Paiement en ligne uniquement via le lien Stripe dans le chat WhatsApp</li>
       <li data-i18n="reg_pay_li4">Aucun paiement en cash accepté</li>
     </ul>
   </div>
-
   <hr class="section-divider">
-
   <div class="rule-block">
     <div class="rule-block-title"><span class="icon">⚠️</span> <span data-i18n="reg_nonpay_title">Non-paiement</span></div>
-    <div class="rule-alert" data-i18n="reg_nonpay_alert">
-      Tout joueur n'ayant pas payé recevra un rappel. <strong>Un non-paiement persistant après rappel entraînera un bannissement</strong> de la communauté jusqu'à régularisation de la situation.
-    </div>
-    <div class="sanction-row">
-      <span class="sanction-badge badge-warning">Rappel</span>
-      <span class="sanction-text" data-i18n="reg_nonpay_s1">Un rappel de paiement est envoyé après la session</span>
-    </div>
-    <div class="sanction-row">
-      <span class="sanction-badge badge-ban">Bannissement</span>
-      <span class="sanction-text" data-i18n="reg_nonpay_s2">Non-paiement ignoré après rappel : exclusion jusqu'à régularisation</span>
+    <div class="rule-alert" data-i18n="reg_nonpay_alert">Tout joueur n’ayant pas payé recevra un rappel. <strong>Un non-paiement persistant après rappel entraînera un bannissement</strong> de la communauté jusqu’à régularisation.</div>
+    <div class="sanction-row"><span class="sanction-badge badge-warning">Rappel</span><span class="sanction-text" data-i18n="reg_nonpay_s1">Un rappel de paiement est envoyé après la session</span></div>
+    <div class="sanction-row"><span class="sanction-badge badge-ban">Bannissement</span><span class="sanction-text" data-i18n="reg_nonpay_s2">Non-paiement ignoré après rappel : exclusion jusqu’à régularisation</span></div>
+  </div>
+</section>
+
+<!-- S4: ABONNEMENTS (NOUVEAU) -->
+<section class="reg-section">
+  <div class="reg-section-title">🔄 <span data-i18n="reg_s4_title">Abonnements</span></div>
+  <div class="rule-block">
+    <div class="rule-block-title"><span class="icon">📌</span> <span data-i18n="reg_sub_title">Règles spécifiques aux abonnés</span></div>
+    <p data-i18n="reg_sub_intro">L’abonnement garantit une place réservée chaque semaine avant l’ouverture du roll call. En contrepartie, les abonnés ont des responsabilités supplémentaires vis-à-vis de la session.</p>
+    <ul>
+      <li data-i18n="reg_sub_li1"><strong>Tu dois prévenir</strong> si tu ne peux pas assister à ta session, même en tant qu’abonné</li>
+      <li data-i18n="reg_sub_li2">L’absence non signalée est considérée comme un <strong>no-show</strong> et entraîne une pénalité</li>
+      <li data-i18n="reg_sub_li3">Un préavis permet de libérer ta place pour la liste d’attente</li>
+    </ul>
+  </div>
+  <hr class="section-divider">
+  <div class="rule-block">
+    <div class="rule-block-title"><span class="icon">💸</span> <span data-i18n="reg_sub_noshow_title">Pénalité de no-show abonné</span></div>
+    <div class="rule-alert" data-i18n="reg_sub_noshow_alert"><strong>Tout abonné absent sans avoir prévenu devra payer une pénalité de 16,90$.</strong> L’abonnement ne couvre pas les absences non signalées.</div>
+    <div class="sanction-row"><span class="sanction-badge badge-paid">16,90 $</span><span class="sanction-text" data-i18n="reg_sub_noshow_s1">Pénalité automatique pour tout no-show, abonné ou non</span></div>
+    <div class="sanction-row"><span class="sanction-badge badge-warning">Avertissement</span><span class="sanction-text" data-i18n="reg_sub_noshow_s2">No-shows répétés : avertissement et réévaluation de l’abonnement</span></div>
+    <div class="sanction-row"><span class="sanction-badge badge-ban">Résiliation</span><span class="sanction-text" data-i18n="reg_sub_noshow_s3">Abus répétés : résiliation forcée de l’abonnement</span></div>
+  </div>
+  <hr class="section-divider">
+  <div class="rule-block">
+    <div class="rule-block-title"><span class="icon">🚪</span> <span data-i18n="reg_sub_cancel_title">Annulation de l’abonnement</span></div>
+    <p data-i18n="reg_sub_cancel_text">L’abonnement se renouvelle automatiquement chaque mois. Tu peux l’annuler à tout moment via ton portail client Stripe — aucune justification n’est requise.</p>
+    <div class="rule-info">
+      🔗 <strong>Portail d’annulation :</strong> <a href="https://billing.stripe.com/p/login/7sYeVe9ON7tn7IWc6j3wQ00" target="_blank" style="color:var(--orange);text-decoration:none;border-bottom:1px dashed var(--orange);">billing.stripe.com ↗</a><br>
+      <span style="color:#555;font-size:13px;margin-top:6px;display:block;">Area Courts ne peut pas annuler ton abonnement à ta place. Utilise le portail ci-dessus.</span>
     </div>
   </div>
 </section>
 
-<!-- SECTION 4 : FORMAT DE JEU -->
+<!-- S5: FORMAT -->
 <section class="reg-section">
-  <div class="reg-section-title">⏱️ <span data-i18n="reg_s4_title">Format de jeu</span></div>
-
+  <div class="reg-section-title">⏱️ <span data-i18n="reg_s5_title">Format de jeu</span></div>
   <div class="rule-block">
     <div class="rule-block-title"><span class="icon">🏀</span> <span data-i18n="reg_format_title">Déroulement</span></div>
     <ul>
       <li data-i18n="reg_format_li1">Sessions de <strong>2 heures</strong>, maximum <strong>15 joueurs</strong></li>
       <li data-i18n="reg_format_li2">Matchs joués à <strong>7 points</strong>, durée approximative de 8 à 10 minutes</li>
-      <li data-i18n="reg_format_li3">Équipes formées sur place par l'ambassadeur de session</li>
-      <li data-i18n="reg_format_li4">L'équipe gagnante reste sur le terrain</li>
+      <li data-i18n="reg_format_li3">Équipes formées sur place par l’ambassadeur de session</li>
+      <li data-i18n="reg_format_li4">L’équipe gagnante reste sur le terrain</li>
     </ul>
   </div>
-
   <hr class="section-divider">
-
   <div class="rule-block">
-    <div class="rule-block-title"><span class="icon">👟</span> <span data-i18n="reg_equip_title">Équipement & accès</span></div>
+    <div class="rule-block-title"><span class="icon">👟</span> <span data-i18n="reg_equip_title">Équipement &amp; accès</span></div>
     <ul>
       <li data-i18n="reg_equip_li1">Souliers de basketball et tenue de sport <strong>obligatoires</strong></li>
-      <li data-i18n="reg_equip_li2">Le ballon est fourni — tu peux amener le tien pour t'échauffer</li>
+      <li data-i18n="reg_equip_li2">Le ballon est fourni — tu peux amener le tien pour t’échauffer</li>
       <li data-i18n="reg_equip_li3"><strong>Aucun sac, veste ou bottes</strong> dans le gymnase — utilise les vestiaires</li>
       <li data-i18n="reg_equip_li4">Apporte un <strong>cadenas</strong> pour sécuriser tes affaires</li>
-      <li data-i18n="reg_equip_li5">Arriver <strong>10 minutes à l'avance</strong> est fortement recommandé</li>
+      <li data-i18n="reg_equip_li5">Arriver <strong>10 minutes à l’avance</strong> est fortement recommandé</li>
     </ul>
   </div>
 </section>
 
-<!-- SECTION 5 : CONDUITE & ESPRIT DU JEU -->
+<!-- S6: CONDUITE -->
 <section class="reg-section">
-  <div class="reg-section-title">🤝 <span data-i18n="reg_s5_title">Conduite & Esprit du jeu</span></div>
-
+  <div class="reg-section-title">🤝 <span data-i18n="reg_s6_title">Conduite &amp; Esprit du jeu</span></div>
   <div class="rule-block">
-    <div class="rule-block-title"><span class="icon">🏀</span> <span data-i18n="reg_spirit_title">Niveau & esprit</span></div>
+    <div class="rule-block-title"><span class="icon">🏀</span> <span data-i18n="reg_spirit_title">Niveau &amp; esprit</span></div>
     <p data-i18n="reg_spirit_text">Les sessions sont ouvertes à tous, mais le jeu est compétitif. Un <strong>niveau intermédiaire à avancé est nécessaire</strong> pour profiter pleinement des matchs. Bonne énergie, fairplay et respect sont attendus sur le terrain comme en dehors.</p>
   </div>
-
   <hr class="section-divider">
-
   <div class="rule-block">
-    <div class="rule-block-title"><span class="icon">🚨</span> <span data-i18n="reg_violence_title">Violence & comportement inacceptable</span></div>
-    <div class="rule-alert" data-i18n="reg_violence_alert">
-      <strong>Toute forme de violence physique ou verbale est strictement interdite.</strong> Cela inclut les insultes, le harcèlement, les menaces et tout comportement irrespectueux envers les joueurs, le staff ou les installations.
-    </div>
-    <div class="sanction-row">
-      <span class="sanction-badge badge-warning">Avertissement</span>
-      <span class="sanction-text" data-i18n="reg_violence_s1">Premier incident : avertissement formel émis par l'ambassadeur ou le staff</span>
-    </div>
-    <div class="sanction-row">
-      <span class="sanction-badge badge-ejection">Éjection</span>
-      <span class="sanction-text" data-i18n="reg_violence_s2">Récidive : éjection immédiate de la session en cours, sans remboursement</span>
-    </div>
-    <div class="sanction-row">
-      <span class="sanction-badge badge-ban">Bannissement</span>
-      <span class="sanction-text" data-i18n="reg_violence_s3">Comportement répété ou incident grave : bannissement permanent de la communauté</span>
-    </div>
+    <div class="rule-block-title"><span class="icon">🚨</span> <span data-i18n="reg_violence_title">Violence &amp; comportement inacceptable</span></div>
+    <div class="rule-alert" data-i18n="reg_violence_alert"><strong>Toute forme de violence physique ou verbale est strictement interdite.</strong> Cela inclut les insultes, le harcèlement, les menaces et tout comportement irrespectueux envers les joueurs, le staff ou les installations.</div>
+    <div class="sanction-row"><span class="sanction-badge badge-warning">Avertissement</span><span class="sanction-text" data-i18n="reg_violence_s1">Premier incident : avertissement formel émis par l’ambassadeur ou le staff</span></div>
+    <div class="sanction-row"><span class="sanction-badge badge-ejection">Éjection</span><span class="sanction-text" data-i18n="reg_violence_s2">Récidive : éjection immédiate de la session en cours, sans remboursement</span></div>
+    <div class="sanction-row"><span class="sanction-badge badge-ban">Bannissement</span><span class="sanction-text" data-i18n="reg_violence_s3">Comportement répété ou incident grave : bannissement permanent de la communauté</span></div>
   </div>
 </section>
 
-<!-- SECTION 6 : IMAGE & DROITS -->
+<!-- S7: IMAGE -->
 <section class="reg-section">
-  <div class="reg-section-title">📸 <span data-i18n="reg_s6_title">Droits à l'image</span></div>
-
+  <div class="reg-section-title">📸 <span data-i18n="reg_s7_title">Droits à l’image</span></div>
   <div class="rule-block">
     <div class="rule-block-title"><span class="icon">🎥</span> <span data-i18n="reg_image_title">Consentement à la captation</span></div>
-    <p data-i18n="reg_image_text">En participant à une session Area Courts, tu accordes à l'organisation le droit de te photographier et de te filmer durant les sessions. Ces contenus peuvent être utilisés sur les réseaux sociaux et supports de communication d'Area Courts.</p>
+    <p data-i18n="reg_image_text">En participant à une session Area Courts, tu accordes à l’organisation le droit de te photographier et de te filmer durant les sessions. Ces contenus peuvent être utilisés sur les réseaux sociaux et supports de communication d’Area Courts.</p>
     <ul>
-      <li data-i18n="reg_image_li1">Photos et vidéos peuvent être publiées sur Instagram, WhatsApp et autres plateformes d'Area Courts</li>
-      <li data-i18n="reg_image_li2">Si tu ne souhaites pas apparaître sur les contenus, signale-le à l'ambassadeur avant la session</li>
+      <li data-i18n="reg_image_li1">Photos et vidéos peuvent être publiées sur Instagram, WhatsApp et autres plateformes d’Area Courts</li>
+      <li data-i18n="reg_image_li2">Si tu ne souhaites pas apparaître sur les contenus, signale-le à l’ambassadeur avant la session</li>
     </ul>
   </div>
 </section>
 
-<!-- CTA -->
 <div class="reg-cta">
   <p data-i18n="reg_cta_text">Des questions sur le règlement ? Consulte notre FAQ ou reviens au site principal.</p>
   <a href="faq.html" class="btn-secondary">📋 <span data-i18n="reg_cta_faq">Consulter la FAQ</span></a>
@@ -509,180 +254,184 @@
 <footer>
   <div class="footer-logo">AREA<span>.</span>COURTS</div>
   <div class="footer-text">Pickup Basketball — Centre Sportif ÉTS, Montréal</div>
-  <div class="footer-text"><a href="https://www.instagram.com/areacourts/" target="_blank" style="color: var(--orange); text-decoration: none;">📸 @areacourts</a> &nbsp;·&nbsp; © 2026 Area Courts</div>
+  <div class="footer-text"><a href="https://www.instagram.com/areacourts/" target="_blank" style="color:var(--orange);text-decoration:none;">📸 @areacourts</a> &nbsp;·&nbsp; © 2026 Area Courts</div>
+  <div class="footer-text" style="font-size:11px;color:var(--muted);margin-top:4px;">Site créé et détenu par Nicolas Michaud. Tous droits réservés.</div>
 </footer>
-
 <script>
 var translations = {
   fr: {
-    nav_how: "Comment jouer", nav_sessions: "Sessions", nav_rules: "Règlement",
-    nav_sub: "Abonnements", nav_location: "Localisation", nav_faq: "FAQ",
-    reg_label: "Règles du jeu", reg_title: "Règlement",
-    reg_subtitle: "En participant à une session Area Courts, tu acceptes l'ensemble de ces règles. Elles sont là pour garantir une expérience de qualité pour tout le monde.",
-    reg_s1_title: "Roll Call & Engagement",
-    reg_rc_title: "Inscription par roll call",
-    reg_rc_text: "Le roll call s'ouvre à une heure précise dans le chat WhatsApp de ta session. Les 15 premiers joueurs à écrire IN sont confirmés. Les abonnés ont leur place réservée avant l'ouverture du roll call.",
-    reg_rc_li1: "Lundi 19h → ouverture dimanche à 20h00",
-    reg_rc_li2: "Lundi 21h → ouverture dimanche à 19h55",
-    reg_rc_li3: "Samedi 11h → ouverture vendredi à 11h00",
-    reg_commit_alert: "En écrivant IN, tu t'engages à venir et à payer. Rejoindre la liste de participation confirme ta présence — ce n'est pas une simple pré-inscription. Si tu ne peux finalement pas venir, tu dois annuler dans les délais pour éviter des frais.",
-    reg_wait_title: "Liste d'attente",
-    reg_wait_text: "Si tu es sur la liste d'attente, reste actif sur le chat. Dès qu'une place se libère, le premier sur la liste est automatiquement invité. Un refus ou une non-réponse dans un délai raisonnable passe la place au suivant.",
-    reg_s2_title: "Annulation & No-Show",
-    reg_cancel_title: "Délais d'annulation",
-    reg_cancel_li1: "Lundi (semaine) : annulation gratuite avant 15h le jour même",
-    reg_cancel_li2: "Samedi : annulation gratuite avant 23h30 la veille",
-    reg_cancel_li3: "Après ces délais, 15,90$ sont dus si aucun remplaçant n'est trouvé",
-    reg_cancel_li4: "Si un remplaçant est trouvé, aucun frais n'est appliqué",
-    reg_noshow_title: "No-Show",
-    reg_noshow_alert: "Ne pas se présenter sans prévenir = paiement obligatoire de 15,90$, même si un remplaçant a été trouvé. Un no-show prive un joueur sur la liste d'attente de sa chance de jouer.",
-    reg_noshow_s1: "Frais automatiques pour tout no-show, sans exception",
-    reg_noshow_s2: "No-shows répétés : avertissement formel",
-    reg_noshow_s3: "No-shows répétés après avertissement : exclusion de la communauté",
-    reg_s3_title: "Paiement",
-    reg_pay_title: "Tarifs & délais",
-    reg_pay_li1: "15,90$ — tarif normal, payé avant la fin de la session",
-    reg_pay_li2: "20$ — tarif retard, appliqué automatiquement après la fin de session",
-    reg_pay_li3: "Paiement en ligne uniquement via le lien Stripe dans le chat WhatsApp",
-    reg_pay_li4: "Aucun paiement en cash accepté",
-    reg_nonpay_title: "Non-paiement",
-    reg_nonpay_alert: "Tout joueur n'ayant pas payé recevra un rappel. Un non-paiement persistant après rappel entraînera un bannissement de la communauté jusqu'à régularisation de la situation.",
-    reg_nonpay_s1: "Un rappel de paiement est envoyé après la session",
-    reg_nonpay_s2: "Non-paiement ignoré après rappel : exclusion jusqu'à régularisation",
-    reg_s4_title: "Format de jeu",
-    reg_format_title: "Déroulement",
-    reg_format_li1: "Sessions de 2 heures, maximum 15 joueurs",
-    reg_format_li2: "Matchs joués à 7 points, durée approximative de 8 à 10 minutes",
-    reg_format_li3: "Équipes formées sur place par l'ambassadeur de session",
-    reg_format_li4: "L'équipe gagnante reste sur le terrain",
-    reg_equip_title: "Équipement & accès",
-    reg_equip_li1: "Souliers de basketball et tenue de sport obligatoires",
-    reg_equip_li2: "Le ballon est fourni — tu peux amener le tien pour t'échauffer",
-    reg_equip_li3: "Aucun sac, veste ou bottes dans le gymnase — utilise les vestiaires",
-    reg_equip_li4: "Apporte un cadenas pour sécuriser tes affaires",
-    reg_equip_li5: "Arriver 10 minutes à l'avance est fortement recommandé",
-    reg_s5_title: "Conduite & Esprit du jeu",
-    reg_spirit_title: "Niveau & esprit",
-    reg_spirit_text: "Les sessions sont ouvertes à tous, mais le jeu est compétitif. Un niveau intermédiaire à avancé est nécessaire pour profiter pleinement des matchs. Bonne énergie, fairplay et respect sont attendus sur le terrain comme en dehors.",
-    reg_violence_title: "Violence & comportement inacceptable",
-    reg_violence_alert: "Toute forme de violence physique ou verbale est strictement interdite. Cela inclut les insultes, le harcèlement, les menaces et tout comportement irrespectueux envers les joueurs, le staff ou les installations.",
-    reg_violence_s1: "Premier incident : avertissement formel émis par l'ambassadeur ou le staff",
-    reg_violence_s2: "Récidive : éjection immédiate de la session en cours, sans remboursement",
-    reg_violence_s3: "Comportement répété ou incident grave : bannissement permanent de la communauté",
-    reg_s6_title: "Droits à l'image",
-    reg_image_title: "Consentement à la captation",
-    reg_image_text: "En participant à une session Area Courts, tu accordes à l'organisation le droit de te photographier et de te filmer durant les sessions.",
-    reg_image_li1: "Photos et vidéos peuvent être publiées sur Instagram, WhatsApp et autres plateformes d'Area Courts",
-    reg_image_li2: "Si tu ne souhaites pas apparaître sur les contenus, signale-le à l'ambassadeur avant la session",
-    reg_cta_text: "Des questions sur le règlement ? Consulte notre FAQ ou reviens au site principal.",
-    reg_cta_faq: "Consulter la FAQ",
-    reg_cta_back: "Retour au site"
+    nav_how:"Comment jouer", nav_sessions:"Sessions", nav_rules:"R\u00e8glement",
+    nav_sub:"Abonnements", nav_location:"Localisation", nav_faq:"FAQ",
+    reg_label:"R\u00e8gles du jeu", reg_title:"R\u00e8glement",
+    reg_subtitle:"En participant \u00e0 une session Area Courts, tu acceptes l\u2019ensemble de ces r\u00e8gles.",
+    reg_s1_title:"Roll Call & Engagement",
+    reg_rc_title:"Inscription par roll call",
+    reg_rc_text:"Le roll call s\u2019ouvre \u00e0 une heure pr\u00e9cise dans le chat WhatsApp de ta session. Les 15 premiers joueurs \u00e0 \u00e9crire IN sont confirm\u00e9s. Les abonn\u00e9s ont leur place r\u00e9serv\u00e9e avant l\u2019ouverture du roll call.",
+    reg_rc_li1:"Lundi 19h \u2192 ouverture dimanche \u00e0 20h00",
+    reg_rc_li2:"Lundi 21h \u2192 ouverture dimanche \u00e0 19h55",
+    reg_rc_li3:"Mercredi 19h \u2192 ouverture mardi \u00e0 20h00",
+    reg_rc_li4:"Samedi 11h \u2192 ouverture vendredi \u00e0 11h00",
+    reg_commit_alert:"En \u00e9crivant IN, tu t\u2019engages \u00e0 venir et \u00e0 payer. Rejoindre la liste de participation confirme ta pr\u00e9sence \u2014 ce n\u2019est pas une simple pr\u00e9-inscription.",
+    reg_wait_title:"Liste d\u2019attente",
+    reg_wait_text:"Si tu es sur la liste d\u2019attente, reste actif sur le chat. D\u00e8s qu\u2019une place se lib\u00e8re, le premier sur la liste est automatiquement invit\u00e9.",
+    reg_s2_title:"Annulation & No-Show",
+    reg_cancel_title:"D\u00e9lais d\u2019annulation",
+    reg_cancel_li1:"Lundi (semaine) : annulation gratuite avant 15h le jour m\u00eame",
+    reg_cancel_li2:"Mercredi : annulation gratuite avant 15h le jour m\u00eame",
+    reg_cancel_li3:"Samedi : annulation gratuite avant 23h30 la veille",
+    reg_cancel_li4:"Apr\u00e8s ces d\u00e9lais, 16,90$ sont dus si aucun rempla\u00e7ant n\u2019est trouv\u00e9",
+    reg_cancel_li5:"Si un rempla\u00e7ant est trouv\u00e9, aucun frais n\u2019est appliqu\u00e9",
+    reg_noshow_title:"No-Show",
+    reg_noshow_alert:"Ne pas se pr\u00e9senter sans pr\u00e9venir = paiement obligatoire de 16,90$, m\u00eame si un rempla\u00e7ant a \u00e9t\u00e9 trouv\u00e9.",
+    reg_noshow_s1:"Frais automatiques pour tout no-show, sans exception",
+    reg_noshow_s2:"No-shows r\u00e9p\u00e9t\u00e9s : avertissement formel",
+    reg_noshow_s3:"No-shows r\u00e9p\u00e9t\u00e9s apr\u00e8s avertissement : exclusion de la communaut\u00e9",
+    reg_s3_title:"Paiement",
+    reg_pay_title:"Tarifs & d\u00e9lais",
+    reg_pay_li1:"16,90$ \u2014 tarif normal, pay\u00e9 avant la fin de la session",
+    reg_pay_li2:"20$ \u2014 tarif retard, appliqu\u00e9 automatiquement apr\u00e8s la fin de session",
+    reg_pay_li3:"Paiement en ligne uniquement via le lien Stripe dans le chat WhatsApp",
+    reg_pay_li4:"Aucun paiement en cash accept\u00e9",
+    reg_nonpay_title:"Non-paiement",
+    reg_nonpay_alert:"Tout joueur n\u2019ayant pas pay\u00e9 recevra un rappel. Un non-paiement persistant apr\u00e8s rappel entra\u00eenera un bannissement jusqu\u2019\u00e0 r\u00e9gularisation.",
+    reg_nonpay_s1:"Un rappel de paiement est envoy\u00e9 apr\u00e8s la session",
+    reg_nonpay_s2:"Non-paiement ignor\u00e9 apr\u00e8s rappel : exclusion jusqu\u2019\u00e0 r\u00e9gularisation",
+    reg_s4_title:"Abonnements",
+    reg_sub_title:"R\u00e8gles sp\u00e9cifiques aux abonn\u00e9s",
+    reg_sub_intro:"L\u2019abonnement garantit une place r\u00e9serv\u00e9e chaque semaine avant l\u2019ouverture du roll call. En contrepartie, les abonn\u00e9s ont des responsabilit\u00e9s suppl\u00e9mentaires vis-\u00e0-vis de la session.",
+    reg_sub_li1:"Tu dois pr\u00e9venir si tu ne peux pas assister \u00e0 ta session, m\u00eame en tant qu\u2019abonn\u00e9",
+    reg_sub_li2:"L\u2019absence non signal\u00e9e est consid\u00e9r\u00e9e comme un no-show et entra\u00eene une p\u00e9nalit\u00e9",
+    reg_sub_li3:"Un pr\u00e9avis permet de lib\u00e9rer ta place pour la liste d\u2019attente",
+    reg_sub_noshow_title:"P\u00e9nalit\u00e9 de no-show abonn\u00e9",
+    reg_sub_noshow_alert:"Tout abonn\u00e9 absent sans avoir pr\u00e9venu devra payer une p\u00e9nalit\u00e9 de 16,90$. L\u2019abonnement ne couvre pas les absences non signal\u00e9es.",
+    reg_sub_noshow_s1:"P\u00e9nalit\u00e9 automatique pour tout no-show, abonn\u00e9 ou non",
+    reg_sub_noshow_s2:"No-shows r\u00e9p\u00e9t\u00e9s : avertissement et r\u00e9\u00e9valuation de l\u2019abonnement",
+    reg_sub_noshow_s3:"Abus r\u00e9p\u00e9t\u00e9s : r\u00e9siliation forc\u00e9e de l\u2019abonnement",
+    reg_sub_cancel_title:"Annulation de l\u2019abonnement",
+    reg_sub_cancel_text:"L\u2019abonnement se renouvelle automatiquement chaque mois. Tu peux l\u2019annuler \u00e0 tout moment via ton portail client Stripe \u2014 aucune justification n\u2019est requise.",
+    reg_s5_title:"Format de jeu",
+    reg_format_title:"D\u00e9roulement",
+    reg_format_li1:"Sessions de 2 heures, maximum 15 joueurs",
+    reg_format_li2:"Matchs jou\u00e9s \u00e0 7 points, dur\u00e9e approximative de 8 \u00e0 10 minutes",
+    reg_format_li3:"\u00c9quipes form\u00e9es sur place par l\u2019ambassadeur de session",
+    reg_format_li4:"L\u2019\u00e9quipe gagnante reste sur le terrain",
+    reg_equip_title:"\u00c9quipement & acc\u00e8s",
+    reg_equip_li1:"Souliers de basketball et tenue de sport obligatoires",
+    reg_equip_li2:"Le ballon est fourni \u2014 tu peux amener le tien pour t\u2019\u00e9chauffer",
+    reg_equip_li3:"Aucun sac, veste ou bottes dans le gymnase \u2014 utilise les vestiaires",
+    reg_equip_li4:"Apporte un cadenas pour s\u00e9curiser tes affaires",
+    reg_equip_li5:"Arriver 10 minutes \u00e0 l\u2019avance est fortement recommand\u00e9",
+    reg_s6_title:"Conduite & Esprit du jeu",
+    reg_spirit_title:"Niveau & esprit",
+    reg_spirit_text:"Les sessions sont ouvertes \u00e0 tous, mais le jeu est comp\u00e9titif. Un niveau interm\u00e9diaire \u00e0 avanc\u00e9 est n\u00e9cessaire. Bonne \u00e9nergie, fairplay et respect sont attendus.",
+    reg_violence_title:"Violence & comportement inacceptable",
+    reg_violence_alert:"Toute forme de violence physique ou verbale est strictement interdite. Cela inclut les insultes, le harc\u00e8lement, les menaces et tout comportement irrespectueux.",
+    reg_violence_s1:"Premier incident : avertissement formel \u00e9mis par l\u2019ambassadeur ou le staff",
+    reg_violence_s2:"R\u00e9cidive : \u00e9jection imm\u00e9diate de la session en cours, sans remboursement",
+    reg_violence_s3:"Comportement r\u00e9p\u00e9t\u00e9 ou incident grave : bannissement permanent",
+    reg_s7_title:"Droits \u00e0 l\u2019image",
+    reg_image_title:"Consentement \u00e0 la captation",
+    reg_image_text:"En participant \u00e0 une session Area Courts, tu accordes \u00e0 l\u2019organisation le droit de te photographier et de te filmer durant les sessions.",
+    reg_image_li1:"Photos et vid\u00e9os peuvent \u00eatre publi\u00e9es sur Instagram, WhatsApp et autres plateformes d\u2019Area Courts",
+    reg_image_li2:"Si tu ne souhaites pas appara\u00eetre sur les contenus, signale-le \u00e0 l\u2019ambassadeur avant la session",
+    reg_cta_text:"Des questions sur le r\u00e8glement ? Consulte notre FAQ ou reviens au site principal.",
+    reg_cta_faq:"Consulter la FAQ", reg_cta_back:"Retour au site"
   },
   en: {
-    nav_how: "How to play", nav_sessions: "Sessions", nav_rules: "Rules",
-    nav_sub: "Memberships", nav_location: "Location", nav_faq: "FAQ",
-    reg_label: "Game rules", reg_title: "Rules",
-    reg_subtitle: "By participating in an Area Courts session, you agree to all of these rules. They exist to ensure a quality experience for everyone.",
-    reg_s1_title: "Roll Call & Commitment",
-    reg_rc_title: "Roll call registration",
-    reg_rc_text: "Roll call opens at a set time in your session's WhatsApp chat. The first 15 players to write IN are confirmed. Members have their spot reserved before roll call opens.",
-    reg_rc_li1: "Monday 7pm → opens Sunday at 8:00pm",
-    reg_rc_li2: "Monday 9pm → opens Sunday at 7:55pm",
-    reg_rc_li3: "Saturday 11am → opens Friday at 11:00am",
-    reg_commit_alert: "By writing IN, you commit to showing up and paying. Joining the participation list confirms your presence — it is not a simple pre-registration. If you can no longer make it, you must cancel within the deadline to avoid fees.",
-    reg_wait_title: "Waitlist",
-    reg_wait_text: "If you are on the waitlist, stay active in the chat. As soon as a spot opens up, the first person on the list is automatically invited. A refusal or no response within a reasonable time passes the spot to the next person.",
-    reg_s2_title: "Cancellation & No-Show",
-    reg_cancel_title: "Cancellation deadlines",
-    reg_cancel_li1: "Monday (weekday): free cancellation before 3pm on the day",
-    reg_cancel_li2: "Saturday: free cancellation before 11:30pm the night before",
-    reg_cancel_li3: "After these deadlines, $15.90 is owed if no replacement is found",
-    reg_cancel_li4: "If a replacement is found, no fee applies",
-    reg_noshow_title: "No-Show",
-    reg_noshow_alert: "Not showing up without notice = mandatory payment of $15.90, even if a replacement was found. A no-show takes away a waitlisted player's chance to play.",
-    reg_noshow_s1: "Automatic fee for any no-show, no exceptions",
-    reg_noshow_s2: "Repeated no-shows: formal warning",
-    reg_noshow_s3: "Repeated no-shows after warning: removal from the community",
-    reg_s3_title: "Payment",
-    reg_pay_title: "Rates & deadlines",
-    reg_pay_li1: "$15.90 — regular rate, paid before the session ends",
-    reg_pay_li2: "$20 — late fee, applied automatically after the session ends",
-    reg_pay_li3: "Online payment only via the Stripe link in the WhatsApp chat",
-    reg_pay_li4: "No cash payments accepted",
-    reg_nonpay_title: "Non-payment",
-    reg_nonpay_alert: "Any player who has not paid will receive a reminder. Persistent non-payment after a reminder will result in a ban from the community until the situation is resolved.",
-    reg_nonpay_s1: "A payment reminder is sent after the session",
-    reg_nonpay_s2: "Non-payment ignored after reminder: ban until resolved",
-    reg_s4_title: "Game format",
-    reg_format_title: "How it runs",
-    reg_format_li1: "2-hour sessions, maximum 15 players",
-    reg_format_li2: "Games played to 7 points, approximately 8 to 10 minutes each",
-    reg_format_li3: "Teams formed on site by the session ambassador",
-    reg_format_li4: "Winning team stays on the court",
-    reg_equip_title: "Equipment & access",
-    reg_equip_li1: "Basketball shoes and athletic wear required",
-    reg_equip_li2: "Ball is provided — you can bring your own to warm up",
-    reg_equip_li3: "No bags, jackets or boots in the gym — use the locker room",
-    reg_equip_li4: "Bring a padlock to secure your belongings",
-    reg_equip_li5: "Arriving 10 minutes early is strongly recommended",
-    reg_s5_title: "Conduct & Spirit of the game",
-    reg_spirit_title: "Level & spirit",
-    reg_spirit_text: "Sessions are open to all, but the game is competitive. An intermediate to advanced level is necessary to fully enjoy the games. Good energy, fair play and respect are expected on and off the court.",
-    reg_violence_title: "Violence & unacceptable behaviour",
-    reg_violence_alert: "All forms of physical or verbal violence are strictly prohibited. This includes insults, harassment, threats and any disrespectful behaviour toward players, staff or facilities.",
-    reg_violence_s1: "First incident: formal warning issued by the ambassador or staff",
-    reg_violence_s2: "Second offence: immediate ejection from the current session, no refund",
-    reg_violence_s3: "Repeated behaviour or serious incident: permanent ban from the community",
-    reg_s6_title: "Image rights",
-    reg_image_title: "Consent to filming",
-    reg_image_text: "By participating in an Area Courts session, you grant the organization the right to photograph and film you during sessions.",
-    reg_image_li1: "Photos and videos may be posted on Instagram, WhatsApp and other Area Courts platforms",
-    reg_image_li2: "If you do not wish to appear in content, let the ambassador know before the session",
-    reg_cta_text: "Questions about the rules? Check our FAQ or head back to the main site.",
-    reg_cta_faq: "Check the FAQ",
-    reg_cta_back: "Back to site"
+    nav_how:"How to play", nav_sessions:"Sessions", nav_rules:"Rules",
+    nav_sub:"Memberships", nav_location:"Location", nav_faq:"FAQ",
+    reg_label:"Game rules", reg_title:"Rules",
+    reg_subtitle:"By participating in an Area Courts session, you agree to all of these rules.",
+    reg_s1_title:"Roll Call & Commitment",
+    reg_rc_title:"Roll call registration",
+    reg_rc_text:"Roll call opens at a set time in your session's WhatsApp chat. The first 15 players to write IN are confirmed. Members have their spot reserved before roll call opens.",
+    reg_rc_li1:"Monday 7pm \u2192 opens Sunday at 8:00pm",
+    reg_rc_li2:"Monday 9pm \u2192 opens Sunday at 7:55pm",
+    reg_rc_li3:"Wednesday 7pm \u2192 opens Tuesday at 8:00pm",
+    reg_rc_li4:"Saturday 11am \u2192 opens Friday at 11:00am",
+    reg_commit_alert:"By writing IN, you commit to showing up and paying. Joining the participation list confirms your presence \u2014 it is not a simple pre-registration.",
+    reg_wait_title:"Waitlist",
+    reg_wait_text:"If you are on the waitlist, stay active in the chat. As soon as a spot opens up, the first person on the list is automatically invited.",
+    reg_s2_title:"Cancellation & No-Show",
+    reg_cancel_title:"Cancellation deadlines",
+    reg_cancel_li1:"Monday (weekday): free cancellation before 3pm on the day",
+    reg_cancel_li2:"Wednesday: free cancellation before 3pm on the day",
+    reg_cancel_li3:"Saturday: free cancellation before 11:30pm the night before",
+    reg_cancel_li4:"After these deadlines, $16.90 is owed if no replacement is found",
+    reg_cancel_li5:"If a replacement is found, no fee applies",
+    reg_noshow_title:"No-Show",
+    reg_noshow_alert:"Not showing up without notice = mandatory payment of $16.90, even if a replacement was found.",
+    reg_noshow_s1:"Automatic fee for any no-show, no exceptions",
+    reg_noshow_s2:"Repeated no-shows: formal warning",
+    reg_noshow_s3:"Repeated no-shows after warning: removal from the community",
+    reg_s3_title:"Payment",
+    reg_pay_title:"Rates & deadlines",
+    reg_pay_li1:"$16.90 \u2014 regular rate, paid before the session ends",
+    reg_pay_li2:"$20 \u2014 late fee, applied automatically after the session ends",
+    reg_pay_li3:"Online payment only via the Stripe link in the WhatsApp chat",
+    reg_pay_li4:"No cash payments accepted",
+    reg_nonpay_title:"Non-payment",
+    reg_nonpay_alert:"Any player who has not paid will receive a reminder. Persistent non-payment after a reminder will result in a ban until resolved.",
+    reg_nonpay_s1:"A payment reminder is sent after the session",
+    reg_nonpay_s2:"Non-payment ignored after reminder: ban until resolved",
+    reg_s4_title:"Memberships",
+    reg_sub_title:"Rules specific to members",
+    reg_sub_intro:"A membership guarantees a reserved spot every week before roll call opens. In return, members have additional responsibilities toward the session.",
+    reg_sub_li1:"You must notify us if you cannot attend your session, even as a member",
+    reg_sub_li2:"An unannounced absence is treated as a no-show and incurs a penalty",
+    reg_sub_li3:"Giving notice allows your spot to be freed up for the waitlist",
+    reg_sub_noshow_title:"Member no-show penalty",
+    reg_sub_noshow_alert:"Any member absent without prior notice will be charged a $16.90 penalty. The membership does not cover unannounced absences.",
+    reg_sub_noshow_s1:"Automatic penalty for any no-show, member or not",
+    reg_sub_noshow_s2:"Repeated no-shows: formal warning and membership review",
+    reg_sub_noshow_s3:"Repeated abuse: forced cancellation of membership",
+    reg_sub_cancel_title:"Cancelling your membership",
+    reg_sub_cancel_text:"Your membership renews automatically each month. You can cancel at any time through your Stripe customer portal \u2014 no justification required.",
+    reg_s5_title:"Game format",
+    reg_format_title:"How it runs",
+    reg_format_li1:"2-hour sessions, maximum 15 players",
+    reg_format_li2:"Games played to 7 points, approximately 8 to 10 minutes each",
+    reg_format_li3:"Teams formed on site by the session ambassador",
+    reg_format_li4:"Winning team stays on the court",
+    reg_equip_title:"Equipment & access",
+    reg_equip_li1:"Basketball shoes and athletic wear required",
+    reg_equip_li2:"Ball is provided \u2014 you can bring your own to warm up",
+    reg_equip_li3:"No bags, jackets or boots in the gym \u2014 use the locker room",
+    reg_equip_li4:"Bring a padlock to secure your belongings",
+    reg_equip_li5:"Arriving 10 minutes early is strongly recommended",
+    reg_s6_title:"Conduct & Spirit of the game",
+    reg_spirit_title:"Level & spirit",
+    reg_spirit_text:"Sessions are open to all, but the game is competitive. An intermediate to advanced level is necessary. Good energy, fair play and respect are expected.",
+    reg_violence_title:"Violence & unacceptable behaviour",
+    reg_violence_alert:"All forms of physical or verbal violence are strictly prohibited. This includes insults, harassment, threats and any disrespectful behaviour.",
+    reg_violence_s1:"First incident: formal warning issued by the ambassador or staff",
+    reg_violence_s2:"Second offence: immediate ejection from the current session, no refund",
+    reg_violence_s3:"Repeated behaviour or serious incident: permanent ban from the community",
+    reg_s7_title:"Image rights",
+    reg_image_title:"Consent to filming",
+    reg_image_text:"By participating in an Area Courts session, you grant the organization the right to photograph and film you during sessions.",
+    reg_image_li1:"Photos and videos may be posted on Instagram, WhatsApp and other Area Courts platforms",
+    reg_image_li2:"If you do not wish to appear in content, let the ambassador know before the session",
+    reg_cta_text:"Questions about the rules? Check our FAQ or head back to the main site.",
+    reg_cta_faq:"Check the FAQ", reg_cta_back:"Back to site"
   }
 };
-
 function setLang(lang) {
-  var t = translations[lang];
-  if (!t) return;
-  document.querySelectorAll("[data-i18n]").forEach(function(el) {
-    var key = el.getAttribute("data-i18n");
-    if (t[key] !== undefined) el.textContent = t[key];
-  });
+  var t = translations[lang]; if (!t) return;
+  document.querySelectorAll("[data-i18n]").forEach(function(el) { var k = el.getAttribute("data-i18n"); if (t[k] !== undefined) el.textContent = t[k]; });
   document.getElementById("btn-fr").classList.toggle("active", lang === "fr");
   document.getElementById("btn-en").classList.toggle("active", lang === "en");
   document.documentElement.lang = lang;
-  try {
-    var url = new URL(window.location.href);
-    url.searchParams.set("lang", lang);
-    window.history.replaceState({}, "", url);
-  } catch(e) {}
+  try { var u = new URL(window.location.href); u.searchParams.set("lang", lang); window.history.replaceState({}, "", u); } catch(e) {}
 }
-
 function toggleMenu() {
-  var nav = document.getElementById("nav-links");
-  var burger = document.getElementById("hamburger");
-  if (!nav || !burger) return;
-  var isOpen = nav.classList.contains("open");
-  nav.classList.toggle("open");
-  burger.classList.toggle("open");
-  document.body.style.overflow = isOpen ? "" : "hidden";
+  var nav = document.getElementById("nav-links"); var b = document.getElementById("hamburger"); if (!nav || !b) return;
+  var o = nav.classList.contains("open"); nav.classList.toggle("open"); b.classList.toggle("open");
+  document.body.style.overflow = o ? "" : "hidden";
 }
-
 document.addEventListener("DOMContentLoaded", function() {
-  document.querySelectorAll("#nav-links a").forEach(function(link) {
-    link.addEventListener("click", function() {
-      document.getElementById("nav-links").classList.remove("open");
-      document.getElementById("hamburger").classList.remove("open");
-      document.body.style.overflow = "";
-    });
-  });
-  try {
-    var urlLang = new URLSearchParams(window.location.search).get("lang");
-    if (urlLang === "en") setLang("en");
-  } catch(e) {}
+  document.querySelectorAll("#nav-links a").forEach(function(l) { l.addEventListener("click", function() { document.getElementById("nav-links").classList.remove("open"); document.getElementById("hamburger").classList.remove("open"); document.body.style.overflow = ""; }); });
+  try { var ul = new URLSearchParams(window.location.search).get("lang"); if (ul === "en") setLang("en"); } catch(e) {}
 });
 </script>
 </body>
