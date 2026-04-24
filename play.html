@@ -292,12 +292,12 @@
     <h2 class="section-title" data-i18n="s3_title">Règlement</h2>
     <div class="divider"></div>
     <div class="rules-grid">
-      <div class="rule-card"><div class="rule-icon">📝</div><div class="rule-title" data-i18n="r_rc_title">Roll Call</div><div class="rule-text">Écris <strong>IN</strong> à l'heure d'ouverture. Les <strong>15 premiers</strong> sont confirmés. En disant IN, tu t'engages à venir et à payer.</div></div>
-      <div class="rule-card"><div class="rule-icon">❌</div><div class="rule-title" data-i18n="r_cancel_title">Annulation</div><div class="rule-text">Gratuite dans les délais. No-show ou annulation tardive : <strong>16,90$</strong> dus. Non-paiement répété : bannissement.</div></div>
-      <div class="rule-card"><div class="rule-icon">💰</div><div class="rule-title" data-i18n="r_pay_title">Paiement</div><div class="rule-text"><strong>16,90$</strong> avant la fin. <strong>20$</strong> après. Lien Stripe dans le chat — aucun cash accepté.</div></div>
-      <div class="rule-card"><div class="rule-icon">⏱️</div><div class="rule-title" data-i18n="r_format_title">Format</div><div class="rule-text"><strong>2h</strong>, 15 joueurs max. Matchs à <strong>7 points</strong>. Équipes formées sur place.</div></div>
-      <div class="rule-card"><div class="rule-icon">👟</div><div class="rule-title" data-i18n="r_equip_title">Équipement</div><div class="rule-text">Souliers de basketball obligatoires. <strong>Cadenas requis</strong>. Aucun sac ni bottes dans le gymnase.</div></div>
-      <div class="rule-card"><div class="rule-icon">🤝</div><div class="rule-title" data-i18n="r_conduct_title">Conduite</div><div class="rule-text">Niveau <strong>intermédiaire à avancé nécessaire</strong>. Toute violence verbale ou physique : avertissement, éjection ou ban.</div></div>
+      <div class="rule-card"><div class="rule-icon">📝</div><div class="rule-title" data-i18n="r_rc_title">Roll Call</div><div class="rule-text" data-i18n-html="r_rc_text">Écris <strong>IN</strong> à l'heure d'ouverture. Les <strong>15 premiers</strong> sont confirmés. En disant IN, tu t'engages à venir et à payer.</div></div>
+      <div class="rule-card"><div class="rule-icon">❌</div><div class="rule-title" data-i18n="r_cancel_title">Annulation</div><div class="rule-text" data-i18n-html="r_cancel_text">Gratuite dans les délais. No-show ou annulation tardive : <strong>16,90$</strong> dus. Non-paiement répété : bannissement.</div></div>
+      <div class="rule-card"><div class="rule-icon">💰</div><div class="rule-title" data-i18n="r_pay_title">Paiement</div><div class="rule-text" data-i18n-html="r_pay_text"><strong>16,90$</strong> avant la fin. <strong>20$</strong> après. Lien Stripe dans le chat — aucun cash accepté.</div></div>
+      <div class="rule-card"><div class="rule-icon">⏱️</div><div class="rule-title" data-i18n="r_format_title">Format</div><div class="rule-text" data-i18n-html="r_format_text"><strong>2h</strong>, 15 joueurs max. Matchs à <strong>7 points</strong>. Équipes formées sur place.</div></div>
+      <div class="rule-card"><div class="rule-icon">👟</div><div class="rule-title" data-i18n="r_equip_title">Équipement</div><div class="rule-text" data-i18n-html="r_equip_text">Souliers de basketball obligatoires. <strong>Cadenas requis</strong>. Aucun sac ni bottes dans le gymnase.</div></div>
+      <div class="rule-card"><div class="rule-icon">🤝</div><div class="rule-title" data-i18n="r_conduct_title">Conduite</div><div class="rule-text" data-i18n-html="r_conduct_text">Niveau <strong>intermédiaire à avancé nécessaire</strong>. Toute violence verbale ou physique : avertissement, éjection ou ban.</div></div>
     </div>
     <div style="text-align:center;margin-top:40px;padding-top:32px;border-top:1px solid var(--border);">
       <p style="color:var(--muted);font-size:14px;margin-bottom:16px;">Consulte le règlement complet pour tous les détails</p>
@@ -437,6 +437,12 @@
       s_per:"/ session", s_pay_btn:"Payer cette session →",
       r_rc_title:"Roll Call", r_cancel_title:"Annulation", r_pay_title:"Paiement",
       r_format_title:"Format", r_equip_title:"Équipement", r_conduct_title:"Conduite",
+      r_rc_text:"Écris <strong>IN</strong> à l'heure d'ouverture. Les <strong>15 premiers</strong> sont confirmés. En disant IN, tu t'engages à venir et à payer.",
+      r_cancel_text:"Gratuite dans les délais. No-show ou annulation tardive : <strong>16,90$</strong> dus. Non-paiement répété : bannissement.",
+      r_pay_text:"<strong>16,90$</strong> avant la fin. <strong>20$</strong> après. Lien Stripe dans le chat — aucun cash accepté.",
+      r_format_text:"<strong>2h</strong>, 15 joueurs max. Matchs à <strong>7 points</strong>. Équipes formées sur place.",
+      r_equip_text:"Souliers de basketball obligatoires. <strong>Cadenas requis</strong>. Aucun sac ni bottes dans le gymnase.",
+      r_conduct_text:"Niveau <strong>intermédiaire à avancé nécessaire</strong>. Toute violence verbale ou physique : avertissement, éjection ou ban.",
       sub_label:"Abonnement mensuel",sub_title:"Joue chaque semaine",sub_intro:"Ta place est garantie chaque semaine. Plus jamais de stress au roll call.",
       perk1:"Place garantie chaque semaine",perk3:"Goodies exclusifs",perk4:"R\u00e9duction sur le merch",perk5:"Annulable \u00e0 tout moment",
       f1_title:"Forfait Solo",f1_sub:"Une session fixe par semaine au choix",f1_vs:"vs 67,60$ en drop-in",f1_save:"Tu \u00e9conomises 13%",f1_p1:"~4 sessions garanties par mois",
@@ -481,6 +487,12 @@
       s_per:"/ session", s_pay_btn:"Pay this session →",
       r_rc_title:"Roll Call", r_cancel_title:"Cancellation", r_pay_title:"Payment",
       r_format_title:"Format", r_equip_title:"Equipment", r_conduct_title:"Conduct",
+      r_rc_text:"Write <strong>IN</strong> at opening time. The <strong>first 15</strong> are confirmed. By writing IN, you commit to coming and paying.",
+      r_cancel_text:"Free within the deadline. No-show or late cancellation: <strong>$16.90</strong> owed. Repeated non-payment: ban.",
+      r_pay_text:"<strong>$15.90</strong> before the end. <strong>$20</strong> after. Stripe link in chat — no cash accepted.",
+      r_format_text:"<strong>2h</strong>, 15 players max. Games to <strong>7 points</strong>. Teams formed on site.",
+      r_equip_text:"Basketball shoes required. <strong>Padlock required</strong>. No bags or boots in the gym.",
+      r_conduct_text:"<strong>Intermediate to advanced level required</strong>. Any verbal or physical violence: warning, ejection or ban.",
       sub_label:"Monthly membership",sub_title:"Play every week",sub_intro:"Your spot is guaranteed every week. No more roll call stress.",
       perk1:"Guaranteed spot every week",perk3:"Exclusive goodies",perk4:"Merch discount",perk5:"Cancel anytime",
       f1_title:"Solo Plan",f1_sub:"One fixed session per week of your choice",f1_vs:"vs $67.60 drop-in",f1_save:"You save 13%",f1_p1:"~4 guaranteed sessions per month",
@@ -498,6 +510,7 @@
   function setLang(lang) {
     var t = translations[lang]; if (!t) return;
     document.querySelectorAll("[data-i18n]").forEach(function(el) { var k = el.getAttribute("data-i18n"); if (t[k] !== undefined) el.textContent = t[k]; });
+    document.querySelectorAll("[data-i18n-html]").forEach(function(el) { var k = el.getAttribute("data-i18n-html"); if (t[k] !== undefined) el.innerHTML = t[k]; });
     var bf = document.getElementById("btn-fr"); var be = document.getElementById("btn-en");
     if (bf) bf.classList.toggle("active", lang === "fr");
     if (be) be.classList.toggle("active", lang === "en");
