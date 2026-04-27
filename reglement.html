@@ -424,6 +424,7 @@ function setLang(lang) {
   document.documentElement.lang = lang;
   try { var u = new URL(window.location.href); u.searchParams.set("lang", lang); window.history.replaceState({}, "", u); } catch(e) {}
 }
+var _scrollY = 0;
 function toggleMenu() {
   var nav = document.getElementById("nav-links");
   var b = document.getElementById("hamburger");
@@ -434,12 +435,16 @@ function toggleMenu() {
     b.classList.remove("open");
     document.body.style.overflow = "";
     document.body.style.position = "";
+    document.body.style.top = "";
     document.body.style.width = "";
+    window.scrollTo(0, _scrollY);
   } else {
+    _scrollY = window.scrollY || window.pageYOffset;
     nav.classList.add("open");
     b.classList.add("open");
     document.body.style.overflow = "hidden";
     document.body.style.position = "fixed";
+    document.body.style.top = "-" + _scrollY + "px";
     document.body.style.width = "100%";
   }
 }
@@ -450,7 +455,9 @@ document.addEventListener("DOMContentLoaded", function() {
       document.getElementById("hamburger").classList.remove("open");
       document.body.style.overflow = "";
       document.body.style.position = "";
+      document.body.style.top = "";
       document.body.style.width = "";
+      window.scrollTo(0, _scrollY);
     });
   });
   try { var ul = new URLSearchParams(window.location.search).get("lang"); if (ul === "en") setLang("en"); } catch(e) {}
