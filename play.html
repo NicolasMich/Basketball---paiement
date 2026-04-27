@@ -122,7 +122,7 @@
     .hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
     .hamburger.open span:nth-child(2) { opacity:0; }
     .hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
-    @media (max-width:768px) { .hamburger { display:flex; } .nav-links { display:none; position:fixed; top:60px; left:0; right:0; background:var(--card); border-bottom:1px solid var(--border); flex-direction:column; padding:16px 0; z-index:99; box-shadow:0 8px 32px rgba(0,0,0,0.3); } .nav-links.open { display:flex; } .nav-links li { width:100%; } .nav-links li a { display:block; padding:14px 32px; font-size:15px; border-bottom:1px solid var(--border); } .nav-links li:last-child a { border-bottom:none; } .lang-toggle { margin-left:auto; } }
+    @media (max-width:768px) { .hamburger { display:flex; } .nav-links { display:none; position:fixed; top:60px; left:0; right:0; background:var(--card); border-bottom:1px solid var(--border); flex-direction:column; padding:16px 0; z-index:101; box-shadow:0 8px 32px rgba(0,0,0,0.3); overflow-y:auto; -webkit-overflow-scrolling:touch; } .nav-links.open { display:flex; } .nav-links li { width:100%; } .nav-links li a { display:block; padding:14px 32px; font-size:15px; border-bottom:1px solid var(--border); } .nav-links li:last-child a { border-bottom:none; } .lang-toggle { margin-left:auto; } }
     nav a.nav-active { color:var(--orange) !important; }
     .onboarding-section { background:linear-gradient(180deg,var(--dark) 0%,var(--black) 100%); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
     .onboarding-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
@@ -530,10 +530,19 @@
   }
 
   function toggleMenu() {
-    var nav = document.getElementById("nav-links"); var burger = document.getElementById("hamburger"); if (!nav || !burger) return;
+    var nav = document.getElementById("nav-links");
+    var burger = document.getElementById("hamburger");
+    if (!nav || !burger) return;
     var isOpen = nav.classList.contains("open");
-    nav.classList.toggle("open"); burger.classList.toggle("open");
-    document.body.style.overflow = isOpen ? "" : "hidden";
+    if (isOpen) {
+      nav.classList.remove("open");
+      burger.classList.remove("open");
+      document.body.style.overflow = "";
+    } else {
+      nav.classList.add("open");
+      burger.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
   }
 
   function updateActiveNav() {
@@ -591,7 +600,15 @@
   updateNextSession();
   setInterval(updateNextSession, 60000);
   document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll("#nav-links a").forEach(function(l) { l.addEventListener("click", function() { var n=document.getElementById("nav-links"); var b=document.getElementById("hamburger"); if(n) n.classList.remove("open"); if(b) b.classList.remove("open"); document.body.style.overflow=""; }); });
+    document.querySelectorAll("#nav-links a").forEach(function(l) {
+      l.addEventListener("click", function() {
+        var n = document.getElementById("nav-links");
+        var b = document.getElementById("hamburger");
+        if (n) n.classList.remove("open");
+        if (b) b.classList.remove("open");
+        document.body.style.overflow = "";
+      });
+    });
     updateActiveNav();
     try { var ul = new URLSearchParams(window.location.search).get("lang"); if (ul === "en") setLang("en"); } catch(e) {}
   });
