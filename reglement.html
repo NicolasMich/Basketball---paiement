@@ -63,7 +63,7 @@
     .footer-text { color:var(--muted); font-size:13px; }
     @media (max-width:768px) {
       nav { padding:16px 20px; } .hamburger { display:flex; }
-      .nav-links { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:var(--black); flex-direction:column; justify-content:center; align-items:center; gap:40px; z-index:99; }
+      .nav-links { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:var(--black); flex-direction:column; justify-content:center; align-items:center; gap:40px; z-index:101; overflow-y:auto; -webkit-overflow-scrolling:touch; }
       .nav-links.open { display:flex; } .nav-links a { font-size:24px; letter-spacing:2px; }
       .page-hero { padding:120px 24px 60px; } .reg-section { padding:0 24px 60px; }
       .reg-cta { padding:40px 24px; } footer { padding:40px 24px; flex-direction:column; text-align:center; }
@@ -425,12 +425,34 @@ function setLang(lang) {
   try { var u = new URL(window.location.href); u.searchParams.set("lang", lang); window.history.replaceState({}, "", u); } catch(e) {}
 }
 function toggleMenu() {
-  var nav = document.getElementById("nav-links"); var b = document.getElementById("hamburger"); if (!nav || !b) return;
-  var o = nav.classList.contains("open"); nav.classList.toggle("open"); b.classList.toggle("open");
-  document.body.style.overflow = o ? "" : "hidden";
+  var nav = document.getElementById("nav-links");
+  var b = document.getElementById("hamburger");
+  if (!nav || !b) return;
+  var isOpen = nav.classList.contains("open");
+  if (isOpen) {
+    nav.classList.remove("open");
+    b.classList.remove("open");
+    document.body.style.overflow = "";
+    document.body.style.position = "";
+    document.body.style.width = "";
+  } else {
+    nav.classList.add("open");
+    b.classList.add("open");
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.width = "100%";
+  }
 }
 document.addEventListener("DOMContentLoaded", function() {
-  document.querySelectorAll("#nav-links a").forEach(function(l) { l.addEventListener("click", function() { document.getElementById("nav-links").classList.remove("open"); document.getElementById("hamburger").classList.remove("open"); document.body.style.overflow = ""; }); });
+  document.querySelectorAll("#nav-links a").forEach(function(l) {
+    l.addEventListener("click", function() {
+      document.getElementById("nav-links").classList.remove("open");
+      document.getElementById("hamburger").classList.remove("open");
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+    });
+  });
   try { var ul = new URLSearchParams(window.location.search).get("lang"); if (ul === "en") setLang("en"); } catch(e) {}
 });
 </script>
