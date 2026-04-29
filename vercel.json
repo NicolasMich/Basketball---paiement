@@ -1,0 +1,5 @@
+{
+  "redirects": [
+    { "source": "/", "destination": "/play.html", "permanent": false }
+  ]
+}
