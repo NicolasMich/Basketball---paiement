@@ -207,7 +207,7 @@
     </div>
     <div class="hero-stats">
       <div class="stat"><div class="stat-num"><span>+</span>350</div><div class="stat-label" data-i18n="stat_players">Joueurs dans la communauté</div></div>
-      <div class="stat"><div class="stat-num">4<span>×</span></div><div class="stat-label" data-i18n="stat_sessions">Sessions / semaine</div></div>
+      <div class="stat"><div class="stat-num">2<span>×</span></div><div class="stat-label" data-i18n="stat_sessions">Sessions / semaine</div></div>
       <div class="stat"><div class="stat-num">15</div><div class="stat-label" data-i18n="stat_max">Joueurs max</div></div>
       <div class="stat"><div class="stat-num">2<span>h</span></div><div class="stat-label" data-i18n="stat_per">Par session</div></div>
     </div>
@@ -219,7 +219,7 @@
     <div class="divider"></div>
     <div class="steps-grid">
       <div class="step-card"><div class="step-num">01</div><div class="step-icon">💬</div><div class="step-title" data-i18n="step1_title">Rejoins la communauté WhatsApp</div><div class="step-text" data-i18n="step1_text">Tout se passe sur WhatsApp. Rejoins notre groupe communautaire pour rester informé des sessions, annulations et nouveautés.</div><a href="https://chat.whatsapp.com/DPwa8jNiDJE3XDgvsm94eI" target="_blank" class="step-btn"><span data-i18n="step1_btn">Rejoindre le groupe →</span></a></div>
-      <div class="step-card"><div class="step-num">02</div><div class="step-icon">🏀</div><div class="step-title" data-i18n="step2_title">Choisis ta session</div><div class="step-text" data-i18n="step2_text">On a 4 sessions par semaine : lundi 19h-21h, lundi 21h-23h, mercredi 19h-21h et samedi 11h-13h. Rejoins le chat de la session qui t'intéresse.</div></div>
+      <div class="step-card"><div class="step-num">02</div><div class="step-icon">🏀</div><div class="step-title" data-i18n="step2_title">Choisis ta session</div><div class="step-text" data-i18n="step2_text">Lundi 21h-23h ou samedi 11h-13h. Rejoins le chat de la session qui t'intéresse.</div></div>
       <div class="step-card"><div class="step-num">03</div><div class="step-icon">✍️</div><div class="step-title" data-i18n="step3_title">Écris IN au Roll Call</div><div class="step-text" data-i18n-html="step3_text">À l'heure d'ouverture du roll call, écris <strong>IN</strong> dans le chat de ta session. Les <strong>15 premiers</strong> sont confirmés. Simple comme ça.</div></div>
       <div class="step-card"><div class="step-num">04</div><div class="step-icon">💳</div><div class="step-title" data-i18n="step4_title">Paie avant la fin de session</div><div class="step-text" data-i18n-html="step4_text">Utilise le lien Stripe de ta session pour payer <strong>16,90$</strong>. Le lien passe automatiquement à <strong>20$</strong> une fois la session terminée.</div></div>
     </div>
@@ -236,19 +236,6 @@
     <div class="sessions-grid">
 
       <div class="session-card">
-        <div class="session-day" data-i18n="s_lun1_day">Lundi</div><div class="session-time">19h – 21h</div>
-        <div class="session-duration" data-i18n="s_duration">2 heures · 15 joueurs max</div>
-        <div class="roll-call-badge" data-i18n="s_lun1_rc">📅 Roll call : dim. 20h00</div>
-        <div class="session-info">
-          <div class="session-info-item"><span class="icon">📍</span> <span data-i18n="s_location">Centre Sportif ÉTS, 3e étage</span></div>
-          <div class="session-info-item"><span class="icon">❌</span> <span data-i18n="s_lun_cancel">Annulation gratuite avant 15h (lun.)</span></div>
-          <div class="session-info-item"><span class="icon">⏰</span> <span data-i18n="s_lun1_late">Paiement tardif après 21h → 20$</span></div>
-        </div>
-        <div class="session-price">15,90$ <span class="per" data-i18n="s_per">/ session</span></div>
-        <a href="https://basketball-paiement.vercel.app/?ouvertureJour=0&ouvertureHeure=20&fermetureJour=1&fermetureHeure=21&normal=https://buy.stripe.com/dRm9AU5yx8xre7k1rF3wQ0e&retard=https://buy.stripe.com/5kQ4gA2ml8xr6ESeer3wQ0g&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto" class="btn-pay" target="_blank" data-i18n="s_pay_btn">Payer cette session →</a>
-      </div>
-
-      <div class="session-card">
         <div class="session-day" data-i18n="s_lun2_day">Lundi</div><div class="session-time">21h – 23h</div>
         <div class="session-duration" data-i18n="s_duration">2 heures · 15 joueurs max</div>
         <div class="roll-call-badge" data-i18n="s_lun2_rc">📅 Roll call : dim. 19h55</div>
@@ -259,19 +246,6 @@
         </div>
         <div class="session-price">15,90$ <span class="per" data-i18n="s_per">/ session</span></div>
         <a href="https://basketball-paiement.vercel.app/?ouvertureJour=0&ouvertureHeure=19&ouvertureMinute=55&fermetureJour=1&fermetureHeure=23&normal=https://buy.stripe.com/5kA17a4HxfZ56DSbIQ&retard=https://buy.stripe.com/eVq6oIf97eVPbZc6LZ3wQ0f&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto" class="btn-pay" target="_blank">Payer cette session →</a>
-      </div>
-
-      <div class="session-card">
-        <div class="session-day" data-i18n="s_mer_day">Mercredi</div><div class="session-time">19h – 21h</div>
-        <div class="session-duration" data-i18n="s_duration">2 heures · 15 joueurs max</div>
-        <div class="roll-call-badge" data-i18n="s_mer_rc">📅 Roll call : mar. 20h00</div>
-        <div class="session-info">
-          <div class="session-info-item"><span class="icon">📍</span> <span data-i18n="s_location">Centre Sportif ÉTS, 3e étage</span></div>
-          <div class="session-info-item"><span class="icon">❌</span> <span data-i18n="s_mer_cancel">Annulation gratuite avant 15h (mer.)</span></div>
-          <div class="session-info-item"><span class="icon">⏰</span> <span data-i18n="s_mer_late">Paiement tardif après 21h → 20$</span></div>
-        </div>
-        <div class="session-price">15,90$ <span class="per" data-i18n="s_per">/ session</span></div>
-        <a href="https://basketball-paiement.vercel.app/?ouvertureJour=2&ouvertureHeure=20&fermetureJour=3&fermetureHeure=21&normal=https://buy.stripe.com/8wMcPSc9ZeV10fu6ox&retard=https://buy.stripe.com/dRm00k9ON8xr5AO4DR3wQ0l&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto" class="btn-pay" target="_blank">Payer cette session →</a>
       </div>
 
       <div class="session-card">
@@ -428,7 +402,7 @@
       stat_players:"Joueurs dans la communaut\u00e9",stat_sessions:"Sessions / semaine",stat_max:"Joueurs max",stat_per:"Par session",
       s1_label:"Nouveau joueur\u00a0?",s1_title:"Comment rejoindre une session",
       step1_title:"Rejoins la communaut\u00e9 WhatsApp",step1_text:"Rejoins le groupe WhatsApp de ta session pour recevoir les informations et participer au roll call.",step1_btn:"Rejoindre le groupe \u2192",
-      step2_title:"Choisis ta session",step2_text:"Lundi 19h-21h, lundi 21h-23h, mercredi 19h-21h ou samedi 11h-13h. Chaque session est limit\u00e9e \u00e0 15 joueurs.",
+      step2_title:"Choisis ta session",step2_text:"Lundi 21h-23h ou samedi 11h-13h. Chaque session est limit\u00e9e \u00e0 15 joueurs.",
       step3_title:"\u00c9cris IN au Roll Call",step3_text:"Quand le roll call s'ouvre, \u00e9cris IN dans le chat. Les 15 premiers sont confirm\u00e9s.",
       step4_title:"Paie avant la fin de session",step4_text:"Utilise le lien Stripe de ta session pour payer avant la fin. Pass\u00e9 ce d\u00e9lai, le tarif retard de 20$ s'applique.",
       wa_title:"Pr\u00eat \u00e0 jouer\u00a0?",wa_sub:"Rejoins la communaut\u00e9 Area Courts sur WhatsApp et r\u00e9serve ta place d\u00e8s le prochain roll call.",wa_btn:"Rejoindre WhatsApp \u2192",
@@ -478,7 +452,7 @@
       stat_players:"Players in the community",stat_sessions:"Sessions / week",stat_max:"Players max",stat_per:"Per session",
       s1_label:"New player?",s1_title:"How to join a session",
       step1_title:"Join the WhatsApp community",step1_text:"Join your session's WhatsApp group to get updates and take part in roll call.",step1_btn:"Join the group \u2192",
-      step2_title:"Choose your session",step2_text:"Monday 7-9pm, Monday 9-11pm, Wednesday 7-9pm or Saturday 11am-1pm. Each session is capped at 15 players.",
+      step2_title:"Choose your session",step2_text:"Monday 9-11pm or Saturday 11am-1pm. Each session is capped at 15 players.",
       step3_title:"Write IN at Roll Call",step3_text:"When roll call opens, write IN in the chat. The first 15 are confirmed.",
       step4_title:"Pay before the session ends",step4_text:"Use the Stripe link in your session chat to pay before the end. After that, the $20 late fee applies.",
       wa_title:"Ready to play?",wa_sub:"Join the Area Courts WhatsApp community and reserve your spot at the next roll call.",wa_btn:"Join WhatsApp \u2192",
@@ -569,10 +543,20 @@
   function updateNextSession() {
     var TZ = "America/Toronto";
     var sessions = [
-      { day:1, hour:19, minute:0, label_fr:"Lundi", label_en:"Monday", time_str:"19h \u2013 21h", rollOpenDay:0, rollOpenHour:20, rollOpenMinute:0, closeDay:1, closeHour:21, closeMinute:0, payUrl:"https://basketball-paiement.vercel.app/?ouvertureJour=0&ouvertureHeure=20&fermetureJour=1&fermetureHeure=21&normal=https://buy.stripe.com/dRm9AU5yx8xre7k1rF3wQ0e&retard=https://buy.stripe.com/5kQ4gA2ml8xr6ESeer3wQ0g&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto" },
-      { day:1, hour:21, minute:0, label_fr:"Lundi", label_en:"Monday", time_str:"21h \u2013 23h", rollOpenDay:0, rollOpenHour:19, rollOpenMinute:55, closeDay:1, closeHour:23, closeMinute:0, payUrl:"https://basketball-paiement.vercel.app/?ouvertureJour=0&ouvertureHeure=19&ouvertureMinute=55&fermetureJour=1&fermetureHeure=23&normal=https://buy.stripe.com/5kA17a4HxfZ56DSbIQ&retard=https://buy.stripe.com/eVq6oIf97eVPbZc6LZ3wQ0f&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto" },
-      { day:3, hour:19, minute:0, label_fr:"Mercredi", label_en:"Wednesday", time_str:"19h \u2013 21h", rollOpenDay:2, rollOpenHour:20, rollOpenMinute:0, closeDay:3, closeHour:21, closeMinute:0, payUrl:"https://basketball-paiement.vercel.app/?ouvertureJour=2&ouvertureHeure=20&fermetureJour=3&fermetureHeure=21&normal=https://buy.stripe.com/8wMcPSc9ZeV10fu6ox&retard=https://buy.stripe.com/dRm00k9ON8xr5AO4DR3wQ0l&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto" },
-      { day:6, hour:11, minute:0, label_fr:"Samedi", label_en:"Saturday", time_str:"11h \u2013 13h", rollOpenDay:5, rollOpenHour:11, rollOpenMinute:0, closeDay:6, closeHour:13, closeMinute:0, payUrl:"https://basketball-paiement.vercel.app/?ouvertureJour=5&ouvertureHeure=11&fermetureJour=6&fermetureHeure=13&normal=https://buy.stripe.com/6oU9AUf97bJD8N0eer3wQ0d&retard=https://buy.stripe.com/3cI8wQ5yx293aV89Yb3wQ0h&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto" }
+      {
+        day:1, hour:21, minute:0,
+        label_fr:"Lundi", label_en:"Monday", time_str:"21h – 23h",
+        rollOpenDay:0, rollOpenHour:19, rollOpenMinute:55,
+        closeDay:1, closeHour:23, closeMinute:0,
+        payUrl:"https://basketball-paiement.vercel.app/?ouvertureJour=0&ouvertureHeure=19&ouvertureMinute=55&fermetureJour=1&fermetureHeure=23&normal=https://buy.stripe.com/5kA17a4HxfZ56DSbIQ&retard=https://buy.stripe.com/eVq6oIf97eVPbZc6LZ3wQ0f&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto"
+      },
+      {
+        day:6, hour:11, minute:0,
+        label_fr:"Samedi", label_en:"Saturday", time_str:"11h – 13h",
+        rollOpenDay:5, rollOpenHour:11, rollOpenMinute:0,
+        closeDay:6, closeHour:13, closeMinute:0,
+        payUrl:"https://basketball-paiement.vercel.app/?ouvertureJour=5&ouvertureHeure=11&fermetureJour=6&fermetureHeure=13&normal=https://buy.stripe.com/6oU9AUf97bJD8N0eer3wQ0d&retard=https://buy.stripe.com/3cI8wQ5yx293aV89Yb3wQ0h&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto"
+      }
     ];
     var nowStr = new Date().toLocaleString("en-US", { timeZone: TZ });
     var now = new Date(nowStr);
