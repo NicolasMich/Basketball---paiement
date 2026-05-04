@@ -3,7 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paiement Basketball</title>
+  <title>Paiement – Area Courts Basketball</title>
+  <meta name="description" content="Page de paiement sécurisé pour les sessions pickup basketball Area Courts Montréal.">
+  <link rel="canonical" href="https://playareacourts.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://playareacourts.com/">
+  <meta property="og:title" content="Paiement – Area Courts Basketball">
+  <meta property="og:description" content="Page de paiement sécurisé pour les sessions pickup basketball Area Courts Montréal.">
+  <meta property="og:image" content="https://playareacourts.com/logo.png">
+  <meta property="og:locale" content="fr_CA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Paiement – Area Courts Basketball">
+  <meta name="twitter:description" content="Page de paiement sécurisé pour les sessions pickup basketball Area Courts Montréal.">
+  <meta name="twitter:image" content="https://playareacourts.com/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f4f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
@@ -40,7 +54,7 @@
     var p = new URLSearchParams(window.location.search);
     var normalLink = p.get('normal');
     var retardLink = p.get('retard');
-    var prixNormal = p.get('prixNormal') || '15,90$';
+    var prixNormal = p.get('prixNormal') || '16,90$';
     var prixRetard = p.get('prixRetard') || '20$';
     var fuseau = p.get('fuseau') || 'America/Toronto';
     var ouvertureJour   = parseInt(p.get('ouvertureJour'));
