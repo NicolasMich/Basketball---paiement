@@ -7,12 +7,12 @@
     },
     {
       "source": "/lundi",
-      "destination": "/index.html?ouvertureJour=0&ouvertureHeure=19&ouvertureMinute=55&fermetureJour=1&fermetureHeure=23&normal=https://buy.stripe.com/5kA17a4HxfZ56DSbIQ&retard=https://buy.stripe.com/eVq6oIf97eVPbZc6LZ3wQ0f&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto",
+      "destination": "/index.html?ouvertureJour=0&ouvertureHeure=19&ouvertureMinute=55&fermetureJour=1&fermetureHeure=23&normal=https://buy.stripe.com/5kA17a4HxfZ56DSbIQ&retard=https://buy.stripe.com/eVq6oIf97eVPbZc6LZ3wQ0f&prixNormal=16,90$&prixRetard=20$&fuseau=America/Toronto",
       "permanent": false
     },
     {
       "source": "/samedi",
-      "destination": "/index.html?ouvertureJour=5&ouvertureHeure=11&fermetureJour=6&fermetureHeure=13&normal=https://buy.stripe.com/6oU9AUf97bJD8N0eer3wQ0d&retard=https://buy.stripe.com/3cI8wQ5yx293aV89Yb3wQ0h&prixNormal=15,90$&prixRetard=20$&fuseau=America/Toronto",
+      "destination": "/index.html?ouvertureJour=5&ouvertureHeure=11&fermetureJour=6&fermetureHeure=13&normal=https://buy.stripe.com/6oU9AUf97bJD8N0eer3wQ0d&retard=https://buy.stripe.com/3cI8wQ5yx293aV89Yb3wQ0h&prixNormal=16,90$&prixRetard=20$&fuseau=America/Toronto",
       "permanent": false
     }
   ]
