@@ -48,6 +48,9 @@
     <a class="btn" id="btn" href="#">Payer maintenant</a>
     <p class="message" id="message"></p>
     <p class="deadline-info" id="deadline-info"></p>
+    <p style="margin-top:24px;font-size:12px;color:#d1d5db;">
+      Après avoir payé → <a href="https://playareacourts.com/merci.html" style="color:#6b7280;text-decoration:underline;">Confirme ta présence</a>
+    </p>
   </div>
 
   <script>
@@ -80,7 +83,8 @@
     var jours = ['dim', 'lun', 'mar', 'mer', 'jeu', 'ven', 'sam'];
     var oMin = ouvertureMinute > 0 ? String(ouvertureMinute).padStart(2,'0') : '';
     var oTxt = jours[ouvertureJour] + '. ' + String(ouvertureHeure).padStart(2,'0') + 'h' + oMin;
-    var fTxt = jours[fermetureJour] + '. ' + String(fermetureHeure).padStart(2,'0') + 'h';
+    var fMin = fermetureMinute > 0 ? String(fermetureMinute).padStart(2,'0') : '';
+    var fTxt = jours[fermetureJour] + '. ' + String(fermetureHeure).padStart(2,'0') + 'h' + fMin;
     document.getElementById('deadline-info').textContent = 'Paiement à temps : ' + oTxt + ' → ' + fTxt;
 
     var emoji      = document.getElementById('emoji');
