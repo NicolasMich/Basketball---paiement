@@ -154,6 +154,17 @@
     .nsw-status { display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:4px; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px; }
     .nsw-status.open { background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); color:#10b981; }
     .nsw-status.closed { background:rgba(204,68,34,0.10); border:1px solid rgba(204,68,34,0.25); color:var(--orange); }
+    .nsw-countdown {
+      font-family:'Barlow Condensed',sans-serif;
+      font-size:20px;
+      font-weight:900;
+      color:var(--muted);
+      letter-spacing:1px;
+      margin-bottom:10px;
+      min-height:36px;
+      line-height:1.2;
+    }
+    .nsw-countdown.soon { color:#10b981; }
     .nsw-btn { display:inline-block; background:var(--orange); color:white; padding:8px 16px; border-radius:6px; font-size:12px; font-weight:700; text-decoration:none; transition:background 0.2s; }
     .nsw-btn:hover { background:var(--orange-dark); }
     @media (max-width:768px) { .hero-main { flex-direction:column; gap:24px; } .next-session-widget { text-align:left; margin-top:0; width:100%; } .nsw-status { display:inline-flex; } }
@@ -202,6 +213,7 @@
         <div class="nsw-day" id="nsw-day">—</div>
         <div class="nsw-time" id="nsw-time">—</div>
         <div class="nsw-status" id="nsw-status"></div>
+        <div class="nsw-countdown" id="nsw-countdown"></div>
         <a href="#sessions" class="nsw-btn" id="nsw-btn" data-i18n="nsw_btn">Payer →</a>
       </div>
     </div>
@@ -547,14 +559,14 @@
         day:1, hour:21, minute:0,
         label_fr:"Lundi", label_en:"Monday", time_str:"21h – 23h",
         rollOpenDay:0, rollOpenHour:19, rollOpenMinute:55,
-        closeDay:1, closeHour:23, closeMinute:0,
+        closeDay:1, closeHour:23, closeMinute:30,
         payUrl:"https://playareacourts.com/lundi"
       },
       {
         day:6, hour:11, minute:0,
         label_fr:"Samedi", label_en:"Saturday", time_str:"11h – 13h",
         rollOpenDay:5, rollOpenHour:11, rollOpenMinute:0,
-        closeDay:6, closeHour:13, closeMinute:0,
+        closeDay:6, closeHour:13, closeMinute:30,
         payUrl:"https://playareacourts.com/samedi"
       }
     ];
@@ -576,8 +588,72 @@
     var isOpen = (nowMins >= rmAbs && nowMins < cm(next));
     document.getElementById("nsw-day").textContent = lang === "en" ? next.label_en : next.label_fr;
     document.getElementById("nsw-time").textContent = next.time_str;
-    document.getElementById("nsw-day").textContent = lang === "en" ? next.label_en : next.label_fr;
-    document.getElementById("nsw-time").textContent = next.time_str;
+
+    // ── Dual countdown ──
+    var countdownEl = document.getElementById("nsw-countdown");
+    if (countdownEl) {
+      var nowExact = new Date();
+      var nowLocal2 = new Date(nowExact.toLocaleString("en-US", { timeZone: TZ }));
+
+      function fmtCountdown(ms) {
+        var total = Math.floor(ms / 1000);
+        var d = Math.floor(total / 86400);
+        var h = Math.floor((total % 86400) / 3600);
+        var m = Math.floor((total % 3600) / 60);
+        var s = total % 60;
+        if (d > 0)      return lang === "en" ? d+"d "+h+"h" : d+"j "+h+"h";
+        else if (h > 0) return lang === "en" ? h+"h "+m+"m" : h+"h "+m+"m";
+        else            return lang === "en" ? m+"m "+s+"s" : m+"m "+s+"s";
+      }
+
+      // Build a Date for a given weekday + time, relative to now
+      // daysOffset lets us force current week vs next
+      function buildDate(weekday, h, m, allowPast) {
+        var d = new Date(nowLocal2);
+        var diff = weekday - d.getDay();
+        if (diff < 0) diff += 7;
+        // If same day but time already passed, go to next week — unless allowPast
+        if (!allowPast && diff === 0 && (d.getHours()*60+d.getMinutes()) >= (h*60+m)) diff = 7;
+        d.setDate(d.getDate() + diff);
+        d.setHours(h, m, 0, 0);
+        return d;
+      }
+
+      // Dates for the CURRENT next session (the one already selected as `next`)
+      // We anchor on session end since that's the last event — work backwards
+      var endDate     = buildDate(next.closeDay,    next.closeHour,    next.closeMinute || 0, false);
+      var sessionDate = buildDate(next.day,          next.hour,         next.minute,           true);
+      var rollDate    = buildDate(next.rollOpenDay,  next.rollOpenHour, next.rollOpenMinute,   true);
+
+      // If sessionDate ended up after endDate (wrap), push sessionDate back a week
+      if (sessionDate > endDate) sessionDate.setDate(sessionDate.getDate() - 7);
+      if (rollDate > sessionDate) rollDate.setDate(rollDate.getDate() - 7);
+
+      var msToRoll    = rollDate    - nowLocal2;
+      var msToSession = sessionDate - nowLocal2;
+      var msToEnd     = endDate     - nowLocal2;
+
+      if (msToRoll > 0) {
+        // Roll call not yet open → countdown to roll call
+        var lbl = lang === "en" ? "Roll call opens in" : "Roll call dans";
+        countdownEl.innerHTML = '<span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);">' + lbl + '</span><br>' + fmtCountdown(msToRoll);
+        countdownEl.className = "nsw-countdown";
+      } else if (msToSession > 0) {
+        // Roll call open, session not started → countdown to session start
+        var lbl2 = lang === "en" ? "Session starts in" : "Session dans";
+        countdownEl.innerHTML = '<span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#10b981;">' + lbl2 + '</span><br>' + fmtCountdown(msToSession);
+        countdownEl.className = "nsw-countdown soon";
+      } else if (msToEnd > 0) {
+        // Session in progress → countdown to end
+        var lbl3 = lang === "en" ? "Session ends in" : "Fin dans";
+        countdownEl.innerHTML = '<span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#10b981;">' + lbl3 + '</span><br>' + fmtCountdown(msToEnd);
+        countdownEl.className = "nsw-countdown soon";
+      } else {
+        // Session over → show nothing (widget will already show next session)
+        countdownEl.textContent = "";
+        countdownEl.className = "nsw-countdown";
+      }
+    }
     var statusEl = document.getElementById("nsw-status");
     var btnEl = document.getElementById("nsw-btn");
     if (isOpen) {
@@ -596,7 +672,32 @@
   }
 
   updateNextSession();
-  setInterval(updateNextSession, 60000);
+  // Countdown: update every second when session is within 24h, else every minute
+  function scheduleUpdate() {
+    var TZ = "America/Toronto";
+    var nowStr = new Date().toLocaleString("en-US", { timeZone: TZ });
+    var now = new Date(nowStr);
+    var nowMins = now.getDay()*1440 + now.getHours()*60 + now.getMinutes();
+    // Find next session mins
+    var sessions2 = [
+      { day:1, hour:21, minute:0 },
+      { day:6, hour:11, minute:0 }
+    ];
+    var minDiff = Infinity;
+    for (var i=0; i<sessions2.length; i++) {
+      var sm = sessions2[i].day*1440 + sessions2[i].hour*60 + sessions2[i].minute;
+      var diff = sm - nowMins;
+      if (diff < 0) diff += 7*1440;
+      if (diff < minDiff) minDiff = diff;
+    }
+    // If within 24h, update every second for countdown; else every minute
+    if (minDiff < 1440) {
+      setTimeout(function() { updateNextSession(); scheduleUpdate(); }, 1000);
+    } else {
+      setTimeout(function() { updateNextSession(); scheduleUpdate(); }, 60000);
+    }
+  }
+  scheduleUpdate();
   document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll("#nav-links a").forEach(function(l) {
       l.addEventListener("click", function() {
