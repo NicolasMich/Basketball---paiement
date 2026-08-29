@@ -100,6 +100,8 @@
     .btn-pay { display:block; width:100%; text-align:center; background:var(--orange); color:white; padding:14px; border-radius:8px; font-weight:700; font-size:14px; letter-spacing:0.5px; text-decoration:none; transition:background 0.2s; }
     .btn-pay:hover { background:var(--orange-dark); }
     .roll-call-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(255,107,26,0.1); border:1px solid rgba(255,107,26,0.2); color:var(--orange); padding:4px 10px; border-radius:4px; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:20px; }
+    .sessions-warning { background:rgba(251,191,36,0.08); border:1px solid rgba(251,191,36,0.3); border-radius:10px; padding:16px 20px; margin-bottom:32px; font-size:14px; color:#fbbf24; line-height:1.6; max-width:800px; }
+    .sessions-warning strong { color:#fde68a; }
     .rules-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
     .rule-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:28px; }
     .rule-icon { font-size:28px; margin-bottom:14px; }
@@ -236,7 +238,7 @@
     </div>
     <div class="hero-stats">
       <div class="stat"><div class="stat-num"><span>+</span>350</div><div class="stat-label" data-i18n="stat_players">Joueurs dans la communauté</div></div>
-      <div class="stat"><div class="stat-num">2<span>×</span></div><div class="stat-label" data-i18n="stat_sessions">Sessions / semaine</div></div>
+      <div class="stat"><div class="stat-num">3<span>×</span></div><div class="stat-label" data-i18n="stat_sessions">Sessions / semaine</div></div>
       <div class="stat"><div class="stat-num">15</div><div class="stat-label" data-i18n="stat_max">Joueurs max</div></div>
       <div class="stat"><div class="stat-num">2<span>h</span></div><div class="stat-label" data-i18n="stat_per">Par session</div></div>
     </div>
@@ -248,7 +250,7 @@
     <div class="divider"></div>
     <div class="steps-grid">
       <div class="step-card"><div class="step-num">01</div><div class="step-icon">💬</div><div class="step-title" data-i18n="step1_title">Rejoins la communauté WhatsApp</div><div class="step-text" data-i18n="step1_text">Tout se passe sur WhatsApp. Rejoins notre groupe communautaire pour rester informé des sessions, annulations et nouveautés.</div><a href="https://chat.whatsapp.com/DPwa8jNiDJE3XDgvsm94eI" target="_blank" class="step-btn"><span data-i18n="step1_btn">Rejoindre le groupe →</span></a></div>
-      <div class="step-card"><div class="step-num">02</div><div class="step-icon">🏀</div><div class="step-title" data-i18n="step2_title">Choisis ta session</div><div class="step-text" data-i18n="step2_text">Lundi 21h-23h ou samedi 11h-13h. Rejoins le chat de la session qui t'intéresse.</div></div>
+      <div class="step-card"><div class="step-num">02</div><div class="step-icon">🏀</div><div class="step-title" data-i18n="step2_title">Choisis ta session</div><div class="step-text" data-i18n="step2_text">Lundi 21h-23h, mercredi 19h-21h ou samedi 11h-13h. Rejoins le chat de la session qui t'intéresse.</div></div>
       <div class="step-card"><div class="step-num">03</div><div class="step-icon">✍️</div><div class="step-title" data-i18n="step3_title">Écris IN au Roll Call</div><div class="step-text" data-i18n-html="step3_text">À l'heure d'ouverture du roll call, écris <strong>IN</strong> dans le chat de ta session. Les <strong>15 premiers</strong> sont confirmés. Simple comme ça.</div></div>
       <div class="step-card"><div class="step-num">04</div><div class="step-icon">💳</div><div class="step-title" data-i18n="step4_title">Paie avant la fin de session</div><div class="step-text" data-i18n-html="step4_text">Utilise le lien Stripe de ta session pour payer <strong>16,90$</strong>. Le lien passe automatiquement à <strong>20$</strong> une fois la session terminée.</div></div>
     </div>
@@ -262,6 +264,11 @@
     <div class="section-label" data-i18n="s2_label">Calendrier</div>
     <h2 class="section-title" data-i18n="s2_title">Sessions &amp; Paiement</h2>
     <div class="divider"></div>
+
+    <div class="sessions-warning">
+      ⚠️ <span data-i18n-html="sessions_warning"><strong>Avant de payer</strong> — assure-toi d'avoir écrit IN dans le chat WhatsApp de ta session et d'être confirmé sur la liste des 15. Payer ne garantit pas ta place si le roll call est complet.</span>
+    </div>
+
     <div class="sessions-grid">
 
       <div class="session-card">
@@ -275,6 +282,19 @@
         </div>
         <div class="session-price">16,90$ <span class="per" data-i18n="s_per">/ session</span></div>
         <a href="https://playareacourts.com/lundi" class="btn-pay" target="_blank">Payer cette session →</a>
+      </div>
+
+      <div class="session-card">
+        <div class="session-day" data-i18n="s_mer_day">Mercredi</div><div class="session-time">19h – 21h</div>
+        <div class="session-duration" data-i18n="s_duration">2 heures · 15 joueurs max</div>
+        <div class="roll-call-badge" data-i18n="s_mer_rc">📅 Roll call : mar. 20h00</div>
+        <div class="session-info">
+          <div class="session-info-item"><span class="icon">📍</span> <span data-i18n="s_location">Centre Sportif ÉTS, 3e étage</span></div>
+          <div class="session-info-item"><span class="icon">❌</span> <span data-i18n="s_mer_cancel">Annulation gratuite avant 15h (mer.)</span></div>
+          <div class="session-info-item"><span class="icon">⏰</span> <span data-i18n="s_mer_late">Paiement tardif après 21h30 → 20$</span></div>
+        </div>
+        <div class="session-price">16,90$ <span class="per" data-i18n="s_per">/ session</span></div>
+        <a href="https://playareacourts.com/mercredi" class="btn-pay" target="_blank">Payer cette session →</a>
       </div>
 
       <div class="session-card">
@@ -431,11 +451,11 @@
       stat_players:"Joueurs dans la communaut\u00e9",stat_sessions:"Sessions / semaine",stat_max:"Joueurs max",stat_per:"Par session",
       s1_label:"Nouveau joueur\u00a0?",s1_title:"Comment rejoindre une session",
       step1_title:"Rejoins la communaut\u00e9 WhatsApp",step1_text:"Rejoins le groupe WhatsApp de ta session pour recevoir les informations et participer au roll call.",step1_btn:"Rejoindre le groupe \u2192",
-      step2_title:"Choisis ta session",step2_text:"Lundi 21h-23h ou samedi 11h-13h. Chaque session est limit\u00e9e \u00e0 15 joueurs.",
+      step2_title:"Choisis ta session",step2_text:"Lundi 21h-23h, mercredi 19h-21h ou samedi 11h-13h. Chaque session est limit\u00e9e \u00e0 15 joueurs.",
       step3_title:"\u00c9cris IN au Roll Call",step3_text:"Quand le roll call s'ouvre, \u00e9cris IN dans le chat. Les 15 premiers sont confirm\u00e9s.",
       step4_title:"Paie avant la fin de session",step4_text:"Utilise le lien Stripe de ta session pour payer avant la fin. Pass\u00e9 ce d\u00e9lai, le tarif retard de 20$ s'applique.",
       wa_title:"Pr\u00eat \u00e0 jouer\u00a0?",wa_sub:"Rejoins la communaut\u00e9 Area Courts sur WhatsApp et r\u00e9serve ta place d\u00e8s le prochain roll call.",wa_btn:"Rejoindre WhatsApp \u2192",
-      s2_label:"Calendrier",s2_title:"Sessions & Paiement",s3_label:"R\u00e8gles du jeu",s3_title:"R\u00e8glement",s4_label:"Nous trouver",s4_title:"Localisation",
+      s2_label:"Calendrier",s2_title:"Sessions & Paiement",sessions_warning:"<strong>Avant de payer</strong> \u2014 assure-toi d\u2019avoir \u00e9crit IN dans le chat WhatsApp de ta session et d\u2019\u00eatre confirm\u00e9 sur la liste des 15. Payer ne garantit pas ta place si le roll call est complet.",s3_label:"R\u00e8gles du jeu",s3_title:"R\u00e8glement",s4_label:"Nous trouver",s4_title:"Localisation",
       loc_gym:"📍 Le gymnase",loc_park:"🚘 Stationnement",loc_transit:"🚇 Transports en commun",
       s_lun1_day:"Lundi", s_lun2_day:"Lundi", s_mer_day:"Mercredi", s_sam_day:"Samedi",
       s_duration:"2 heures · 15 joueurs max",
@@ -449,7 +469,7 @@
       s_sam_cancel:"Annulation gratuite avant 23h30 (ven.)",
       s_lun1_late:"Paiement tardif après 21h → 20$",
       s_lun2_late:"Paiement tardif après 23h30 → 20$",
-      s_mer_late:"Paiement tardif après 21h → 20$",
+      s_mer_late:"Paiement tardif après 21h30 → 20$",
       s_sam_late:"Paiement tardif après 13h30 → 20$",
       s_per:"/ session", s_pay_btn:"Payer cette session →",
       r_rc_title:"Roll Call", r_cancel_title:"Annulation", r_pay_title:"Paiement",
@@ -481,11 +501,11 @@
       stat_players:"Players in the community",stat_sessions:"Sessions / week",stat_max:"Players max",stat_per:"Per session",
       s1_label:"New player?",s1_title:"How to join a session",
       step1_title:"Join the WhatsApp community",step1_text:"Join your session's WhatsApp group to get updates and take part in roll call.",step1_btn:"Join the group \u2192",
-      step2_title:"Choose your session",step2_text:"Monday 9-11pm or Saturday 11am-1pm. Each session is capped at 15 players.",
+      step2_title:"Choose your session",step2_text:"Monday 9-11pm, Wednesday 7-9pm or Saturday 11am-1pm. Each session is capped at 15 players.",
       step3_title:"Write IN at Roll Call",step3_text:"When roll call opens, write IN in the chat. The first 15 are confirmed.",
       step4_title:"Pay before the session ends",step4_text:"Use the Stripe link in your session chat to pay before the end. After that, the $20 late fee applies.",
       wa_title:"Ready to play?",wa_sub:"Join the Area Courts WhatsApp community and reserve your spot at the next roll call.",wa_btn:"Join WhatsApp \u2192",
-      s2_label:"Schedule",s2_title:"Sessions & Payment",s3_label:"Game rules",s3_title:"Rules",s4_label:"Find us",s4_title:"Location",
+      s2_label:"Schedule",s2_title:"Sessions & Payment",sessions_warning:"<strong>Before paying</strong> \u2014 make sure you\u2019ve written IN in your session\u2019s WhatsApp chat and are confirmed on the list of 15. Paying does not guarantee your spot if roll call is full.",s3_label:"Game rules",s3_title:"Rules",s4_label:"Find us",s4_title:"Location",
       loc_gym:"📍 The gym",loc_park:"🚘 Parking",loc_transit:"🚇 Public transit",
       s_lun1_day:"Monday", s_lun2_day:"Monday", s_mer_day:"Wednesday", s_sam_day:"Saturday",
       s_duration:"2 hours · 15 players max",
@@ -499,7 +519,7 @@
       s_sam_cancel:"Free cancellation before 11:30pm (Fri.)",
       s_lun1_late:"Late payment after 9pm → $20",
       s_lun2_late:"Late payment after 11:30pm → $20",
-      s_mer_late:"Late payment after 9pm → $20",
+      s_mer_late:"Late payment after 9:30pm → $20",
       s_sam_late:"Late payment after 1:30pm → $20",
       s_per:"/ session", s_pay_btn:"Pay this session →",
       r_rc_title:"Roll Call", r_cancel_title:"Cancellation", r_pay_title:"Payment",
@@ -578,6 +598,13 @@
         rollOpenDay:0, rollOpenHour:19, rollOpenMinute:55,
         closeDay:1, closeHour:23, closeMinute:30,
         payUrl:"https://playareacourts.com/lundi"
+      },
+      {
+        day:3, hour:19, minute:0,
+        label_fr:"Mercredi", label_en:"Wednesday", time_str:"19h – 21h",
+        rollOpenDay:2, rollOpenHour:20, rollOpenMinute:0,
+        closeDay:3, closeHour:21, closeMinute:30,
+        payUrl:"https://playareacourts.com/mercredi"
       },
       {
         day:6, hour:11, minute:0,
