@@ -36,6 +36,8 @@
     .message { margin-top: 20px; font-size: 13px; color: #9ca3af; line-height: 1.5; }
     .message.late { color: #ef4444; }
     .deadline-info { margin-top: 16px; font-size: 12px; color: #d1d5db; }
+    .warning-box { background:#fff7ed; border:1px solid #fdba74; border-radius:10px; padding:14px 16px; margin-bottom:20px; text-align:left; font-size:13px; color:#9a3412; line-height:1.5; }
+    .warning-box strong { color:#7c2d12; }
   </style>
 </head>
 <body>
@@ -45,6 +47,9 @@
     <div class="status" id="status"></div>
     <div class="price" id="price"></div>
     <div class="price-label" id="price-label"></div>
+    <div class="warning-box">
+      ⚠️ <strong>Avant de payer</strong> — assure-toi d'avoir écrit <strong>IN</strong> dans le chat WhatsApp de ta session et d'être confirmé sur la liste. Payer ne garantit pas ta place.
+    </div>
     <a class="btn" id="btn" href="#">Payer maintenant</a>
     <p class="message" id="message"></p>
     <p class="deadline-info" id="deadline-info"></p>
