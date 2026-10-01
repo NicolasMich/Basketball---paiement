@@ -137,6 +137,7 @@
     .sub-perk-icon { font-size:16px; }
     .forfait-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
     @media (max-width:600px) { .forfait-grid { grid-template-columns:1fr; } }
+    .manage-sub { text-align:center; margin-top:36px; }
     .forfait-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:36px 32px; position:relative; overflow:hidden; cursor:pointer; transition:border-color 0.2s,transform 0.2s; }
     .forfait-card:hover { border-color:var(--orange); transform:translateY(-3px); }
     .forfait-card::before { content:""; position:absolute; top:0; left:0; right:0; height:3px; background:var(--orange); }
@@ -387,6 +388,10 @@
         <stripe-buy-button buy-button-id="buy_btn_1T7hdBJBtwWGjbUNYexSFWB5" publishable-key="pk_live_51Qcwg3JBtwWGjbUNMi7TYLF567I3K0TO1iilUMg3WyX2knuMxdr2ui0emnWGyZT9BfdpT4f4LwmVbvEyB0j7QOWw00FNaqmIfv"></stripe-buy-button>
       </div>
     </div>
+
+    <div class="manage-sub">
+      <a href="https://billing.stripe.com/p/login/7sYeVe9ON7tn7IWc6j3wQ00" target="_blank" class="btn-secondary" data-i18n="manage_sub_btn">⚙️ Gérer mon abonnement</a>
+    </div>
   </section>
 
   <section id="localisation" style="background:var(--dark);">
@@ -482,7 +487,7 @@
       r_equip_text:"Souliers de basketball obligatoires. <strong>Cadenas requis</strong>. Aucun sac ni bottes dans le gymnase.",
       r_conduct_text:"Niveau <strong>intermédiaire à avancé nécessaire</strong>. Toute violence verbale ou physique : avertissement, éjection ou ban.",
       sub_label:"Abonnement mensuel",sub_title:"Joue chaque semaine",sub_intro:"Ta place est garantie chaque semaine. Plus jamais de stress au roll call.",
-      perk1:"Place garantie chaque semaine",perk3:"Goodies exclusifs",perk4:"R\u00e9duction sur le merch",perk5:"Annulable \u00e0 tout moment",
+      perk1:"Place garantie chaque semaine",perk3:"Goodies exclusifs",perk4:"R\u00e9duction sur le merch",perk5:"Annulable \u00e0 tout moment",manage_sub_btn:"⚙️ Gérer mon abonnement",
       f1_title:"Forfait Solo",f1_sub:"Une session fixe par semaine au choix",f1_vs:"vs 67,60$ en drop-in",f1_save:"Tu \u00e9conomises 13%",f1_p1:"~4 sessions garanties par mois",
       f2_title:"Forfait Double",f2_sub:"Deux sessions fixes par semaine au choix",f2_vs:"vs 135,20$ en drop-in",f2_save:"Tu \u00e9conomises 20%",f2_p1:"~8 sessions garanties par mois",
       ob_label:"C'est ta premi\u00e8re fois\u00a0?",ob_title:"Ce qu'il faut savoir avant de venir",
@@ -532,7 +537,7 @@
       r_equip_text:"Basketball shoes required. <strong>Padlock required</strong>. No bags or boots in the gym.",
       r_conduct_text:"<strong>Intermediate to advanced level required</strong>. Any verbal or physical violence: warning, ejection or ban.",
       sub_label:"Monthly membership",sub_title:"Play every week",sub_intro:"Your spot is guaranteed every week. No more roll call stress.",
-      perk1:"Guaranteed spot every week",perk3:"Exclusive goodies",perk4:"Merch discount",perk5:"Cancel anytime",
+      perk1:"Guaranteed spot every week",perk3:"Exclusive goodies",perk4:"Merch discount",perk5:"Cancel anytime",manage_sub_btn:"⚙️ Manage my subscription",
       f1_title:"Solo Plan",f1_sub:"One fixed session per week of your choice",f1_vs:"vs $67.60 drop-in",f1_save:"You save 13%",f1_p1:"~4 guaranteed sessions per month",
       f2_title:"Double Plan",f2_sub:"Two fixed sessions per week of your choice",f2_vs:"vs $135.20 drop-in",f2_save:"You save 20%",f2_p1:"~8 guaranteed sessions per month",
       ob_label:"First time here?",ob_title:"What you need to know before you come",
